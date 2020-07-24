@@ -1,0 +1,24 @@
+<template>
+    <div :id="$id" :class="$container $background $show $radius v-mg-b-10px">
+        <div :class="v-f-left v-square-16px v-mg-r-10px v-bgcolor-pink" :show="$icon">
+
+        </div>
+        <div :class="$color $text_size $offset v-f-left">
+            {{ $slot }}
+        </div>
+        <div class="v-f-left v-square-16px" :show="$dismiss">
+            <a href="#" class="v-decor-line-none v-bold v-color-white v-show v-square-16px v-align-center v-lh-12px v-size-18px">
+                &times;
+            </a>
+        </div>
+        <div class="v-clear-left"></div>
+    </div>
+</template>
+
+<script>
+
+</script>
+
+<style>
+
+</style>
