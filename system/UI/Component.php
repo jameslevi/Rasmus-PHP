@@ -53,6 +53,10 @@ abstract class Component
         }        
     }
 
+    /**
+     * Overridable methods.
+     */
+
     protected function init()
     {
 
@@ -143,6 +147,13 @@ abstract class Component
                 $css = str_replace(': ', ':', $css);
 
                 Canvas::addStylesheet($template, $css);
+            }
+
+            if(Str::has($html, '<script') && Str::has($html, '</script>'))
+            {
+                $js = Str::trim(Str::move(Str::break(Str::break($html, '<script')[1], '</script>')[0], 1));
+
+                Canvas::addJavascript($template, $js);
             }
 
             if(Str::has($html, '<template>') && Str::has($html, '</template>'))

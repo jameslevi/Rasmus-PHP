@@ -62,7 +62,7 @@ class Cache
      * Return true if html content needs to be minified.
      */
 
-    private $minify = true;
+    private static $minify = true;
 
     /**
      * Set cache type from the constructor.
@@ -105,7 +105,7 @@ class Cache
         {
             $html = $reader->contents();
             
-            if($this->minify)
+            if(static::$minify)
             {
                 $html = $this->htmlMinify($html);
             }
@@ -120,7 +120,7 @@ class Cache
                 $object = require $location;
                 $html = $object->html();
 
-                if($this->minify)
+                if(static::$minify)
                 {
                     $html = $this->htmlMinify($html);
                 }
@@ -392,7 +392,7 @@ class Cache
                 if(array_key_exists($module, static::$config_cache))
                 {
                     static::$enabled = static::$config_cache[$module]['cache'];
-                    $this->minify = static::$config_cache[$module]['minify'];
+                    static::$minify = static::$config_cache[$module]['minify'];
                 }
             }
 

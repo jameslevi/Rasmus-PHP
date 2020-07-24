@@ -14,5 +14,6 @@ namespace Rasmus\Route {
      */
 
     Route::get('/resource/static/css/{css}', 'ResourceController@stylesheet')->content('text/css');
+    Route::get('/resource/static/js/{js}', 'ResourceController@javascript')->content('application/javascript');
 
 }

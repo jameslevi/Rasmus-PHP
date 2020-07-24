@@ -1,22 +1,56 @@
 <template>
-    <div :id="$id" :class="$container $background $show $radius v-mg-b-10px">
+    <div :id="$id" :class="$container $background $show $radius v-mg-b-10px v-ov-hidden" onmouseover="showDismissButton(this)" onmouseout="hideDismissButton(this)">
         <div :class="v-f-left v-square-16px v-mg-r-10px v-bgcolor-pink" :show="$icon">
 
         </div>
-        <div :class="$color $text_size $offset v-f-left">
+        <div :class="$color $text_size $offset v-f-left v-ww-break-word alert-message">
             {{ $slot }}
         </div>
         <div class="v-f-left v-square-16px" :show="$dismiss">
-            <a href="#" class="v-decor-line-none v-bold v-color-white v-show v-square-16px v-align-center v-lh-12px v-size-18px">
-                &times;
-            </a>
+            <div :class="$dismiss_bg v-square-16px v-hide v-brd-radius-2px alert-dismiss">
+                <a href="#" onclick="hideAlert(this); return false" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px">
+                    &times;
+                </a>
+            </div>
         </div>
         <div class="v-clear-left"></div>
     </div>
 </template>
 
 <script>
+function showAlert(id, message, delay = null)
+{
+    let el = document.getElementById(id);
 
+    el.getElementsByClassName('alert-message')[0].innerHTML = message;
+
+    if(delay !== null)
+    {
+
+    }
+}
+
+function hideAlert(el)
+{
+    if(typeof el === 'object')
+    {
+        el.parentNode.parentNode.parentNode.style.display = 'none';
+    }
+    else
+    {
+        document.getElementById(el).style.display = 'none';
+    }
+}
+
+function showDismissButton(el)
+{
+    el.getElementsByClassName('alert-dismiss')[0].style.display = 'block';
+}
+
+function hideDismissButton(el)
+{
+    el.getElementsByClassName('alert-dismiss')[0].style.display = 'none';
+}
 </script>
 
 <style>

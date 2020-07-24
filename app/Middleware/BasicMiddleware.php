@@ -22,7 +22,7 @@ class BasicMiddleware extends Middleware
      * Accepted static resources.
      */
 
-    private $resource_ext = ['.xcss'];
+    private $resource_ext = ['xcss', 'xjs'];
 
     /**
      * Basic http request logic handler.
@@ -65,18 +65,21 @@ class BasicMiddleware extends Middleware
 
         $uri = Str::break($request->uri(), '?')[0];
         
-        if(Str::endWith($uri, '.xcss') && Str::startWith($uri, '/resource/static/css/'))
+        foreach($this->resource_ext as $ext)
         {
-            $path = 'storage/cache/css/' . $request->resource()->css;
-            $reader = new Reader($path);
+            if(Str::endWith($uri, '.' . $ext) && Str::startWith($uri, '/resource/static/'))
+            {
+                $path = 'storage/cache/' . Str::move($ext, 1) . '/' . $request->resource()->{Str::move($ext, 1)};
+                $reader = new Reader($path);
             
-            if($reader->exist())
-            {
-                return bypass();
-            }
-            else
-            {
-                return http(404);       
+                if($reader->exist())
+                {
+                    return bypass();
+                }
+                else
+                {
+                    return http(404);       
+                }
             }
         }
 

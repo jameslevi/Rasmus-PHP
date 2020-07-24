@@ -17,6 +17,12 @@ class Canvas
     private static $stylesheet = [];
 
     /**
+     * Component javascripts.
+     */
+
+    private static $javascript = [];
+
+    /**
      * Store the template name.
      */
 
@@ -93,6 +99,18 @@ class Canvas
         if(!in_array($component, static::$stylesheet))
         {
             static::$stylesheet[$component] = $stylesheet;
+        }
+    }
+
+    /**
+     * Add javascript from components.
+     */
+
+    public static function addJavascript(string $component, string $javascript)
+    {
+        if(!in_array($component, static::$javascript))
+        {
+            static::$javascript[$component] = $javascript;
         }
     }
 
@@ -191,11 +209,17 @@ class Canvas
 
                         if(in_array($pseudo, $pseudos))
                         {
-                            $make = $utility->make($method, $value, $pseudo);
+                            if($utility->hasDirectMethod($colon[1]))
+                            {
+                                $make = $utility->makeDirectCall($colon[1], $pseudo);
+                            }
+                            else
+                            {
+                                $make = $utility->make($method, $value, $pseudo);
+                            }
 
                             if(!is_null($make))
                             {
-                                $call = Str::break($make, '{');
                                 $css[] = $make;
                             }
                         }
@@ -205,8 +229,15 @@ class Canvas
 
                             if($name === 'media' && Str::has($pseudo, '-'))
                             {
-                                $make = $utility->make($method, $value, $pseudo);
-                                
+                                if($utility->hasDirectMethod($colon[1]))
+                                {
+                                    $make = $utility->makeDirectCall($colon[1], $pseudo);
+                                }
+                                else
+                                {
+                                    $make = $utility->make($method, $value, $pseudo);
+                                }
+
                                 if(!is_null($make))
                                 {
                                     if(array_key_exists($pseudo, $media))
@@ -237,7 +268,14 @@ class Canvas
                             $method = $value;
                         }
 
-                        $make = $utility->make($method, $value);
+                        if($utility->hasDirectMethod($class))
+                        {
+                            $make = $utility->makeDirectCall($class);
+                        }
+                        else
+                        {
+                            $make = $utility->make($method, $value);
+                        }
 
                         if(!is_null($make))
                         {
@@ -308,6 +346,10 @@ class Canvas
             }
         }
 
+        /**
+         * Cache component's stylesheets.
+         */
+
         if($imploded !== '' && Str::has($html, '</head>'))
         {
             $uri = Request::uri();
@@ -335,6 +377,40 @@ class Canvas
             $link = '<link rel="stylesheet" href="' . $url . 'resource/static/css/' . $uri . '.xcss" type="text/css" />';
 
             $html = $segments[0] . $link . '</head>' . $segments[1];
+        }
+
+        /**
+         * Cache component's javascript.
+         */
+
+        if(!empty(static::$javascript) && Str::has($html, '</body>'))
+        {
+            $js = implode(' ', static::$javascript);
+            $uri = Request::uri();
+            $file = 'storage/cache/js/' . md5($uri) . '.xjs';
+            $reader = new Reader($file);
+            $reader->delete();
+
+            if(!$reader->exist())
+            {
+                $handle = fopen($file, 'a+');
+                fwrite($handle, $js);
+                fclose($handle);
+            }
+
+            $segments = Str::break($html, '</body>');
+            $url = 'http://' . Config::app()->url;
+
+            if(!Str::endWith($url, '/'))
+            {
+                $url .= '/';
+            }
+
+            $uri = md5(Request::uri());
+
+            $script = '<script type="text/javascript" src="' . $url . 'resource/static/js/' . $uri . '.xjs"></script>';
+        
+            $html = $segments[0] . $script . '</body>' . $segments[1];
         }
 
         return $html;

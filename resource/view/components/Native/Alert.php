@@ -11,10 +11,9 @@ class Alert extends Component
      * Supported alert styles.
      */
 
-    private $styles = [
+    private $variants = [
         'default',
         'border',
-        'dense',
         'outline',
     ];
 
@@ -38,6 +37,10 @@ class Alert extends Component
 
         'radius' => 'v-brd-radius-none',
 
+        'dismiss_bg' => 'v-bgcolor-none v-hover:bgcolor-red',
+
+        'dismiss_color' => 'v-color-light',
+
     ];
 
     /**
@@ -52,9 +55,9 @@ class Alert extends Component
 
         'icon' => true,
 
-        'variant' => 'success',
+        'scheme' => 'success',
 
-        'style' => 'default',
+        'variant' => 'default',
 
         'size' => 13,
 
@@ -121,19 +124,23 @@ class Alert extends Component
      * Set alert variant stylesheet.
      */
 
-    protected function variant(string $variant)
+    protected function scheme(string $scheme)
     {
-        $variant = strtolower($variant);
+        $scheme = strtolower($scheme);
 
-        if($variant === 'success')
+        if($scheme === 'success')
         {
             $this->background = 'v-bgcolor-success';
             $this->color = 'v-color-light';
+            $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-light';
+            $this->dismiss_color = 'v-color-light v-hover:color-success';
         }
-        else if($variant === 'error')
+        else if($scheme === 'error')
         {
             $this->background = 'v-bgcolor-error';
             $this->color = 'v-color-light';
+            $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-light';
+            $this->dismiss_color = 'v-color-light v-hover:color-error';
         }
     }
 
@@ -141,22 +148,33 @@ class Alert extends Component
      * Set alert style.
      */
 
-    protected function style(string $style)
+    protected function variant(string $variant)
     {
-        if(in_array($style, $this->styles))
+        if(in_array($variant, $this->variants))
         {
-            if($style === 'default')
+            if($variant === 'default')
             {
                 $this->container = [
-                    'v-pd-10px',
-                    'v-lh-16px',
+                    'v-pd-12px',
                 ];
             }
-            else if($style === 'outline')
+            else if($variant === 'border')
+            {
+                $this->container = [
+                    'v-pd-12px',
+                    'v-brd-l-solid-10px',
+                    'v-brd-color-red',
+                ];
+            }
+            else if($variant === 'outline')
             {
                 $this->background = 'v-bgcolor-transparent';
+                $this->color = 'v-color-' . $this->scheme;
+                $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-' . $this->scheme;
+                $this->dismiss_color = 'v-color-' . $this->scheme . ' v-hover:color-light';
                 $this->container = [
-                    'v-pd-10px',
+                    'v-pd-12px',
+                    'v-brd-color-' . $this->scheme,
                     'v-lh-16px',
                     'v-brd-solid-1px',
                 ];

@@ -8,15 +8,15 @@
 
     {{-- This is a sample alert --}}
 
-    <v-alert id="alert_1" variant="success" style="default" icon="true" display="true" rounded="true">
+    <v-alert id="alert_1" scheme="success" variant="default" icon="true" display="true" rounded="true">
         Credentials successfully saved.
     </v-alert>
 
-    <v-alert id="alert_2" variant="error" style="default" icon="true" dismiss="false" display="true">
+    <v-alert id="alert_2" scheme="error" variant="border" icon="false" dismiss="true" display="true" rounded="true">
         An error occurred on your request.
     </v-alert>
 
-    <v-alert id="alert_3" variant="error" style="outline" icon="false" dismiss="false" display="true" rounded="true">
+    <v-alert id="alert_3" scheme="success" variant="outline" size="14" display="true" rounded="true">
         An error occurred on your request.
     </v-alert>
     

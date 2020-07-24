@@ -140,7 +140,7 @@ class Application
 
     private function timezone(string $timezone)
     {
-        date_default_timezone_get($timezone);
+        date_default_timezone_set($timezone);
     }
 
     /**

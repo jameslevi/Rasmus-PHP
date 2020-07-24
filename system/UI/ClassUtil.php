@@ -384,6 +384,61 @@ abstract class ClassUtil
     }
 
     /**
+     * Make new css rule from methods without parameters.
+     */
+
+    public function makeDirectCall(string $method, string $pseudo = null)
+    {
+        $method = str_replace('-', '_', $method);
+
+        if(method_exists($this, $method))
+        {
+            $is_important = false;
+            if(Str::endWith($method, '!'))
+            {
+                $is_important = true;
+                $method = Str::move($method, 0, 1);
+            }
+
+            $data = $this->{$method}();
+            
+            if(!is_null($data))
+            {
+                if($is_important)
+                {
+                    $rules = '';
+                    foreach(explode(';', $data[1]) as $rule)
+                    {
+                        $rules .= $rule . ' !important';
+                    }
+
+                    return $this->template($data[0], $rules, $pseudo);
+                }
+                else
+                {
+                    return $this->template($data[0], $data[1], $pseudo);
+                }
+            }
+        }
+    }
+
+    /**
+     * Test if method requires no parameter value.
+     */
+
+    public function hasDirectMethod(string $method)
+    {
+        $method = str_replace('-', '_', $method);
+
+        if(Str::endWith($method, '!'))
+        {
+            $method = Str::move($method, 0, 1);
+        }
+
+        return method_exists($this, $method);
+    }
+
+    /**
      * CSS Rule template.
      */
 
