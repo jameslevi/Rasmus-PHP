@@ -1,0 +1,12 @@
+<template>
+    <div :id="$id" :class="$dimension nv-icon" :title="$title">
+        <a :href="$link" :class="$dimension v-display-block v-pos-absolute v-z-index-1" :show="hasHref()"></a>
+        <img :src="$src" :class="$dimension v-mg-none v-pd-none v-pos-absolute v-z-index-0">
+    </div>
+</template>
+
+<style>
+.nv-icon img {
+    border: 0px;
+}
+</style>

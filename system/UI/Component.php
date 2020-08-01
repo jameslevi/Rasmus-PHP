@@ -112,7 +112,7 @@ abstract class Component
         {
             if(strtolower($key) === 'id')
             {
-                $this->data['id'] = $value;
+                $this->prop['id'] = $value;
             }
         }
     }
@@ -152,8 +152,21 @@ abstract class Component
             if(Str::has($html, '<script') && Str::has($html, '</script>'))
             {
                 $js = Str::trim(Str::move(Str::break(Str::break($html, '<script')[1], '</script>')[0], 1));
+                $script = '';
 
-                Canvas::addJavascript($template, $js);
+                foreach(explode('/**', $js) as $line)
+                {
+                    if(Str::has($line, '*/'))
+                    {
+                        $script .= Str::break($line, '*/')[1];
+                    }
+                    else
+                    {
+                        $script .= $line;
+                    }
+                }
+
+                Canvas::addJavascript($template, $script);
             }
 
             if(Str::has($html, '<template>') && Str::has($html, '</template>'))
@@ -189,18 +202,21 @@ abstract class Component
                     $attr_style = null;
                     $style_value = null;
                     $styled = false;
-                    $i = 0;
 
                     /**
                      * Evaluate all tag attributes.
                      */
 
+                    if(sizeof($attrs) > 1)
+                    {
+
                     foreach($attrs as $attr)
                     {
-                        if($attr !== '')
+                        if($attr !== '' && $attr !== ' ')
                         {
                             $name = Str::break($attr, '=')[0];
                             $value = Str::move(Str::break($attr, '=')[1], 1);
+
                             if(Str::startWith($name, ':'))
                             {
                                 $name = Str::move($name, 1);
@@ -210,10 +226,10 @@ abstract class Component
                                     if(Str::startWith($value, '$'))
                                     {
                                         $var = Str::move($value, 1);
-
+                                        
                                         if(strtolower($var) === 'id')
                                         {
-                                            $value = $this->data['id'];
+                                            $value = $this->prop['id'] ?? null;
                                         }
                                         else
                                         {
@@ -228,7 +244,10 @@ abstract class Component
                                         }
                                     }
 
-                                    $str .= $name . '="' . $value . '" ';
+                                    if(!is_null($value))
+                                    {
+                                        $str .= $name . '="' . $value . '" ';
+                                    }
                                 }
                                 else if($name === 'show')
                                 {
@@ -382,6 +401,41 @@ abstract class Component
 
                                     $str .= $name . '="' . $class . '" ';
                                 }
+                                else
+                                {
+                                    if(Str::startWith($value, '$'))
+                                    {
+                                        $value = Str::move($value, 1);
+
+                                        if(array_key_exists($value, $this->data))
+                                        {
+                                            $value = $this->data[$value];
+                                        }
+                                        else if(array_key_exists($value, $this->prop))
+                                        {
+                                            $value = $this->prop[$value];
+                                        }
+
+                                        if(is_bool($value))
+                                        {
+                                            if($value)
+                                            {
+                                                $str .= $name . ' ';
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if(!is_null($value))
+                                            {
+                                                $str .= $name . '="' . $value . '"';
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $str .= $name . '="' . $value . '"';
+                                    }
+                                }
                             }
                             else
                             {
@@ -395,6 +449,8 @@ abstract class Component
                                 }
                             }
                         }                       
+                    }
+
                     }
 
                     if(($has_show || $has_style || !is_null($style_value)) && !$styled)

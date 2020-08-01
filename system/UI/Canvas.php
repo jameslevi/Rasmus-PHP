@@ -365,7 +365,7 @@ class Canvas
             }
 
             $segments = Str::break($html, '</head>');
-            $url = 'http://' . Config::app()->url;
+            $url = Config::app()->url;
 
             if(!Str::endWith($url, '/'))
             {
@@ -399,7 +399,7 @@ class Canvas
             }
 
             $segments = Str::break($html, '</body>');
-            $url = 'http://' . Config::app()->url;
+            $url = Config::app()->url;
 
             if(!Str::endWith($url, '/'))
             {
@@ -538,6 +538,30 @@ class Canvas
                 else if(is_numeric($value) || is_int($value))
                 {
                     $value = (int)$value;
+                }
+                else if(Str::startWith($value, '$') && Str::has($value, '[') && Str::has($value, ']'))
+                {
+                    $value = Str::move($value, 1, 2);
+                    $break = Str::break($value, '[');
+                    $name = strtolower($break[0]);
+                    $val = Str::move($break[1], 1, 2);
+                    
+                    if($name === 'emit')
+                    {
+                        if(array_key_exists($val, $this->emitted) && !is_null($this->emitted[$val]))
+                        {
+                            $value = $this->emitted[$val];
+                        }
+                    }
+                    else if($name === 'label')
+                    {
+                        $label = Lang::get($value);
+
+                        if($label !== $value)
+                        {
+                            $value = $label;
+                        }
+                    }
                 }
 
                 $instance->{$prop} = $value;

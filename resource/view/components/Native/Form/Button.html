@@ -1,0 +1,49 @@
+<template>
+    <button :id="$id" :name="$name" :disabled="$disabled" :guard="$guard" :method="$onclick" onclick="triggerButton(this)" :class="$button_width $button_height $line_height $bgcolor $bgcolor_hover $bgcolor_active $text_color $text_size $text_weight $border_radius v-align-center nv-button">
+        <div class="v-display-inline-block">
+            <b :show="hasIcon()" :class="$icon_margin v-square-16px v-show v-f-left v-mg-r-8px">
+                <v-icon :src="$icon" size="16"></v-icon>
+            </b>
+            <span class="v-show v-f-left">
+                {{ $slot }}
+            </span>
+            <div class="v-clear-left"></div>
+        </div>
+    </button>
+</template>
+
+<script>
+
+/**
+ * Call function each time button is clicked.
+ */
+
+function triggerButton(btn)
+{
+    if(!btn.disabled)
+    {
+        var method = btn.getAttribute('method'),
+            guard = btn.getAttribute('guard') ? true : false;
+
+        if(method)
+        {
+            if(guard)
+            {
+                btn.disabled = true;
+            }
+
+            window[method](btn);
+        }
+    }
+}
+
+</script>
+
+<style>
+.nv-button {
+    padding: 0px 10px;
+    border: 0px;
+    margin-bottom: 10px;
+    outline: none;
+}
+</style>

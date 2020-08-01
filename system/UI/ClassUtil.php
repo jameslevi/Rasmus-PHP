@@ -496,6 +496,11 @@ abstract class ClassUtil
 
     protected function isSchemeColor(string $color)
     {
+        if(Str::has($color, '_'))
+        {
+            $color = Str::break($color, '_')[0];
+        }
+        
         return !is_null($this->toRGB($color));
     }
 
@@ -514,9 +519,18 @@ abstract class ClassUtil
 
     protected function getBorderColor(string $color)
     {
-        $rgb = $this->toRGB($color);
+        $rgb = $this->toRGB(Str::break($color, '_')[0]);
+
+        if(Str::has($color, '_'))
+        {
+            $rgb = $rgb[Str::break($color, '_')[1]];
+        }
+        else
+        {
+            $rgb = $rgb['default'];
+        }
         
-        return 'rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')';
+        return 'rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')';
     }
 
     /**

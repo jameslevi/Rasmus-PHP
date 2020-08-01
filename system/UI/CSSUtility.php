@@ -46,6 +46,15 @@ class CSSUtility extends ClassUtil
     }
 
     /**
+     * Set element display to inline block.
+     */
+
+    protected function display_inline_block()
+    {
+        return ['display-inline-block', 'display:inline-block'];
+    }
+
+    /**
      * Set element float.
      */
 
@@ -121,11 +130,11 @@ class CSSUtility extends ClassUtil
      * Set element position.
      */
 
-    protected function position(string $position)
+    protected function pos(string $position)
     {
         if(in_array($position, $this->position))
         {
-            return ['position-' . $position, 'position:' . $position];
+            return ['pos-' . $position, 'position:' . $position];
         }
     }
 
@@ -136,9 +145,10 @@ class CSSUtility extends ClassUtil
     protected function z_index(string $index)
     {
         if(in_array($index, [
+            'auto',
             'initial',
             'inherit',
-        ]))
+        ]) || is_numeric($index))
         {
             return ['z-index-' . $index, 'z-index:' . $index];
         }
@@ -351,9 +361,18 @@ class CSSUtility extends ClassUtil
             }
             else if($this->isSchemeColor($color))
             {
-                $rgb = $this->toRGB($color);
+                $rgb = $this->toRGB(Str::break($color, '_')[0]);
 
-                return ['color-' . $color, 'color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
+                if(Str::has($color, '_'))
+                {
+                    $rgb = $rgb[Str::break($color, '_')[1]];
+                }
+                else
+                {
+                    $rgb = $rgb['default'];
+                }
+
+                return ['color-' . $color, 'color:rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')'];
             }
         }
     }
@@ -617,9 +636,19 @@ class CSSUtility extends ClassUtil
             }
             else if($this->isSchemeColor($color))
             {
-                $rgb = $this->toRGB($color);
+                $rgb = $this->toRGB(Str::break($color, '_')[0]);
+                
+                if(Str::has($color, '_'))
+                {
+                    $break = Str::break($color, '_');
+                    $rgb = $rgb[$break[1]];
+                }
+                else
+                {
+                    $rgb = $rgb['default'];
+                }
 
-                return ['bgcolor-' . $color, 'background-color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
+                return ['bgcolor-' . $color, 'background-color:rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')'];
             }
         }
     }
@@ -1168,6 +1197,15 @@ class CSSUtility extends ClassUtil
     protected function cur_zoom_out()
     {
         return ['cur-zoom-out', 'cursor:zoom-out'];
+    }
+
+    /**
+     * Remove border.
+     */
+
+    protected function brd_none()
+    {
+        return ['brd-none', 'border:0px'];
     }
 
     /**
@@ -2209,7 +2247,7 @@ class CSSUtility extends ClassUtil
      * Element outline.
      */
 
-    protected function outl(string $outline)
+    protected function outline(string $outline)
     {
         if(in_array($outline, [
             'none',
@@ -2217,7 +2255,7 @@ class CSSUtility extends ClassUtil
             'inherit',
         ]))
         {
-            return ['outl-' . $outline, 'outline:' . $outline];
+            return ['outline-' . $outline, 'outline:' . $outline];
         }
     }
 
@@ -2225,7 +2263,7 @@ class CSSUtility extends ClassUtil
      * Element outline color.
      */
 
-    protected function outl_color(string $color)
+    protected function outline_color(string $color)
     {
         if(in_array($color, [
             'invert',
@@ -2238,7 +2276,7 @@ class CSSUtility extends ClassUtil
         else if($this->isSchemeColor($color))
         {
             $rgb = $this->toRGB($color);
-            return ['outl-color-' . $color, 'outline-color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
+            return ['outline-color-' . $color, 'outline-color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
         }
     }
 
@@ -2246,14 +2284,14 @@ class CSSUtility extends ClassUtil
      * Element outline offset.
      */
 
-    protected function outl_offset(string $offset)
+    protected function outline_offset(string $offset)
     {
         if($this->isPX($offset) || in_array($offset, [
             'initial',
             'inherit',
         ]))
         {
-            return ['outl-offset-' . $offset, 'outline-offset:' . $offset];
+            return ['outline-offset-' . $offset, 'outline-offset:' . $offset];
         }
     }
 
@@ -2261,11 +2299,11 @@ class CSSUtility extends ClassUtil
      * Element outline style.
      */
 
-    protected function outl_style(string $style)
+    protected function outline_style(string $style)
     {
         if(in_array($style, $this->border_style))
         {
-            return ['outl-style-' . $style, 'outline-style:' . $style];           
+            return ['outline-style-' . $style, 'outline-style:' . $style];           
         }
     }
 
@@ -2273,11 +2311,11 @@ class CSSUtility extends ClassUtil
      * Element outline width.
      */
 
-    protected function outl_width(string $width)
+    protected function outline_width(string $width)
     {
         if($this->isPX($width) || in_array($width, $this->border_width))
         {
-            return ['outl-width-' . $width, 'outline-width:' . $width];
+            return ['outline-width-' . $width, 'outline-width:' . $width];
         }       
     }
 

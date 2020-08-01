@@ -2,7 +2,9 @@
 
 namespace Components\Native;
 
+use Rasmus\App\Config;
 use Rasmus\UI\Component;
+use Rasmus\Util\String\Str;
 
 class Alert extends Component
 {
@@ -25,9 +27,9 @@ class Alert extends Component
 
         'container' => [],        
 
-        'background' => null,
+        'background' => 'v-bgcolor-primary',
 
-        'color' => null,
+        'color' => 'v-color-light',
 
         'text_size' => 'v-size-13px',
 
@@ -37,9 +39,11 @@ class Alert extends Component
 
         'radius' => 'v-brd-radius-none',
 
-        'dismiss_bg' => 'v-bgcolor-none v-hover:bgcolor-red',
+        'dismiss_bg' => 'v-bgcolor-none v-hover:bgcolor-light',
 
         'dismiss_color' => 'v-color-light',
+
+        'url' => null,
 
     ];
 
@@ -53,7 +57,7 @@ class Alert extends Component
 
         'text' => null,
 
-        'icon' => true,
+        'icon' => null,
 
         'scheme' => 'success',
 
@@ -111,6 +115,29 @@ class Alert extends Component
     }
 
     /**
+     * Return true if alert has icon.
+     */
+
+    protected function hasIcon()
+    {
+        return !is_null($this->icon) && !is_null($this->url);
+    }
+
+    /**
+     * Set icon url.
+     */
+
+    protected function icon(string $icon)
+    {
+        if(!Str::startWith($icon, '/'))
+        {
+            $icon = '/' . $icon;
+        }
+
+        $this->url = Config::app()->url . $icon;
+    }
+
+    /**
      * Set text as slot data.
      */
 
@@ -128,20 +155,10 @@ class Alert extends Component
     {
         $scheme = strtolower($scheme);
 
-        if($scheme === 'success')
-        {
-            $this->background = 'v-bgcolor-success';
-            $this->color = 'v-color-light';
-            $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-light';
-            $this->dismiss_color = 'v-color-light v-hover:color-success';
-        }
-        else if($scheme === 'error')
-        {
-            $this->background = 'v-bgcolor-error';
-            $this->color = 'v-color-light';
-            $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-light';
-            $this->dismiss_color = 'v-color-light v-hover:color-error';
-        }
+        $this->color = 'v-color-light';
+        $this->background = 'v-bgcolor-' . $scheme;
+        $this->dismiss_bg = 'v-bgcolor-none v-hover:bgcolor-light';
+        $this->dismiss_color = 'v-color-light v-hover:color-' . $scheme;
     }
 
     /**
@@ -163,7 +180,7 @@ class Alert extends Component
                 $this->container = [
                     'v-pd-12px',
                     'v-brd-l-solid-10px',
-                    'v-brd-color-red',
+                    'v-brd-color-' . $this->scheme . '_hover',
                 ];
             }
             else if($variant === 'outline')

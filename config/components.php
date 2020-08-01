@@ -1,5 +1,7 @@
 <?php
 
+use Rasmus\UI\Component;
+
 return [
 
     /**
@@ -9,6 +11,9 @@ return [
      */
 
     'alert' => Components\Native\Alert::class,
-    'line' => Components\Native\Line::class,
+    'box' => Components\Native\Layout\Box::class,
+    'button' => Components\Native\Form\Button::class,
+    'icon' => Components\Native\Media\Icon::class,
+    'line' => Components\Native\Layout\Line::class,
 
 ];

@@ -474,13 +474,6 @@ class Application
             {
                 header('Content-Type: application/json');
             }
-            else
-            {
-                if(!is_null($route['content']))
-                {
-                    header('Content-Type: ' . $route['content']);
-                }
-            }
         }
     }
 
