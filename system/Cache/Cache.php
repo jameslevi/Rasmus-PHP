@@ -6,6 +6,7 @@ use Rasmus\File\Directory;
 use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Locale;
 use Rasmus\Route\Route;
+use Rasmus\UI\Canvas;
 use Rasmus\Util\String\Str;
 use Rasmus\Validation\Form;
 
@@ -95,7 +96,7 @@ class Cache
      * Return cache HTML.
      */
 
-    public function getHtml(string $uri, string $canvas)
+    public function getHtml(string $uri, string $canvas, array $emit = [])
     {
         $html = null;
         $file = static::$path . 'html/' . static::serialize($uri) . '.html';
@@ -117,13 +118,19 @@ class Cache
             
             if($read->exist())
             {
-                $object = require $location;
-                $html = $object->html();
+                Canvas::init($emit);
+
+                function loadCanvas(string $location)
+                {
+                    $object = require $location;
+                    return $object->html();
+                }
+                $html = loadCanvas($location);
 
                 if(static::$minify)
                 {
                     $html = $this->htmlMinify($html);
-                }
+                }  
             }
 
             if(static::$enabled && !is_null($html))
@@ -549,10 +556,10 @@ class Cache
      * Return html caching data.
      */
 
-    public static function html(string $uri, string $canvas)
+    public static function html(string $uri, string $canvas, array $emit)
     {
         $instance = new self('html');
-        return $instance->getHtml($uri, $canvas);       
+        return $instance->getHtml($uri, $canvas, $emit);       
     }
 
     /**

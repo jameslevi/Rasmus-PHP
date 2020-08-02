@@ -269,6 +269,15 @@ class CSSUtility extends ClassUtil
     }
 
     /**
+     * Set text-decoration to none.
+     */
+
+    protected function decor_none()
+    {
+        return ['decor-none', 'text-decoration:none'];
+    }
+
+    /**
      * Set text align.
      */
 
@@ -822,7 +831,7 @@ class CSSUtility extends ClassUtil
     {
         if($this->isPX($margin) || in_array($margin, $this->auto))
         {
-            return ['mg-y-' . $margin, 'margin-top:' . $margin, ';margin-bottom:' . $margin];
+            return ['mg-y-' . $margin, 'margin-top:' . $margin . ';margin-bottom:' . $margin];
         }
         else if(strtolower($margin) === 'none')
         {

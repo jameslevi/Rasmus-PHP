@@ -15,14 +15,12 @@ namespace Rasmus\Route {
 
     Route::group(function(Group $group) {
 
-        $group->controller('MainController');
+        $group->controller('AuthenticationController');
         $group->auth(false);
         
-        $group->get('/login', 'login');
-        $group->post('/login/authenticate', 'authenticate')->ajax(true);
-        $group->get('/forgot-password', 'forgotPassword');
-        $group->post('/forgot-password/request', 'requestPassword')->ajax(true);
-        $group->post('/logout', 'logout');
+        $group->get('/login', 'index');
+        $group->post('/login/authenticate', 'authenticate');
+        $group->get('/logout', 'logout');
 
     });
 

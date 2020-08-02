@@ -9,15 +9,21 @@ class Line extends Component
 
     protected $data = [
 
+        'line_width' => 'v-w-100',
+
         'line_weight' => 'v-h-1px',
 
         'line_color' => 'v-bgcolor-gray',
 
         'line_rounded' => 'v-brd-radius-none',
 
+        'margin_y' => 'v-mg-y-none',
+
     ];
 
     protected $prop = [
+
+        'width' => 'v-w-100',
 
         'weight' => 1,
 
@@ -57,6 +63,24 @@ class Line extends Component
         {
             $this->line_rounded = 'v-brd-radius-' . $this->weight . 'px';
         }
+    }
+
+    /**
+     * Set vertical margin.
+     */
+
+    protected function margin(int $margin)
+    {
+        $this->margin_y = 'v-mg-y-' . $margin . 'px';
+    }
+
+    /**
+     * Set line width.
+     */
+
+    protected function width(string $width)
+    {
+        $this->line_width = 'v-w-' . $width;
     }
 
 }

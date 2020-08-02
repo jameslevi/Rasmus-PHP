@@ -42,4 +42,5 @@ namespace Rasmus\Resource\Lang {
     Locale::id('message.code.26')->en('${name} must have a value more than or equal ${value}.');
     Locale::id('message.code.27')->en('${name} must have a value less than or equal ${value}.');
     Locale::id('message.strength.weak')->en('${name} strength is too weak.');
+    Locale::id('message.default')->en('Something went wrong on your request.');
 }

@@ -6,10 +6,17 @@ use Rasmus\App\Config;
 use Rasmus\App\Request;
 use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Lang;
+use Rasmus\Util\Collection;
 use Rasmus\Util\String\Str;
 
 class Canvas
 {
+    /**
+     * Store data emitted from the controller.
+     */
+
+    private static $inital_emit = [];
+
     /**
      * Component stylesheets.
      */
@@ -42,7 +49,10 @@ class Canvas
 
     private function __construct()
     {
-
+        foreach(static::$inital_emit as $key => $data)
+        {
+            $this->emit($key, $data);
+        }
     }
 
     /**
@@ -58,12 +68,21 @@ class Canvas
     }
 
     /**
-     * Emit value.
+     * Emit or return value.
      */
 
     public function emit(string $name, $value)
     {
         $this->emitted[$name] = $value;
+    }
+
+    /**
+     * Initial data emission.
+     */
+
+    public static function init(array $emit)
+    {
+        static::$inital_emit = $emit;
     }
 
     /**
@@ -73,6 +92,45 @@ class Canvas
     public function raw(string $html)
     {
         $this->output .= $html;
+    }
+
+    /**
+     * Include raw html from file.
+     */
+
+    public function include(string $component)
+    {
+        $file = 'resource/view/components/';
+
+        foreach(explode('.', $component) as $dir)
+        {
+            $file .= ucfirst($dir) . '/';
+        }
+
+        if(Str::endWith($file, '/'))
+        {
+            $file = Str::move($file, 0, 1);
+        }
+
+        $file .= '.html';
+
+        $reader = new Reader($file);
+
+        if($reader->exist())
+        {
+            $html = Str::break($reader->contents(), '</template>')[0];
+        
+            if(Str::has($html, '<template>'))
+            {
+                $html = Str::break($html, '<template>')[1];
+            }
+
+            $this->output .= $html;
+        }
+        else
+        {
+            $this->output .= $component;
+        }
     }
 
     /**
@@ -684,7 +742,7 @@ class Canvas
 
     public static function draw($closure)
     {
-        return $closure(new self());
+        return $closure(new self(), new Collection(static::$inital_emit));
     }
 
 }

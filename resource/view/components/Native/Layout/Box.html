@@ -2,11 +2,11 @@
 <div :id="$id" :class="$margin_left $margin_right $margin_top $margin_bottom $box_width">
     <div :class="$padding_left $padding_right $padding_top $padding_bottom v-bgcolor-white $box_height v-brd-radius-4px">
         <div :show="hasTitle()">
-            <h3 class="v-show v-mg-none v-f-left v-pd-none v-weight-normal v-h-28px v-lh-28px v-size-20px">
+            <h3 class="v-show v-mg-none v-f-left v-pd-none v-weight-normal v-h-28px v-lh-28px v-size-18px">
                 {{ $title }}
             </h3>
             <div class="v-clear-left"></div>
-            <v-line color="#cccccc"></v-line>
+            <v-line color="#cccccc" margin="10"></v-line>
         </div>
         <div>
             {{ $slot }}

@@ -4,6 +4,7 @@ namespace App\Controller
 {
 
     use Rasmus\App\Request;
+    use Rasmus\App\Response;
     use Rasmus\Cache\Cache;
     use Rasmus\Resource\Lang\Lang;
     use Rasmus\Util\Collection;
@@ -14,12 +15,7 @@ namespace App\Controller
 
     function view(string $canvas, array $emit = [])
     {   
-        if(!empty($emit))
-        {
-            
-        }
-
-        $cache = Cache::html(Request::uri(), $canvas);
+        $cache = Cache::html(Request::uri(), $canvas, $emit);
 
         if(!is_null($cache))
         {
@@ -50,6 +46,24 @@ namespace App\Controller
     function label(string $key, array $template = [])
     {
         return Lang::get($key, $template);
+    }
+
+    /**
+     * Return http status error instead of returning resources.
+     */
+
+    function http(int $code)
+    {
+        return new Response('http', $code);
+    }
+
+    /**
+     * Make redirection after controller iteration.
+     */
+
+    function redirect(string $url)
+    {
+        return new Response('redirect', $url);
     }
 
 }

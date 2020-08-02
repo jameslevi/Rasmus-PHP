@@ -45,7 +45,7 @@ class BasicMiddleware extends Middleware
         /**
          * Test if request method is supported.
          */
-
+        
         if(in_array($request->method(), $this->accepted_methods))
         {
             if($request->method() !== $request->route('verb'))

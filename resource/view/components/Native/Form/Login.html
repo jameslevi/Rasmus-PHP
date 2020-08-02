@@ -1,0 +1,32 @@
+<template>
+
+    <form :id="$id" method="post" :action="$action_url">
+        
+        {{ $slot }}
+
+        <div>
+            <v-alert :id="$alert_id" scheme="error" variant="default" rounded="true">
+                {{ $label['validation::message.default'] }}
+            </v-alert>
+        </div>
+        <div class="v-pd-b-10px">
+            <v-textbox type="text" :id="$user_id" name="user" class="nv-user-text" rounded="true" size="medium" :placeholder="$user"></v-textbox>
+        </div>
+        <div class="v-pd-b-10px">
+            <v-textbox type="password" :id="$password_id" name="password" class="nv-password-text" rounded="true" size="medium" :placeholder="$password"></v-textbox>
+        </div>
+        <div>
+            <v-button :id="$button_id" rounded="true" width="100" bold="true" size="medium" onclick="login">
+                {{ $button }}
+            </v-button>
+        </div>
+    </form>
+
+</template>
+
+<script>
+function login(el)
+{
+    
+}
+</script>

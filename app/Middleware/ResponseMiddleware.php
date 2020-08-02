@@ -2,7 +2,6 @@
 
 namespace App\Middleware;
 
-use Rasmus\App\Config;
 use Rasmus\App\Middleware;
 use Rasmus\Http\Request;
 
@@ -11,8 +10,27 @@ class ResponseMiddleware extends Middleware
 
     protected function handle(Request $request)
     {
-        $response = emit('content');
-        $redirect = $request->route('redirect');
+        $code = emit('code') ?? 200;
+        $response = emit('content') ?? null;
+        $redirect = $request->route('redirect') ?? emit('redirect');
+
+        /**
+         * Return http status code.
+         */
+
+        if($code !== 200)
+        {
+            return http($code);
+        }
+
+        /**
+         * Redirect route.
+         */
+
+        if(!is_null($redirect))
+        {
+            return redirect($redirect);
+        }
 
         /**
          * Return Http Status code 204 if response
@@ -25,13 +43,8 @@ class ResponseMiddleware extends Middleware
         }
 
         /**
-         * Redirect route.
+         * Go to the next afterware.
          */
-
-        if(!is_null($redirect))
-        {
-            return redirect($redirect);
-        }
 
         return next();
     }

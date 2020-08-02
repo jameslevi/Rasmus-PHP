@@ -17,7 +17,7 @@ class HttpController extends Controller
         $code = $request->status();
         $errors = $request->errors() ?? [];
         $message = label('statuscode::status.code.' . $code);
-
+        
         /**
          * Return json message.
          */

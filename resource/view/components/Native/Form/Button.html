@@ -1,5 +1,5 @@
 <template>
-    <button :id="$id" :name="$name" :disabled="$disabled" :guard="$guard" :method="$onclick" onclick="triggerButton(this)" :class="$button_width $button_height $line_height $bgcolor $bgcolor_hover $bgcolor_active $text_color $text_size $text_weight $border_radius v-align-center nv-button">
+    <button :id="$id" :name="$name" :disabled="$disabled" :guard="$guard" :method="$onclick" onclick="triggerButton(this)" :class="$button_width $button_height $line_height $bgcolor $bgcolor_hover $bgcolor_active $text_color $text_size $text_weight $border_radius v-display-block v-pd-none v-mg-none v-align-center nv-button">
         <div class="v-display-inline-block">
             <b :show="hasIcon()" :class="$icon_margin v-square-16px v-show v-f-left v-mg-r-8px">
                 <v-icon :src="$icon" size="16"></v-icon>
@@ -43,7 +43,6 @@ function triggerButton(btn)
 .nv-button {
     padding: 0px 10px;
     border: 0px;
-    margin-bottom: 10px;
     outline: none;
 }
 </style>

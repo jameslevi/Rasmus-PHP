@@ -4,6 +4,7 @@ namespace Rasmus;
 
 use Rasmus\App\Config;
 use Rasmus\App\Request;
+use Rasmus\App\Response;
 use Rasmus\Cache\Cache;
 use Rasmus\File\Json;
 use Rasmus\File\Reader;
@@ -359,13 +360,32 @@ class Application
             Emitter::emit('code', $code);
             $fetch = $this->controllerExec($controller, $method, new Collection($route ?? []));
             
-            Emitter::clear();
-            Emitter::emit('content', $fetch);
+            if($fetch instanceof Response)
+            {
+                Emitter::clear();
+                $type = strtolower($fetch->type());
+                $data = $fetch->data();
+
+                if($type === 'http')
+                {
+                    Emitter::emit('code', $data);
+                }
+                else if($type === 'redirect')
+                {
+                    Emitter::emit('redirect', $data);
+                }
+
+            }
+            else
+            {
+                Emitter::clear();
+                Emitter::emit('content', $fetch);
+            }
 
             /**
              * Iterate afterwares.
              */
-
+            
             if(!is_null($test))
             {
                 if(!$test->empty(true))
@@ -487,7 +507,7 @@ class Application
 
         $instance = new $controller();
         $fetch = $instance->init($method, $route);
-
+        
         return $fetch->success() ? $fetch->response() : null;
     }
 
@@ -506,7 +526,7 @@ class Application
 
     private function forcedRedirect(string $url)
     {
-        $base = 'http://' . Config::app()->url;
+        $base = Config::app()->url;
 
         if(!Str::endWith($base, '/'))
         {

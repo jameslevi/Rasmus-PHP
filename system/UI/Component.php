@@ -3,6 +3,7 @@
 namespace Rasmus\UI;
 
 use Rasmus\File\Reader;
+use Rasmus\Resource\Lang\Lang;
 use Rasmus\Util\String\Str;
 
 abstract class Component
@@ -113,6 +114,10 @@ abstract class Component
             if(strtolower($key) === 'id')
             {
                 $this->prop['id'] = $value;
+                if(method_exists($this, 'id'))
+                {
+                    $this->{'id'}($value);
+                }
             }
         }
     }
@@ -407,27 +412,34 @@ abstract class Component
                                     {
                                         $value = Str::move($value, 1);
 
-                                        if(array_key_exists($value, $this->data))
+                                        if(strtolower($value) === 'slot')
                                         {
-                                            $value = $this->data[$value];
-                                        }
-                                        else if(array_key_exists($value, $this->prop))
-                                        {
-                                            $value = $this->prop[$value];
-                                        }
-
-                                        if(is_bool($value))
-                                        {
-                                            if($value)
-                                            {
-                                                $str .= $name . ' ';
-                                            }
+                                            $str .= $name . '="' . $this->slot . '"';
                                         }
                                         else
                                         {
-                                            if(!is_null($value))
+                                            if(array_key_exists($value, $this->data))
                                             {
-                                                $str .= $name . '="' . $value . '"';
+                                                $value = $this->data[$value];
+                                            }
+                                            else if(array_key_exists($value, $this->prop))
+                                            {
+                                                $value = $this->prop[$value];
+                                            }
+
+                                            if(is_bool($value))
+                                            {
+                                                if($value)
+                                                {
+                                                    $str .= $name . ' ';
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if(!is_null($value))
+                                                {
+                                                    $str .= $name . '="' . $value . '"';
+                                                }
                                             }
                                         }
                                     }
@@ -587,7 +599,26 @@ abstract class Component
 
                 if(Str::has($directive, '[') && Str::has($directive, ']'))
                 {
+                    $name = strtolower(Str::break($directive, '[')[0]);
+                    $value = Str::move(Str::break($directive, '[')[1], 1, 3);
 
+                    if($name === 'label')
+                    {
+                        $label = Lang::get($value);
+
+                        if($label !== $value)
+                        {
+                            $str .= $label . Str::break($segment, '}}')[1];
+                        }
+                        else
+                        {
+                            $str .= '' . Str::break($segment, '}}')[1];
+                        }
+                    }
+                    else if($name === 'emit')
+                    {
+
+                    }
                 }
                 else if($directive === 'slot')
                 {

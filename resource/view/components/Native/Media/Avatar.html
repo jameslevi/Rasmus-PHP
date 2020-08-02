@@ -1,0 +1,11 @@
+<template>
+    <div :id="$id" :class="$diameter $radius $background v-ov-hidden v-unselectable" :title="$title">
+        <a :href="$url" :show="hasHref()" :class="$diameter $show v-pos-absolute v-z-index-2"></a>
+        <div :show="hasIcon()" :class="$diameter v-pos-absolute v-z-index-1">
+            <img :src="$src" :class="$diameter v-mg-none v-pd-none v-brd-none v-show">
+        </div>
+        <div :class="$diameter $line_height $text_color $text_size $font_weight v-align-center v-uc v-pos-absolute v-z-index-0">
+            {{ $slot }}
+        </div>
+    </div>
+</template>

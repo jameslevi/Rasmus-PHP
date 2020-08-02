@@ -47,7 +47,7 @@ abstract class Controller
             if(method_exists($this, $method))
             {
                 $fetch = $this->{$method}($this->makePackage());
-            
+                
                 if(!is_null($fetch))
                 {
                     $this->success = true;
@@ -63,6 +63,14 @@ abstract class Controller
                     else if(is_array($fetch))
                     {
                         $this->response = json_encode($fetch);
+                    }
+                    else if($fetch instanceof Collection)
+                    {
+                        $this->response = $fetch->toJson();
+                    }
+                    else
+                    {
+                        $this->response = $fetch;
                     }
                 }
             }
