@@ -40,7 +40,13 @@ class HttpController extends Controller
          * Return HTML view.
          */
 
-        return $message;
+        return view('http.response', [
+
+            'code' => $code,
+
+            'message' => $message,
+
+        ]);
     }
 
     /**

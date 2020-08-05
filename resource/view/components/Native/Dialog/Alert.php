@@ -25,7 +25,7 @@ class Alert extends Component
 
     protected $data = [
 
-        'container' => [],        
+        'container' => ['v-pd-12px'],        
 
         'background' => 'v-bgcolor-primary',
 
@@ -173,12 +173,14 @@ class Alert extends Component
             {
                 $this->container = [
                     'v-pd-12px',
+                    'v-lh-16px',
                 ];
             }
             else if($variant === 'border')
             {
                 $this->container = [
                     'v-pd-12px',
+                    'v-lh-16px',
                     'v-brd-l-solid-10px',
                     'v-brd-color-' . $this->scheme . '_hover',
                 ];

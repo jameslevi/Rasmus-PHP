@@ -33,6 +33,8 @@ class Line extends Component
 
         'rounded' => false,
 
+        'show' => true,
+
     ];
 
     /**

@@ -1,0 +1,14 @@
+<template>
+    <div :id="$id">
+        <div class="v-pd-y-10px">
+            <div :class="$font_weight v-f-left">
+                {{ $title }}
+            </div>
+            <div class="v-f-right">
+                {{ $slot }}
+            </div>
+            <div class="v-clear-left"></div>
+        </div>
+        <v-line :show="$line"></v-line>
+    </div>
+</template>

@@ -21,19 +21,19 @@ class Button extends Component
 
         'bgcolor_hover' => 'v-hover:bgcolor-primary',
 
-        'bgcolor_active' => 'v-active:bgcolor-primary',
+        'bgcolor_active' => 'v-active:bgcolor-primary_active',
 
         'text_color' => 'v-color-light',
 
         'text_size' => 'v-size-13px',
-
-        'text_weight' => 'v-weight-normal',
 
         'icon_margin' => 'v-mg-t-8px',
 
         'border_radius' => 'v-brd-radius-none',
 
         'url' => null,
+
+        'redirect' => null,
 
     ];
     
@@ -51,8 +51,6 @@ class Button extends Component
 
         'icon' => null,
 
-        'bold' => false,
-
         'disabled' => false,
 
         'guard' => false,
@@ -61,7 +59,23 @@ class Button extends Component
 
         'hover' => false,
 
+        'href' => null,
+
     ];
+
+    /**
+     * Set redirection link for button.
+     */
+
+    protected function href(string $href)
+    {
+        if(!Str::startWith($href, '/'))
+        {
+            $href = '/' . $href;
+        }
+
+        $this->redirect = Config::app()->url . $href;
+    }
 
     /**
      * If button has icon return true.

@@ -122,10 +122,8 @@ class Canvas
         
             if(Str::has($html, '<template>'))
             {
-                $html = Str::break($html, '<template>')[1];
+                $this->output .= Str::break($html, '<template>')[1];
             }
-
-            $this->output .= $html;
         }
         else
         {
@@ -371,7 +369,7 @@ class Canvas
 
         foreach($media as $key => $data)
         {
-            $str = '@media only screen and (min-width:' . Str::break($key, '-')[1] . '){';
+            $str = '@media only screen and (max-width:' . Str::break($key, '-')[1] . '){';
 
             for($i = 0; $i <= (sizeof($data) - 1); $i++)
             {
@@ -580,8 +578,12 @@ class Canvas
             $refs = Config::components();
             $ref = $refs->{$name};
             $output = $span;
-            $rendered = false;
             $instance = new $ref();
+
+            if(!is_null($content))
+            {
+                $instance->slot(Str::trim($content));
+            }
                 
             foreach($data as $prop => $value)
             {
@@ -623,11 +625,6 @@ class Canvas
                 }
 
                 $instance->{$prop} = $value;
-            }
-
-            if(!is_null($content))
-            {
-                $instance->slot($content);
             }
 
             $output = $instance->draw();

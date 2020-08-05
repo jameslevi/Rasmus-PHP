@@ -78,6 +78,7 @@ abstract class ClassUtil
 
     protected $display = [
         'none',
+        'flex',
         'block',
         'inline',
         'initial',

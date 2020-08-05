@@ -4,6 +4,7 @@ namespace Rasmus\UI;
 
 use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Lang;
+use Rasmus\Util\Collection;
 use Rasmus\Util\String\Str;
 
 abstract class Component
@@ -19,7 +20,7 @@ abstract class Component
      * Component inner html content.
      */
 
-    private $slot;
+    protected $slot;
 
     /**
      * Set slot content.
@@ -35,6 +36,11 @@ abstract class Component
      */
 
     protected $data = [];
+
+    /**
+     * Component properties.
+     */
+
     protected $prop = [];
 
     /**
@@ -123,6 +129,60 @@ abstract class Component
     }
 
     /**
+     * Return slot child data.
+     */
+
+    protected function getChild(string $name, array $keys = [])
+    {
+        $slot = $this->slot;
+        $count = 0;
+        $explode = explode('<' . $name, $slot);
+        $items = [];
+
+        foreach($explode as $slot)
+        {
+            if(Str::has($slot, '</' . $name) && Str::has($slot, '>'))
+            {
+                $count++;
+            }
+        }
+
+        if($count !== 0)
+        {
+            foreach($explode as $slot)
+            {
+                if(Str::has($slot, '</' . $name) && Str::has($slot, '>'))
+                {
+                    $slot = Str::break($slot, '</' . $name . '>')[0];
+                    $break = Str::break($slot, '>');
+                    $attr = $break[0];
+                    $html = $break[1];
+                    $data = $keys;
+                    $data['content'] = $html;
+                    
+                    foreach(explode(' ', $attr) as $prop)
+                    {
+                        if(!empty($prop) && $prop !== '')
+                        {
+                            $attr_name = Str::break($prop, '="')[0];
+                            $attr_val = Str::move(Str::break($prop, '="')[1], 0, 1);
+                            
+                            if(array_key_exists($attr_name, $keys))
+                            {
+                                $data[$attr_name] = $attr_val;
+                            }
+                        }
+                    }
+
+                    $items[] = new Collection($data);
+                }
+            }
+        }
+
+        return $items;
+    }
+
+    /**
      * Render html components.
      */
 
@@ -137,6 +197,10 @@ abstract class Component
         {
             $html = $reader->contents();
             $str = '';
+
+            /**
+             * Export component stylesheet to cache css file.
+             */
 
             if(Str::has($html, '<style') && Str::has($html, '</style>'))
             {
@@ -153,6 +217,10 @@ abstract class Component
 
                 Canvas::addStylesheet($template, $css);
             }
+
+            /**
+             * Export component javascript to cache javascript file.
+             */
 
             if(Str::has($html, '<script') && Str::has($html, '</script>'))
             {
@@ -174,6 +242,10 @@ abstract class Component
                 Canvas::addJavascript($template, $script);
             }
 
+            /**
+             * Extract template from component html file.
+             */
+
             if(Str::has($html, '<template>') && Str::has($html, '</template>'))
             {
 
@@ -190,6 +262,7 @@ abstract class Component
                     $props = Str::move(Str::break($tag, '>')[0], $pos);
                     $content = Str::break($tag, '>')[1] ?? null;
                     $str .= Str::break(Str::break($tag, '>')[0], ' ')[0] . ' ';
+                    $tagname = Str::break($tag, ' ')[0];
                     
                     if(Str::startWith($props, ' '))
                     {
@@ -332,10 +405,21 @@ abstract class Component
                                     {
                                         $value = true;
                                     }
-
-                                    if($value === false)
+                                    else if($value === 'false')
                                     {
-                                        $has_show = true;
+                                        $value = false;
+                                    }
+
+                                    if(Str::startWith($tagname, 'v-'))
+                                    {
+                                        $str .= $name . '="' . ($value ? 'true' : 'false') . '" ';
+                                    }
+                                    else
+                                    {
+                                        if($value === false)
+                                        {
+                                            $has_show = true;
+                                        }
                                     }
                                 }
                                 else if($name === 'style')
@@ -497,25 +581,29 @@ abstract class Component
 
                             foreach(explode(';', $css) as $rule)
                             {
-                                $name = Str::break($rule, ':')[0];
-                                
-                                if($name === 'display')
+                                if($rule !== '' && !empty($rule))
                                 {
-                                    $has_display = true;
-                                    if($has_show)
+                                    $name = Str::break($rule, ':')[0];
+                                
+                                    if($name === 'display')
                                     {
-                                        $str .= 'display: block';
+                                        $has_display = true;
+
+                                        if($has_show)
+                                        {
+                                            $str .= 'display: block';
+                                        }
+                                        else
+                                        {
+                                            $str .= 'display: ' . Str::break($rule, ':')[1];
+                                        }
+                                        $str .= '; ';
                                     }
                                     else
                                     {
-                                        $str .= 'display: none';
+                                        $str .= $rule . '; ';
                                     }
                                 }
-                                else
-                                {
-                                    $str .= $rule;
-                                }
-                                $str .= '; ';
                             }
 
                             if(!$has_display)
@@ -615,10 +703,6 @@ abstract class Component
                             $str .= '' . Str::break($segment, '}}')[1];
                         }
                     }
-                    else if($name === 'emit')
-                    {
-
-                    }
                 }
                 else if($directive === 'slot')
                 {
@@ -628,11 +712,25 @@ abstract class Component
                 {
                     if(array_key_exists($directive, $this->data))
                     {
+                        $val = $this->data[$directive];
+
+                        if(is_bool($val))
+                        {
+                            $val = $val ? 'true' : 'false';
+                        }
+
                         $str .= $this->data[$directive] . Str::break($segment, '}}')[1];
                     }
                     else if(array_key_exists($directive, $this->prop))
                     {
-                        $str .= $this->prop[$directive] . Str::break($segment, '}}')[1];
+                        $val = $this->prop[$directive];
+
+                        if(is_bool($val))
+                        {
+                            $val = $val ? 'true' : 'false';
+                        }
+
+                        $str .= $val . Str::break($segment, '}}')[1];
                     }
                     else
                     {

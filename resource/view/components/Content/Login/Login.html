@@ -1,17 +1,20 @@
 <template>
-    <div class="v-align-center v-pd-t-100px">
-        <div class="v-max-w-460px v-min-w-320px v-display-inline-block v-align-left">
-            <v-box marginbottom="10">
-                <div class="v-pd-20px">
-                    <v-login action="login/authenticate">
 
-                    </v-login>
+    <div class="v-w-100 v-h-100vh v-bgcolor-#dddddd v-ov-auto">
+        <v-center>
+            <div class="v-w-320px">
+            <v-box marginbottom="10" margintop="100">
+                <div class="v-pd-20px v-pd-t-0px">
+                    <div class="v-pd-b-10px">
+                        <v-header title="Login" bold="true"></v-header>
+                    </div>
+                    <div>
+                        <v-login action="login/authenticate"></v-login>
+                    </div>
                 </div>
             </v-box>
-        </div>
+            </div>
+        </v-center>
     </div>
+
 </template>
-
-<style>
-
-</style>

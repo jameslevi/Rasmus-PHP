@@ -40,7 +40,10 @@ class Link extends Component
             $href = '/' . $href;
         }
 
-        $this->href = Config::app()->url . $href;
+        if(!Str::startWith($href, 'http'))
+        {
+            $this->href = Config::app()->url . $href;
+        }
     }
 
     /**

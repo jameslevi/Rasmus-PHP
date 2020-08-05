@@ -302,6 +302,15 @@ class CSSUtility extends ClassUtil
     }
 
     /**
+     * Align center elements.
+     */
+
+    protected function center()
+    {
+        return ['center', 'margin-left:auto;margin-right:auto'];
+    }
+
+    /**
      * Set font size.
      */
 
@@ -636,6 +645,10 @@ class CSSUtility extends ClassUtil
         else if(strtolower($color) === 'transparent')
         {
             return ['bgcolor-transparent', 'background-color:transparent'];           
+        }
+        else if(strtolower($color) === 'none')
+        {
+            return ['bgcolor-none', 'background-color:none'];
         } 
         else
         {
@@ -666,11 +679,11 @@ class CSSUtility extends ClassUtil
      * Set element visibility.
      */
 
-    protected function vis(string $visibility)
+    protected function visibility(string $visibility)
     {
         if(in_array($visibility, $this->visibility))
         {
-            return ['vis-' . $visibility, 'visibility:' . $visibility];
+            return ['visibility-' . $visibility, 'visibility:' . $visibility];
         }
     }
 
@@ -678,7 +691,7 @@ class CSSUtility extends ClassUtil
      * Justify text.
      */
 
-    protected function jstf(string $justify)
+    protected function justify(string $justify)
     {
         if(in_array($justify, [
             'auto',
@@ -687,37 +700,89 @@ class CSSUtility extends ClassUtil
             'inherit',
         ]))
         {
-            return ['jstf-' . $justify, 'text-justify:' . $justify];
+            return ['justify-' . $justify, 'text-justify:' . $justify];
         }
+    }
+
+    /**
+     * Set justify-content of element.
+     */
+
+    protected function justify_content(string $prop)
+    {
+        if(in_array($prop, [
+            'center',
+            'initial',
+            'inherit',
+        ]))
+        {
+            return ['justify-content-' . $prop, 'justify-content:' . $prop];
+        }
+    }
+
+    /**
+     * Set justify-content to flex-start.
+     */
+
+    protected function justify_content_flex_start()
+    {
+        return ['justify-content-flex-start', 'justify-content:flex-start'];
+    }
+
+    /**
+     * Set justify-content to flex-end.
+     */
+
+    protected function justify_content_flex_end()
+    {
+        return ['justify-content-flex-end', 'justify-content:flex-end'];
+    }
+
+    /**
+     * Set justify-content to space between.
+     */
+
+    protected function justify_content_space_between()
+    {
+        return ['justify-content-space-between', 'justify-content:space-between'];
+    }
+
+    /**
+     * Set justify-content to space around.
+     */
+
+    protected function justify_content_space_around()
+    {
+        return ['justify-content-space-around', 'justify-content:space-around'];
     }
 
     /**
      * Set text-justify to inter-word.
      */
 
-    protected function jstf_inter_word()
+    protected function justify_inter_word()
     {
-        return ['jstf-inter-word', 'text-justify:inter-word'];
+        return ['justify-inter-word', 'text-justify:inter-word'];
     }
 
     /**
      * Set text-justify to inter-character.
      */
 
-    protected function jstf_inter_character()
+    protected function justify_inter_character()
     {
-        return ['jstf-inter-character', 'text-justify:inter-character'];
+        return ['justify-inter-character', 'text-justify:inter-character'];
     }
 
     /**
      * Set text word wrap.
      */
 
-    protected function ww(string $wrap)
+    protected function wrap(string $wrap)
     {
         if(in_array($wrap, $this->normal))
         {
-            return ['ww-' . $wrap, 'word-wrap:' . $wrap];
+            return ['wrap-' . $wrap, 'word-wrap:' . $wrap];
         }
     }   
 
@@ -725,9 +790,9 @@ class CSSUtility extends ClassUtil
      * Set text word wrap to break word.
      */
 
-    protected function ww_break_word()
+    protected function wrap_break_word()
     {
-        return ['ww-break-word', 'word-wrap:break-word'];
+        return ['wrap-break-word', 'word-wrap:break-word'];
     }   
 
     /**
