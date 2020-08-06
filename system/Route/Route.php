@@ -177,6 +177,7 @@ class Route
             'text/html',
             'text/css',
             'application/json',
+            'application/javascript',
         ]))
         {
             $this->set('content', $type);

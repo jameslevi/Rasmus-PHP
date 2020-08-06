@@ -31,16 +31,8 @@ class BasicMiddleware extends Middleware
     protected function handle(Request $request)
     {
         $app = Application::context();
-        
-        /**
-         * Test if service is available.
-         */
-
-        if(Config::app()->mode === 'down' || $request->route('mode') === 'down')
-        {
-            $app->mode = 'down';
-            return http(503);
-        }
+        $uri = Str::break($request->uri(), '?')[0];
+        $is_resource = false;
 
         /**
          * Test if request method is supported.
@@ -63,8 +55,6 @@ class BasicMiddleware extends Middleware
          * middleware testing.
          */
 
-        $uri = Str::break($request->uri(), '?')[0];
-        
         foreach($this->resource_ext as $ext)
         {
             if(Str::endWith($uri, '.' . $ext) && Str::startWith($uri, '/resource/static/'))
@@ -74,12 +64,30 @@ class BasicMiddleware extends Middleware
             
                 if($reader->exist())
                 {
-                    return bypass();
+                    $is_resource = true;
                 }
                 else
                 {
                     return http(404);       
                 }
+            }
+        }
+
+        if($is_resource)
+        {
+            return bypass();
+        }
+       
+        /**
+         * Test if service is available.
+         */
+
+        if(Config::app()->mode === 'down' || $request->route('mode') === 'down')
+        {
+            if(!$is_resource)
+            {
+                $app->mode = 'down';
+                return http(503);
             }
         }
 

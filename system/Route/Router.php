@@ -39,12 +39,6 @@ class Router
     private $route;
 
     /**
-     * Store data embeded from uri.
-     */
-
-    private $resource = [];
-
-    /**
      * Store request uri.
      */
 
@@ -69,13 +63,15 @@ class Router
     {
         $uri1 = $this->uriToArray($this->uri);
         $groups = array_keys($this->routes);
-
+        $resource = [];
+        
         for($i = 0; $i <= (sizeof($groups) - 1); $i++)
         {
             $group = $this->routes[$groups[$i]];
 
             for($j = 0; $j <= (sizeof($group) - 1); $j++)
             {
+                $resource = [];
                 $route = $group[$j];
                 $uri2 = $this->uriToArray($route['uri']);
                 $n = 0;
@@ -94,7 +90,7 @@ class Router
                             if(Str::startWith($uri2[$k], '{') && Str::endWith($uri2[$k], '}') && $name !== '')
                             {
                                 $n++;
-                                $this->resource[$name] = $uri1[$k];
+                                $resource[$name] = $uri1[$k];
                             }
                         }
                     }
@@ -117,7 +113,10 @@ class Router
                         $this->success = true;
                     }
 
-                    $this->route['resource'] = $this->resource;
+                    if(!empty($resource))
+                    {
+                        $this->route['resource'] = $resource;
+                    }
                     break 2;
                 }
             }
