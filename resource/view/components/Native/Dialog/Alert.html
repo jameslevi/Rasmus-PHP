@@ -1,6 +1,6 @@
 <template>
 <div :id="$id" class="nv-alert">
-    <div :class="$container $background $show $radius v-mg-b-10px v-ov-hidden nv-alert-body">
+    <div :display="$display" :class="$container $background $radius v-mg-b-10px v-ov-hidden v-hide nv-alert-body">
         <div :class="v-f-left v-square-16px v-mg-r-10px" :show="hasIcon()">
             <v-icon :src="$url" size="16"></v-icon>
         </div>
@@ -20,6 +20,19 @@
 </template>
 
 <script>
+/**
+ * Automatically open alert.
+ */
+
+$('.nv-alert-body').each(function() {
+    let display = $(this).is('[display]');
+    
+    if(display)
+    {
+        $(this).delay(500).fadeIn(500);
+    }
+});
+
 /**
  * Show alert and replace message.
  */

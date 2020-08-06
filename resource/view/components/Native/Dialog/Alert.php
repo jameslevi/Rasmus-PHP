@@ -35,8 +35,6 @@ class Alert extends Component
 
         'offset' => 'v-w-offset-10px',
 
-        'show' => 'v-hide',
-
         'radius' => 'v-brd-radius-none',
 
         'dismiss_bg' => 'v-bgcolor-none v-hover:bgcolor-light',
@@ -77,15 +75,6 @@ class Alert extends Component
 
     protected function render()
     {
-        if($this->display)
-        {
-            $this->show = 'v-show';
-        }
-        else
-        {
-            $this->show = 'v-hide';
-        }
-
         if($this->rounded)
         {
             $this->radius = 'v-brd-radius-4px';
