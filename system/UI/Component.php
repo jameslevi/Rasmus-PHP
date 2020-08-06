@@ -2,6 +2,7 @@
 
 namespace Rasmus\UI;
 
+use Rasmus\App\Config;
 use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Lang;
 use Rasmus\Util\Collection;
@@ -205,15 +206,19 @@ abstract class Component
             if(Str::has($html, '<style') && Str::has($html, '</style>'))
             {
                 $css = Str::trim(Str::move(Str::break(Str::break($html, '<style')[1], '</style>')[0], 1));
-                $css = str_replace(' {', '{', $css);
-                $css = str_replace('{ ', '{', $css);
-                $css = str_replace(' }', '}', $css);
-                $css = str_replace('} ', '}', $css);
-                $css = str_replace('; ', ';', $css);
-                $css = str_replace(' ;', ';', $css);
-                $css = str_replace(', ', ',', $css);
-                $css = str_replace(' ,', ',', $css);
-                $css = str_replace(': ', ':', $css);
+
+                if(Config::app()->minify)
+                {
+                    $css = str_replace(' {', '{', $css);
+                    $css = str_replace('{ ', '{', $css);
+                    $css = str_replace(' }', '}', $css);
+                    $css = str_replace('} ', '}', $css);
+                    $css = str_replace('; ', ';', $css);
+                    $css = str_replace(' ;', ';', $css);
+                    $css = str_replace(', ', ',', $css);
+                    $css = str_replace(' ,', ',', $css);
+                    $css = str_replace(': ', ':', $css);
+                }
 
                 Canvas::addStylesheet($template, $css);
             }
@@ -250,6 +255,25 @@ abstract class Component
             {
 
             $html = Str::break(Str::break($html, '<template>')[1], '</template>')[0];
+
+            if(Str::has($html, '<!--') && Str::has($html, '-->'))
+            {
+                $parsed = '';
+
+                foreach(explode('<!--', $html) as $comment)
+                {
+                    if(Str::has($comment, '-->'))
+                    {
+                        $parsed .= Str::break($comment, '-->')[1];
+                    }
+                    else
+                    {
+                        $parsed .= $comment;
+                    }
+                }
+
+                $html = $parsed;
+            }
 
             foreach(explode('<', $html) as $tag)
             {

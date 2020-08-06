@@ -119,10 +119,90 @@ class Canvas
         if($reader->exist())
         {
             $html = Str::break($reader->contents(), '</template>')[0];
+
+            /**
+             * Return html template.
+             */
         
             if(Str::has($html, '<template>'))
             {
-                $this->output .= Str::break($html, '<template>')[1];
+                $output = Str::break($html, '<template>')[1];
+            
+                if(Str::has($output, '<!--') && Str::has($output, '-->') && Config::app()->minify)
+                {
+                    $parsed = '';
+
+                    foreach(explode('<!--', $output) as $comment)
+                    {
+                        if(Str::has($comment, '-->'))
+                        {
+                            $parsed .= Str::break($comment, '-->')[1];
+                        }
+                        else
+                        {
+                            $parsed .= $comment;
+                        }
+                    }
+
+                    $output = $parsed;
+                }
+
+                $this->output .= $output;
+            }
+            
+            $html = $reader->contents();
+
+            /**
+             * Return stylesheet data.
+             */
+
+            if(Str::has($html, '<style') && Str::has($html, '</style>'))
+            {
+                $style = Str::break(Str::break(Str::break($html, '<style')[1], '</style>')[0], '>')[1];
+
+                if(Config::app()->minify)
+                {
+                    $css = str_replace(' {', '{', Str::trim($style));
+                    $css = str_replace('{ ', '{', $css);
+                    $css = str_replace(' }', '}', $css);
+                    $css = str_replace('} ', '}', $css);
+                    $css = str_replace('; ', ';', $css);
+                    $css = str_replace(' ;', ';', $css);
+                    $css = str_replace(', ', ',', $css);
+                    $css = str_replace(' ,', ',', $css);
+                    $css = str_replace(': ', ':', $css);
+                    $style = Str::trim($css);
+                }
+
+                if(!empty($style))
+                {
+                    if(!array_key_exists($component, static::$stylesheet))
+                    {
+                        static::$stylesheet[$component] = $style;
+                    }
+                }
+            }
+
+            /**
+             * Return javascript data.
+             */
+
+            if(Str::has($html, '<script') && Str::has($html, '</script>'))
+            {
+                $script = Str::break(Str::break(Str::break($html, '<script')[1], '</script>')[0], '>')[1];
+
+                if(Config::app()->minify)
+                {
+                    $script = Str::trim($script);
+                }
+
+                if(!empty($script))
+                {
+                    if(!array_key_exists($component, static::$javascript))
+                    {
+                        static::$javascript[$component] = $script;
+                    }
+                }
             }
         }
         else

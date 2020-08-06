@@ -10,17 +10,7 @@ class MainController extends Controller
 
     protected function index(Request $request)
     {
-
-        
-
         return view('index.welcome');
-    }
-
-    protected function ivan(Request $request)
-    {
-        $text = 'Hello Ivan';
-
-        return $text;
     }
 
 }
