@@ -1,9 +1,8 @@
 <template>
     <div class="v-w-100">
-        <div class="v-pd-10px">
-            <v-alert scheme="error" display="true" rounded="true">
-                Something went wrong in your request.
-            </v-alert>
-        </div>
+        <h1 class="v-show v-center v-weight-normal v-align-center v-mg-t-100px v-size-70px">
+            {{ $emit['title'] }}
+        </h1>
+        
     </div>
 </template>

@@ -3,12 +3,13 @@
 namespace Rasmus\Resource\Lang {
 
     /**
-     * LOCALIZATION
+     * STATUS CODE
      * -----------------------------------------------
-     * Define translations for your text resources.  
+     * Descriptions of your http status codes.  
      */
     
     Locale::id('status.code.200')->en('OK');
+    Locale::id('status.code.201')->en('Created');
     Locale::id('status.code.204')->en('No Content');
     Locale::id('status.code.301')->en('Moved Permanently');
     Locale::id('status.code.307')->en('Temporary Redirect');
