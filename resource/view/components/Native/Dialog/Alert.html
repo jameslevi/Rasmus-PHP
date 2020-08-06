@@ -1,6 +1,6 @@
 <template>
-<div :id="$id">
-    <div :class="$container $background $show $radius v-mg-b-10px v-ov-hidden" onmouseover="showDismissButton(this)" onmouseout="hideDismissButton(this)">
+<div :id="$id" class="nv-alert">
+    <div :class="$container $background $show $radius v-mg-b-10px v-ov-hidden nv-alert-body">
         <div :class="v-f-left v-square-16px v-mg-r-10px" :show="hasIcon()">
             <v-icon :src="$url" size="16"></v-icon>
         </div>
@@ -9,7 +9,7 @@
         </div>
         <div class="v-f-left v-square-16px" :show="$dismiss">
             <div :class="$dismiss_bg v-square-16px v-hide v-brd-radius-2px nv-alert-dismiss">
-                <a href="#" onclick="hideAlert(this); return false" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px">
+                <a href="#" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px nv-alert-dismiss-icon">
                     &times;
                 </a>
             </div>
@@ -38,6 +38,15 @@ function showAlert(id, message, autoclose_delay = null)
 }
 
 /**
+ * Close all rendered alert.
+ */
+
+function hideAllAlert()
+{
+    $('.nv-alert').fadeOut(500);
+}
+
+/**
  * Hide alert by dismiss button or method call.
  */
 
@@ -53,25 +62,25 @@ function hideAlert(el)
     }
 }
 
+$('.nv-alert-dismiss-icon').click(function(e) {
+    hideAlert(this);
+    e.preventDefault();
+});
+
 /**
  * Show dismiss button in each onmouseover event.
  */
 
-function showDismissButton(el)
-{
-    $(el).find('.nv-alert-dismiss').show();
-}
+$('.nv-alert-body').mouseover(function(e) {
+    $(this).find('.nv-alert-dismiss').show();
+});
 
 /**
  * Hide dismiss button in each onmouseout event.
  */
 
-function hideDismissButton(el)
-{
-    $(el).find('.nv-alert-dismiss').hide();
-}
+$('.nv-alert-body').mouseout(function(e) {
+    $(this).find('.nv-alert-dismiss').hide();
+});
+
 </script>
-
-<style>
-
-</style>

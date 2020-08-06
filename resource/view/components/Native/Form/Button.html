@@ -20,17 +20,19 @@
 
 function triggerButton(btn)
 {
-    if(!btn.disabled)
+    let el = $(btn);
+    
+    if(!el.attr('disabled'))
     {
-        var method = btn.getAttribute('method'),
-            href = btn.getAttribute('redirect'),
-            guard = btn.getAttribute('guard') ? true : false;
-            
+        let method = el.attr('method'),
+            href = el.attr('redirect'),
+            guard = el.attr('guard') ? true : false;
+
         if(method && href === null)
         {
             if(guard)
             {
-                btn.disabled = true;
+                el.prop('disabled', true);
             }
 
             window[method](btn);
