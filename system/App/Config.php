@@ -70,6 +70,15 @@ class Config
     }
 
     /**
+     * Return javascript libraries dependency directory.
+     */
+
+    public static function dependency()
+    {
+        return new Collection(static::cache()->dependency());
+    }
+
+    /**
      * Return form validation data.
      */
 

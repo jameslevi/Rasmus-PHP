@@ -8,7 +8,7 @@
             {{ $slot }} &nbsp;
         </div>
         <div class="v-f-left v-square-16px" :show="$dismiss">
-            <div :class="$dismiss_bg v-square-16px v-hide v-brd-radius-2px alert-dismiss">
+            <div :class="$dismiss_bg v-square-16px v-hide v-brd-radius-2px nv-alert-dismiss">
                 <a href="#" onclick="hideAlert(this); return false" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px">
                     &times;
                 </a>
@@ -20,16 +20,20 @@
 </template>
 
 <script>
-function showAlert(id, message, delay = null)
+/**
+ * Show alert and replace message.
+ */
+
+function showAlert(id, message, autoclose_delay = null)
 {
-    let el = document.getElementById(id);
+    let el = $('#' + id);
 
-    el.getElementsByClassName('nv-alert-message')[0].innerHTML = message;
-    el.style.display = 'block';
+    el.find('.nv-alert-message').text(message);
+    el.fadeIn(500);
 
-    if(delay !== null)
+    if(autoclose_delay !== null)
     {
-
+        el.delay(autoclose_delay).fadeOut(500);
     }
 }
 
@@ -41,11 +45,11 @@ function hideAlert(el)
 {
     if(typeof el === 'object')
     {
-        el.parentNode.parentNode.parentNode.style.display = 'none';
+        $(el).parent().parent().parent().fadeOut(500);
     }
     else
     {
-        document.getElementById(el).style.display = 'none';
+        $('#' + id).fadeOut(500);
     }
 }
 
@@ -55,7 +59,7 @@ function hideAlert(el)
 
 function showDismissButton(el)
 {
-    el.getElementsByClassName('alert-dismiss')[0].style.display = 'block';
+    $(el).find('.nv-alert-dismiss').show();
 }
 
 /**
@@ -64,7 +68,7 @@ function showDismissButton(el)
 
 function hideDismissButton(el)
 {
-    el.getElementsByClassName('alert-dismiss')[0].style.display = 'none';
+    $(el).find('.nv-alert-dismiss').hide();
 }
 </script>
 

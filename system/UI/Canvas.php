@@ -258,7 +258,7 @@ class Canvas
     {
         if(!is_null($this->template))
         {
-            $reader = new Reader('resource/view/template/' . $this->template . '.php');          
+            $reader = new Reader('resource/view/template/' . $this->template . '.html');          
 
             if($reader->exist())
             {
@@ -526,6 +526,26 @@ class Canvas
             $file = 'storage/cache/js/' . md5($uri) . '.xjs';
             $reader = new Reader($file);
             $reader->delete();
+
+            /**
+             * Include jquery library for native components.
+             */
+
+            if(Str::has($js, '$('))
+            {
+                $jquery = Config::dependency()->jQuery;
+                $read_jquery = new Reader($jquery);
+
+                if($read_jquery->exist())
+                {
+                    $contents = $read_jquery->contents();
+                    
+                    if(!empty($contents))
+                    {
+                        $js = $contents . $js;
+                    }
+                }
+            }
 
             if(!$reader->exist())
             {
