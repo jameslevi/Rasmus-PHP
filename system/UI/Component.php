@@ -525,7 +525,7 @@ abstract class Component
 
                                         if(strtolower($value) === 'slot')
                                         {
-                                            $str .= $name . '="' . $this->slot . '"';
+                                            $str .= $name . '="' . $this->slot . '" ';
                                         }
                                         else
                                         {
@@ -549,14 +549,14 @@ abstract class Component
                                             {
                                                 if(!is_null($value))
                                                 {
-                                                    $str .= $name . '="' . $value . '"';
+                                                    $str .= $name . '="' . $value . '" ';
                                                 }
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        $str .= $name . '="' . $value . '"';
+                                        $str .= $name . '="' . $value . '" ';
                                     }
                                 }
                             }

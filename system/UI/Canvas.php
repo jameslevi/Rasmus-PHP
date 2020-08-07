@@ -282,7 +282,7 @@ class Canvas
                 $html = $this->replaceTags($html);
                 $html = $this->replaceUtilty($html);
                 $html = $this->replaceTemplates($html);
-                
+
                 return $html;
             }
         }
@@ -546,7 +546,7 @@ class Canvas
              * Include jquery library for native components.
              */
 
-            if(Str::has($js, '$('))
+            if(Str::has($js, '$(') || Str::has($js, '$.ajax'))
             {
                 $jquery = Config::dependency()->jQuery;
                 $read_jquery = new Reader($jquery);
@@ -610,6 +610,7 @@ class Canvas
             $end = strpos($str, '</v-' . $name . '>');
             $props = Str::move($tag, strlen($name));
             $span = substr($html, $pos, $length);
+            $tagname = Str::break($tag, ' ')[0];
             $content = null;
             $data = [];
 
@@ -743,6 +744,12 @@ class Canvas
             }
 
             $output = $instance->draw();
+
+            if(Config::app()->minify)
+            {
+                $output = str_replace('/n', ' ', Str::trim($output));
+            }
+
             $this->rendered = true;
             
             $html = $begin . $output . $ending;
@@ -770,7 +777,7 @@ class Canvas
         foreach($split as $segment)
         {
             $temp = str_replace(' ', '', Str::break($segment, '}}')[0]);
-            
+
             if(Str::startWith($temp, '$'))
             {
                 $directive = strtolower(Str::move($temp, 1));
