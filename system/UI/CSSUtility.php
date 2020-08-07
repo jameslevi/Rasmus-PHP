@@ -2393,4 +2393,136 @@ class CSSUtility extends ClassUtil
         }       
     }
 
+    /**
+     * Set list style position.
+     */
+
+    protected function li_position(string $position)
+    {
+        if(in_array($position, $this->list_style_position))
+        {
+            return ['li-position-' . $position, 'list-style-position:' . $position];
+        }
+    }
+
+    /**
+     * Set list style type.
+     */
+
+    protected function li_type(string $type)
+    {
+        if(in_array($type, $this->list_style_type))
+        {
+            return ['li-type-' . $type, 'list-style-type:' . $type];
+        }
+    }
+
+    /**
+     * Set list style type to cjk-ideographic.
+     */
+
+    protected function li_type_cjk_ideographic()
+    {
+        return ['li-type-cjk-ideographic', 'list-style-type:cjk-ideographic'];
+    }
+
+    /**
+     * Set list style type to decimal-leading-zero.
+     */
+
+    protected function li_type_decimal_leading_zero()
+    {
+        return ['li-type-decimal-leading-zero', 'list-style-type:decimal-leading-zero'];
+    }
+
+    /**
+     * Set list style type to hiragana-iroha.
+     */
+
+    protected function li_type_hiragana_iroha()
+    {
+        return ['li-type-hiragana-iroha', 'list-style-type:hiragana-iroha'];
+    }   
+
+    /**
+     * Set list style type to katakana-iroha.
+     */
+
+    protected function li_type_katakana_iroha()
+    {
+        return ['li-type-katakana-iroha', 'list-style-type:katakana-iroha'];
+    }
+
+    /**
+     * Set list style type to lower-alpha.
+     */
+
+    protected function li_type_lower_alpha()
+    {
+        return ['li-type-lower-alpha', 'list-style-type:lower-alpha'];
+    }
+
+    /**
+     * Set list style type to lower-greek.
+     */
+
+    protected function li_type_lower_greek()
+    {
+        return ['li-type-lower-greek', 'list-style-type:lower-greek'];
+    }
+
+    /**
+     * Set list style type to lower-latin.
+     */
+
+    protected function li_type_lower_latin()
+    {
+        return ['li-type-lower-latin', 'list-style-type:lower-latin'];
+    }
+
+    /**
+     * Set list style type to lower-roman.
+     */
+
+    protected function li_type_lower_roman()
+    {
+        return ['li-type-lower-roman', 'list-style-type:lower-roman'];
+    }
+
+    /**
+     * Set list style type to upper-alpha.
+     */
+
+    protected function li_type_upper_alpha()
+    {
+        return ['li-type-upper-alpha', 'list-style-type:upper-alpha'];
+    }
+
+    /**
+     * Set list style type to upper-greek.
+     */
+
+    protected function li_type_upper_greek()
+    {
+        return ['li-type-upper-greek', 'list-style-type:upper-greek'];
+    }
+
+    /**
+     * Set list style type to upper-latin.
+     */
+
+    protected function li_type_upper_latin()
+    {
+        return ['li-type-upper-latin', 'list-style-type:upper-latin'];
+    }
+
+    /**
+     * Set list style type to upper-roman.
+     */
+
+    protected function li_type_upper_roman()
+    {
+        return ['li-type-upper-roman', 'list-style-type:upper-roman'];
+    }
+
 }

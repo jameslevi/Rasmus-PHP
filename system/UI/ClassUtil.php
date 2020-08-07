@@ -348,6 +348,36 @@ abstract class ClassUtil
     ];
 
     /**
+     * List bullet style type.
+     */
+
+    protected $list_style_type = [
+        'disc',
+        'armenian',
+        'circle',
+        'decimal',
+        'georgian',
+        'hebrew',
+        'hiragana',
+        'katakana',
+        'none',
+        'square',
+        'initial',
+        'inherit',
+    ];
+
+    /**
+     * List bullet style position.
+     */
+
+    protected $list_style_position = [
+        'inside',
+        'outside',
+        'initial',
+        'inherit',
+    ];
+
+    /**
      * Make new css rule.
      */
 
