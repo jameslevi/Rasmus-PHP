@@ -19,7 +19,7 @@ namespace Rasmus\Route {
         $group->auth(false);
         
         $group->get('/login', 'index');
-        $group->post('/login/authenticate', 'authenticate');
+        $group->post('/login/authenticate', 'authenticate')->validate('Authentication');
         $group->get('/logout', 'logout');
 
     });

@@ -111,7 +111,7 @@ class Textbox extends Component
 
     protected function autocomplete(bool $autocomplete)
     {
-        $this->text_complete = $autocomplete ? 'on' : 'off';
+        $this->text_autocomplete = $autocomplete ? 'on' : 'off';
     }
 
     /**

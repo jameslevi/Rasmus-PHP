@@ -2,9 +2,8 @@
 
 namespace Rasmus\App;
 
-use Rasmus\App\RequestData;
+use Rasmus\App\Request as RequestData;
 use Rasmus\Http\Request;
-use Rasmus\Util\Collection;
 use Rasmus\Validation\Param;
 
 abstract class Validator

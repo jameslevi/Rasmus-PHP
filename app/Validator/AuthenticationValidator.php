@@ -12,7 +12,7 @@ class AuthenticationValidator extends Validator
      * Expected request method.
      */
 
-    private $method = 'get';
+    private $method = 'post';
 
     /**
      * USER VALIDATION
@@ -22,7 +22,7 @@ class AuthenticationValidator extends Validator
 
     protected function user(Param $param)
     {
-        $param->name('username');
+        $param->name('Username');
         $param->type('text');
         $param->method($this->method);
 
@@ -40,23 +40,6 @@ class AuthenticationValidator extends Validator
         $param->name('Password');
         $param->type('text');
         $param->method($this->method);
-
-        return $param;
-    }
-
-    /**
-     * REMEMBER ME
-     * -----------------------------------------------
-     * Each time the user checks the "Remember Me"
-     * checkbox, the session will be saved to cookies. 
-     */
-
-    protected function remember(Param $param)
-    {
-        $param->name('Remember Me');
-        $param->type('boolean');
-        $param->method($this->method);
-        $param->default(0);
 
         return $param;
     }
