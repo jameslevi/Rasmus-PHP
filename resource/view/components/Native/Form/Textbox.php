@@ -21,6 +21,8 @@ class Textbox extends Component
 
         'border_color' => 'v-focus:brd-color-primary',
 
+        'number' => false,
+
     ];
 
     protected $prop = [
@@ -81,7 +83,7 @@ class Textbox extends Component
 
     protected function type(string $type)
     {
-        if(in_array($type, ['text', 'password']))
+        if(in_array($type, ['text', 'password', 'number']))
         {
             $this->type = $type;
         }
