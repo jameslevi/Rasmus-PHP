@@ -232,15 +232,18 @@ abstract class Component
                 $js = Str::trim(Str::move(Str::break(Str::break($html, '<script')[1], '</script>')[0], 1));
                 $script = '';
 
-                foreach(explode('/**', $js) as $line)
+                if(Config::app()->minify)
                 {
-                    if(Str::has($line, '*/'))
+                    foreach(explode('/**', $js) as $line)
                     {
-                        $script .= Str::break($line, '*/')[1];
-                    }
-                    else
-                    {
-                        $script .= $line;
+                        if(Str::has($line, '*/'))
+                        {
+                            $script .= Str::break($line, '*/')[1];
+                        }
+                        else
+                        {
+                            $script .= $line;
+                        }
                     }
                 }
 
@@ -256,7 +259,7 @@ abstract class Component
 
             $html = Str::break(Str::break($html, '<template>')[1], '</template>')[0];
 
-            if(Str::has($html, '<!--') && Str::has($html, '-->'))
+            if(Str::has($html, '<!--') && Str::has($html, '-->') && Config::app()->minify)
             {
                 $parsed = '';
 

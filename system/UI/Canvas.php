@@ -194,6 +194,21 @@ class Canvas
                 if(Config::app()->minify)
                 {
                     $script = Str::trim($script);
+                    $js = '';
+
+                    foreach(explode('/**', $script) as $line)
+                    {
+                        if(Str::has($line, '*/'))
+                        {
+                            $js .= Str::break($line, '*/')[1];
+                        }
+                        else
+                        {
+                            $js .= $line;
+                        }
+                    }
+
+                    $script = $js;
                 }
 
                 if(!empty($script))
