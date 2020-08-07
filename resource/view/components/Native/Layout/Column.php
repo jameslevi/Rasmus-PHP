@@ -48,7 +48,11 @@ class Column extends Component
         foreach($child as $data)
         {
             $width = (100 / $length);
-            $content .= '<div class="v-f-left v-media-' . $this->break . 'px:f-none v-bgcolor-' . $data->color . ' v-w-' . $width . ' v-media-' . $this->break . 'px:w-100"><div class="v-pd-' . $data->padding . 'px">' . $data->content . '</div></div>';
+            if(!is_null($data->width))
+            {
+                $width = $data->width;
+            }
+            $content .= '<div class="v-f-left v-media-' . $this->break . 'px:f-none v-bgcolor-' . $data->color . ' v-w-' . $width . ' v-media-' . $this->break . 'px:w-100 nv-column-item"><div class="v-pd-' . $data->padding . 'px">' . $data->content . '</div></div>';
         }
 
         $this->content = $content;

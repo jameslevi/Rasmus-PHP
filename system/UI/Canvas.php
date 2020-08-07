@@ -438,7 +438,7 @@ class Canvas
         }
 
         $c = 0;
-
+        
         for($i = 0; $i <= (sizeof($css) - 1); $i++)
         {
             $class = Str::move(Str::break($css[$i], '{')[0], 1);
@@ -452,10 +452,17 @@ class Canvas
                 $pseudo = ':' . $break[1];
             }
 
-            if(Str::has($html, $class))
+            if(Str::has($html, $class . ' ') || Str::has($html, $class . '! '))
             {
-                $html = str_replace($class . '!', Str::move($new_class, 1), $html);
-                $html = str_replace($class, Str::move($new_class, 1), $html);
+                $html = str_replace($class . '! ', Str::move($new_class, 1) . ' ', $html);
+                $html = str_replace($class . ' ', Str::move($new_class, 1). ' ', $html);
+                $c++;
+            }
+            
+            if(Str::has($html, $class . '"') || Str::has($html, $class . '!"'))
+            {
+                $html = str_replace($class . '!"', Str::move($new_class, 1) . '"', $html);
+                $html = str_replace($class . '"', Str::move($new_class, 1). '"', $html);
                 $c++;
             }
 
