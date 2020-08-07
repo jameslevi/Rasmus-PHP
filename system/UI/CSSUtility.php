@@ -311,6 +311,15 @@ class CSSUtility extends ClassUtil
     }
 
     /**
+     * Center elements without specified width.
+     */
+
+    protected function justify_center()
+    {
+        return ['justify-center', 'justify-content:center;display:flex;width:auto'];
+    }
+
+    /**
      * Set font size.
      */
 

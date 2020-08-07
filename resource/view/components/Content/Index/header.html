@@ -1,19 +1,45 @@
 <template>
     <div class="v-min-h-36px v-lh-36px v-size-14px v-bgcolor-#eeeeee">
-        <v-column break="400">
-            <item>
-                <div class="v-h-36px v-ov-hidden v-w-100 v-media-400px:align-center">
+        <v-column break="480">
+            <item width="30">
+                <div class="v-h-36px v-ov-hidden v-w-100 v-media-480px:align-center">
                     <b class="v-mg-l-10px">
                         <v-link href="https://raccoon.io" newtab="true">Raccoon Framework</v-link>
-                    </b> - version {{ $emit['version'] }}
+                    </b>
+                    <span> - version {{ $emit['version'] }}</span>
                 </div>
             </item>
-            <item>
-                <div class="v-h-36px v-pd-x-10px v-f-right v-media-400px:f-none v-media-400px:bgcolor-#e0e0e0">
-                    
+            <item width="70">
+                <div class="v-h-36px v-pd-x-10px v-f-right v-media-480px:f-none v-media-480px:bgcolor-#e0e0e0 v-media-480px:justify-center">
+                    <ul class="v-li-type-none header-menu v-mg-0px v-pd-0px">
+                        <li style="margin-left: 0px;">
+                            <v-link href="https://raccoon.io/documentation" newtab="true">Documentation</v-link>
+                        </li>
+                        <li>
+                            <v-link href="https://raccoon.io/ecosystem">Ecosystem</v-link>
+                        </li>
+                        <li>
+                            <v-link href="https://raccoon.io/blog" newtab="true">Blog</v-link>
+                        </li>
+                        <li>
+                            <v-link href="https://raccoon.io/tutorial" newtab="true">Tutorial</v-link>
+                        </li>
+                        <li>
+                            <v-link href="https://github.com/jameslevi/Rasmus-PHP" newtab="true">Github</v-link>
+                        </li>
+                    </ul>
                 </div>
             </item>
         </v-column>
     </div>
     <v-line color="#e0e0e0"></v-line>
 </template>
+
+<style>
+.header-menu li {
+    margin: 0px 0px;
+    padding: 0px 0px;
+    display: inline;
+    margin-left: 12px;
+}
+</style>
