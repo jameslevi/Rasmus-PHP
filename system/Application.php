@@ -6,6 +6,7 @@ use Rasmus\App\Config;
 use Rasmus\App\Request;
 use Rasmus\App\Response;
 use Rasmus\Cache\Cache;
+use Rasmus\Database\DB;
 use Rasmus\File\Json;
 use Rasmus\File\Reader;
 use Rasmus\File\ReadLine;
@@ -572,12 +573,12 @@ class Application
     {
         if(!$this->exited && !$this->running && $this->started)
         {
+            if($this->database)
+            {
+                DB::close();
+            }
+
             $this->exited = true;
-            // echo'<br /><br />';
-            // foreach(\get_included_files() as $file)
-            // {
-            //     echo $file . '<br />';
-            // }
             exit(0);
         }
     }

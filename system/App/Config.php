@@ -70,6 +70,16 @@ class Config
     }
 
     /**
+     * Return application database driver and
+     * credentials.
+     */
+
+    public static function database()
+    {
+        return new Collection(static::cache()->database());
+    }
+
+    /**
      * Return javascript libraries dependency directory.
      */
 

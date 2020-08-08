@@ -359,6 +359,7 @@ class Cache
             'auth',
             'components',
             'cors',
+            'database',
             'dependency',
             'form',
             'middleware',
