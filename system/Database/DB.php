@@ -26,12 +26,10 @@ class DB
      */
 
     private $tablename;
-    private $conn;
 
     private function __construct(string $tablename, $conn)
     {
         $this->tablename = $tablename;
-        $this->conn = $conn;
     }
 
     /**
@@ -117,12 +115,14 @@ class DB
 
     public function truncate()
     {
-        $test = DB::query('SELECT * FROM ' . $this->tablename);
-
-        if(!$test->empty())
+        if($this->totalRows() !== 0)
         {
-            DB::query('TRUNCATE TABLE `' . $this->tablename . '`');
-            $this->reset();
+            $exec = DB::query('TRUNCATE TABLE `' . $this->tablename . '`');
+            
+            if($exec)
+            {
+                $this->reset();
+            }
         }
     }
 

@@ -24,6 +24,8 @@ class SelectBuilder extends WhereBuilder
 
         'where' => [
 
+            'enable' => false,
+
             'raw' => null,
 
             'items' => [],
@@ -176,13 +178,30 @@ class SelectBuilder extends WhereBuilder
          * WHERE
          */
 
-        if(!is_null($this->data['where']['raw']))
+        $where = $this->data['where'];
+
+        if(!is_null($where['raw']))
         {
             $sql .= 'WHERE ' . $this->data['where']['raw'] . ' ';
         }
-        else if(!empty($this->data['where']['items']))
+        else if(!empty($where['items']))
         {
             $sql .= 'WHERE ';
+
+            foreach($where['items'] as $data)
+            {
+                if(!$where['enable'])
+                {
+                    $where['enable'] = true;
+                    $this->data['where']['enable'] = true;
+                    if(Str::startWith($data, 'AND '))
+                    {
+                        $data = Str::move($data, 4);
+                    }
+                }
+
+                $sql .= $data;
+            }
         }
 
         /**
@@ -233,10 +252,28 @@ class SelectBuilder extends WhereBuilder
 
         if(Str::endWith($sql, ' '))
         {
-            $sql .= Str::move($sql, 0, 1);
+            $sql = Str::move($sql, 0, 1);
         }
 
         return $sql;
+    }
+
+    /**
+     * Return only the first result.
+     */
+
+    public function first()
+    {
+        return $this->limit(0, 1)->get();
+    }
+
+    /**
+     * Return random result.
+     */
+
+    public function pick()
+    {
+        return $this->random()->limit(0, 1)->get();
     }
 
     /**
