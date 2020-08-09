@@ -112,31 +112,6 @@ class Application
     }
 
     /**
-     * Set application visibility mode.
-     */
-
-    private function mode(string $mode)
-    {
-        if(in_array($mode, [
-            'up',
-            'down',
-            'construct'
-        ]))
-        {
-
-        }
-    }
-
-    /**
-     * Set application locale.
-     */
-
-    private function locale(string $lang)
-    {
-
-    }
-
-    /**
      * Set application timezone.
      */
 

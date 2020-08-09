@@ -72,7 +72,34 @@ class DB
 
     public function insert(array $data)
     {
+        return new InsertBuilder($this->tablename, $data);
+    }
 
+    /**
+     * Insert each data.
+     */
+
+    public function insertEach(array $data)
+    {
+        $builder = new InsertBuilder($this->tablename, $data[0]);
+
+        if(sizeof($data) > 1)
+        {
+            $skip = false;
+            foreach($data as $item)
+            {
+                if($skip)
+                {
+                    $builder->insert($item);
+                }
+                else
+                {
+                    $skip = true;
+                }
+            }
+        }
+
+        return $builder;
     }
 
     /**

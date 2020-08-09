@@ -22,7 +22,13 @@ class SelectBuilder extends WhereBuilder
 
         'return' => '*',
 
-        'where' => [],
+        'where' => [
+
+            'raw' => null,
+
+            'items' => [],
+
+        ],
 
         'binary' => false,
 
@@ -59,6 +65,20 @@ class SelectBuilder extends WhereBuilder
     public function distinct()
     {
         $this->data['distinct'] = true;
+        return $this;
+    }
+
+    /**
+     * Set raw SQL WHERE claus.
+     */
+
+    public function where(string $raw = null)
+    {
+        if(!is_null($raw))
+        {
+            $this->data['where']['raw'] = $raw;
+        }
+        
         return $this;
     }
 
@@ -156,7 +176,11 @@ class SelectBuilder extends WhereBuilder
          * WHERE
          */
 
-        if(!empty($this->data['where']))
+        if(!is_null($this->data['where']['raw']))
+        {
+            $sql .= 'WHERE ' . $this->data['where']['raw'] . ' ';
+        }
+        else if(!empty($this->data['where']['items']))
         {
             $sql .= 'WHERE ';
         }
@@ -221,9 +245,7 @@ class SelectBuilder extends WhereBuilder
 
     public function get()
     {
-        $sql = $this->sql();
-
-        return $this;
+        return DB::query($this->sql());
     }
 
 }
