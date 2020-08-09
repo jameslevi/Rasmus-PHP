@@ -2,6 +2,9 @@
 
 session_start();
 
+define('START_TIME', microtime(true));
+define('SESSION_ID', session_id());
+
 /**
  * Each time a client requested an application,
  * .htaccess will automatically redirect the
@@ -18,20 +21,23 @@ if(function_exists('spl_autoload_register'))
 
             'App' => 'app/',
             'Components' => 'resource/view/components/',
-            'Database' => 'database/',
+            'Database' => 'app/database/',
             'Rasmus' => 'system/',
 
         ];
 
         if(array_key_exists($vendorName, $vendorPath))
         {
-            $base = $vendorPath[$vendorName];
-            $path = str_replace('\\', '/', substr($class, strlen($vendorName) + 1, strlen($class)));
-            $file = $base . $path . '.php';
-
-            if(file_exists($file))
+            if($vendorName !== 'App\\Database')
             {
-                include($file);
+                $base = $vendorPath[$vendorName];
+                $path = str_replace('\\', '/', substr($class, strlen($vendorName) + 1, strlen($class)));
+                $file = $base . $path . '.php';
+
+                if(file_exists($file) && is_readable($file))
+                {
+                    include($file);
+                }
             }
         }
 

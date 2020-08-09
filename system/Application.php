@@ -64,6 +64,12 @@ class Application
     private $env = [];
 
     /**
+     * Store execution duration.
+     */
+
+    private $duration;
+
+    /**
      * Return current Rasmus Framework version.
      */
 
@@ -554,8 +560,30 @@ class Application
             }
 
             $this->exited = true;
+            $this->computeExecutionDuration();
             exit(0);
         }
+    }
+
+    /**
+     * Compute execution duration.
+     */
+
+    private function computeExecutionDuration()
+    {
+        $start = START_TIME;
+        $end = microtime(true);
+
+        $this->duration = (number_format($end - $start, 2));
+    }
+
+    /**
+     * Return execution duration in seconds.
+     */
+
+    public function getExecutionTime()
+    {
+        return $this->duration;
     }
 
     /**
