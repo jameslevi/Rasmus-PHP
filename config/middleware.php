@@ -48,6 +48,7 @@ namespace Env {
                 'after' => [
 
                     App\Middleware\ResponseMiddleware::class,
+                    App\Middleware\VisitorCounterMiddleware::class,
 
                 ],
 

@@ -80,6 +80,15 @@ class Request
     }
 
     /**
+     * Return user-agent.
+     */
+
+    public static function userAgent()
+    {
+        return $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    /**
      * Return current request uri.
      */
 

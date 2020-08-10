@@ -4,6 +4,7 @@ namespace Rasmus\Database;
 
 use Rasmus\App\Config;
 use Rasmus\Application;
+use Rasmus\File\Directory;
 use Rasmus\Util\Collection;
 use Rasmus\Util\String\Str;
 
@@ -22,6 +23,12 @@ class DB
     private static $connection;
 
     /**
+     * Return true if table is already tested.
+     */
+
+    private $tested = false;
+
+    /**
      * Tablename of the current request.
      */
 
@@ -30,6 +37,55 @@ class DB
     private function __construct(string $tablename, $conn)
     {
         $this->tablename = $tablename;
+    
+        if(!$this->tested)
+        {
+            if(!$this->exist())
+            {
+                $this->addNewTable($tablename);
+            }
+            else
+            {
+                $this->tested = true;
+            }
+        }
+    }
+
+    /**
+     * Adding new table must be done by model classes.
+     */
+
+    private function addNewTable(string $tablename)
+    {
+        $path = 'app/Database/Model/';
+        $dir = new Directory($path);
+        $model = null;
+
+        if($dir->valid())
+        {
+            foreach($dir->files() as $file)
+            {
+                if(strtolower($file) !== '.gitkeep' && strtolower(Str::break($file, '.')[0]) === strtolower($tablename))
+                {
+                    $model = 'Database\Model\\' . Str::break($file, '.')[0];
+                }
+            }
+        }
+
+        if(!is_null($model))
+        {
+            $instance = new $model();
+            $create = $instance->create();
+        }
+    }
+
+    /**
+     * Test if table exist.
+     */
+
+    public function exist()
+    {
+        return DB::query('DESCRIBE `' . $this->tablename . '`');
     }
 
     /**
@@ -59,9 +115,9 @@ class DB
      * Execute UPDATE SQL query.
      */
 
-    public function update(array $data)
+    public function update(array $data = [])
     {
-
+        return new UpdateBuilder($this->tablename, $data);
     }
 
     /**
@@ -105,7 +161,7 @@ class DB
 
     public function delete()
     {
-
+        return new DeleteBuilder($this->tablename);
     }
 
     /**
@@ -292,6 +348,8 @@ class DB
 
                 return new Response($start_time, $end_time, $driver, $select, $query, $conn);
             }
+
+            return false;
         }
     }
 

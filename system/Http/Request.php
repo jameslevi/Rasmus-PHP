@@ -132,4 +132,13 @@ class Request
         return RequestData::isAjax();
     }
 
+    /**
+     * Return string of useragent informations.
+     */
+
+    public function userAgent()
+    {
+        return RequestData::userAgent();
+    }
+
 }

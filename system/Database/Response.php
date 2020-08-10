@@ -32,33 +32,52 @@ class Response
 
     private $result = [];
 
+    private $success = false;
+
     public function __construct(float $start_time, float $end_time, string $driver, bool $select, $query, $conn)
     {
         $this->start_time = $start_time;
         $this->end_time = $end_time;
 
-        if($driver === 'mysql' && $select)
+        if($query)
         {
-            $this->num = mysqli_num_rows($query);
-            $this->affected_rows = mysqli_affected_rows($conn);
+            $this->success = true;
+        }
 
-            if($this->num > 0)
+        if($driver === 'mysql')
+        {
+            if($select)
             {
-                if($this->num === 1)
+                $this->num = mysqli_num_rows($query);
+                $this->affected_rows = mysqli_affected_rows($conn);
+
+                if($this->num > 0)
                 {
-                    $this->result[] = mysqli_fetch_assoc($query);
-                }
-                else
-                {
-                    while($row = mysqli_fetch_assoc($query))
+                    if($this->num === 1)
                     {
-                        $this->result[] = $row;
+                        $this->result[] = mysqli_fetch_assoc($query);
+                    }
+                    else
+                    {
+                        while($row = mysqli_fetch_assoc($query))
+                        {
+                            $this->result[] = $row;
+                        }
                     }
                 }
-            }
 
-            mysqli_free_result($query);
+                mysqli_free_result($query);
+            }
         }
+    }
+
+    /**
+     * Return true if query is success.
+     */
+
+    public function success()
+    {
+        return $this->success;
     }
 
     /**
