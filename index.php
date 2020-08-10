@@ -63,3 +63,5 @@ $app->start();
  */
 
 $app->exit();
+
+exit(0);

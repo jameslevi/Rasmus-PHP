@@ -561,7 +561,6 @@ class Application
 
             $this->exited = true;
             $this->computeExecutionDuration();
-            exit(0);
         }
     }
 
