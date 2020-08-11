@@ -5,6 +5,7 @@ namespace Rasmus\Database;
 use Rasmus\App\Config;
 use Rasmus\Application;
 use Rasmus\File\Directory;
+use Rasmus\Util\Arr;
 use Rasmus\Util\Collection;
 use Rasmus\Util\Str;
 
@@ -117,7 +118,7 @@ class DB
 
     public function update(array $data = [])
     {
-        if(!empty($data) && count($data) !== count($data, COUNT_RECURSIVE))
+        if(!empty($data) && Arr::multidimensional($data))
         {
 
         }
@@ -133,7 +134,7 @@ class DB
 
     public function insert(array $data)
     {
-        if(count($data) !== count($data, COUNT_RECURSIVE))
+        if(Arr::multidimensional($data))
         {
             $builder = new InsertBuilder($this->tablename, $data[0]);
 
