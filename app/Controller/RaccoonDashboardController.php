@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use Rasmus\App\Controller;
-use Rasmus\Http\Request;
-use Rasmus\Util\Str;
+use Raccoon\App\Controller;
+use Raccoon\Http\Request;
+use Raccoon\Util\Str;
 
 class RaccoonDashboardController extends Controller
 {

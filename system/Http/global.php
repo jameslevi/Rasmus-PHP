@@ -2,8 +2,8 @@
 
 namespace App\Middleware {
 
-    use Rasmus\Http\Emitter;
-    use Rasmus\Http\Response;
+    use Raccoon\Http\Emitter;
+    use Raccoon\Http\Response;
 
     /**
      * Return http response code.

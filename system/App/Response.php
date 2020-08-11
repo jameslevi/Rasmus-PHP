@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
 class Response
 {

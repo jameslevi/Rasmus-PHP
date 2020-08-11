@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
-use Rasmus\App\Middleware;
-use Rasmus\Http\Request;
+use Raccoon\App\Middleware;
+use Raccoon\Http\Request;
 
 class ResponseMiddleware extends Middleware
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
-use Rasmus\App\Request as RequestData;
-use Rasmus\Http\Request;
-use Rasmus\Validation\Param;
+use Raccoon\App\Request as RequestData;
+use Raccoon\Http\Request;
+use Raccoon\Validation\Param;
 
 abstract class Validator
 {

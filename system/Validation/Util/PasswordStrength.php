@@ -1,10 +1,10 @@
 <?php
 
-namespace Rasmus\Validation\Util;
+namespace Raccoon\Validation\Util;
 
-use Rasmus\App\Config;
-use Rasmus\Resource\Lang\Lang;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Util\Str;
 
 class PasswordStrength
 {

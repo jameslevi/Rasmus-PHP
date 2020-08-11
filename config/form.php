@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Validation {
+namespace Raccoon\Validation {
 
     /**
      * DEFAULT TEXT VALIDATION

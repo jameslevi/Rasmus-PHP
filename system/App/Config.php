@@ -1,10 +1,10 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
-use Rasmus\Application;
-use Rasmus\Cache\Cache;
-use Rasmus\Util\Collection;
+use Raccoon\Application;
+use Raccoon\Cache\Cache;
+use Raccoon\Util\Collection;
 
 class Config
 {

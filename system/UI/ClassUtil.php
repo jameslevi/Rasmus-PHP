@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\UI;
+namespace Raccoon\UI;
 
-use Rasmus\App\Config;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\Util\Str;
 
 abstract class ClassUtil
 {

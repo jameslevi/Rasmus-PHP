@@ -2,9 +2,9 @@
 
 namespace App\Middleware;
 
-use Rasmus\App\Config;
-use Rasmus\App\Middleware;
-use Rasmus\Http\Request;
+use Raccoon\App\Config;
+use Raccoon\App\Middleware;
+use Raccoon\Http\Request;
 
 class CORSMiddleware extends Middleware
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\Database;
+namespace Raccoon\Database;
 
-use Rasmus\Util\Collection;
+use Raccoon\Util\Collection;
 
 class Response
 {

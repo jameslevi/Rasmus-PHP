@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Rasmus\App\Config;
-use Rasmus\App\Controller;
-use Rasmus\File\Reader;
-use Rasmus\Http\Request;
+use Raccoon\App\Config;
+use Raccoon\App\Controller;
+use Raccoon\File\Reader;
+use Raccoon\Http\Request;
 
 class ResourceController extends Controller
 {

@@ -2,10 +2,10 @@
 
 namespace App\Middleware;
 
-use Rasmus\App\Config;
-use Rasmus\App\Middleware;
-use Rasmus\Http\Request;
-use Rasmus\Session\Auth;
+use Raccoon\App\Config;
+use Raccoon\App\Middleware;
+use Raccoon\Http\Request;
+use Raccoon\Session\Auth;
 
 class AuthenticationMiddleware extends Middleware
 {

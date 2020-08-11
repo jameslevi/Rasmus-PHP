@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
-use Rasmus\Http\Request;
-use Rasmus\Util\Collection;
+use Raccoon\Http\Request;
+use Raccoon\Util\Collection;
 
 abstract class Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Rasmus\UI;
+namespace Raccoon\UI;
 
-use Rasmus\App\Config;
-use Rasmus\File\Reader;
-use Rasmus\Resource\Lang\Lang;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\File\Reader;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 abstract class Component
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Resource\Lang {
+namespace Raccoon\Resource\Lang {
 
     /**
      * STATUS CODE

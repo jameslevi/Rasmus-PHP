@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\UI;
+namespace Raccoon\UI;
 
-use Rasmus\Util\Str;
+use Raccoon\Util\Str;
 
 class CSSUtility extends ClassUtil
 {

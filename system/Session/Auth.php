@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\Session;
+namespace Raccoon\Session;
 
-use Rasmus\App\Config;
-use Rasmus\Util\Collection;
+use Raccoon\App\Config;
+use Raccoon\Util\Collection;
 
 class Auth
 {

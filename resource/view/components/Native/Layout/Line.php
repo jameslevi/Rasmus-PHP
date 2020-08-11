@@ -2,7 +2,7 @@
 
 namespace Components\Native\Layout;
 
-use Rasmus\UI\Component;
+use Raccoon\UI\Component;
 
 class Line extends Component
 {

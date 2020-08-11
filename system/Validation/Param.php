@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\Validation;
+namespace Raccoon\Validation;
 
-use Rasmus\App\Request;
-use Rasmus\Http\Request as RequestData;
+use Raccoon\App\Request;
+use Raccoon\Http\Request as RequestData;
 
 class Param
 {

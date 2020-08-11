@@ -2,7 +2,7 @@
 
 namespace Components\Native\Form;
 
-use Rasmus\UI\Component;
+use Raccoon\UI\Component;
 
 class Data extends Component
 {

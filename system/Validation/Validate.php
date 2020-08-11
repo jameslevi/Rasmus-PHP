@@ -1,11 +1,11 @@
 <?php
 
-namespace Rasmus\Validation;
+namespace Raccoon\Validation;
 
-use Rasmus\App\Config;
-use Rasmus\Resource\Lang\Lang;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 class Validate
 {

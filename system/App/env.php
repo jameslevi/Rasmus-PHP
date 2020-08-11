@@ -2,8 +2,8 @@
 
 namespace Env {
 
-    use Rasmus\Application;
-    use Rasmus\Util\Str;
+    use Raccoon\Application;
+    use Raccoon\Util\Str;
 
     /**
      * Provide data from .env file to config settings.

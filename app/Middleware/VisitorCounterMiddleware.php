@@ -2,10 +2,10 @@
 
 namespace App\Middleware;
 
-use Rasmus\App\Middleware;
-use Rasmus\Database\DB;
-use Rasmus\Http\Request;
-use Rasmus\Session\Session;
+use Raccoon\App\Middleware;
+use Raccoon\Database\DB;
+use Raccoon\Http\Request;
+use Raccoon\Session\Session;
 
 class VisitorCounterMiddleware extends Middleware
 {

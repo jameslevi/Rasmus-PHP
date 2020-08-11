@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Database;
+namespace Raccoon\Database;
 
 class Field
 {

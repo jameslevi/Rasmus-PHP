@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Route {
+namespace Raccoon\Route {
 
     /**
      * ROUTING

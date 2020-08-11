@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\Database;
+namespace Raccoon\Database;
 
-use Rasmus\Util\Str;
+use Raccoon\Util\Str;
 
 class SelectBuilder extends WhereBuilder
 {

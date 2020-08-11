@@ -2,8 +2,8 @@
 
 namespace Database\Model;
 
-use Rasmus\Database\Field;
-use Rasmus\Database\Model;
+use Raccoon\Database\Field;
+use Raccoon\Database\Model;
 
 class Counter extends Model
 {

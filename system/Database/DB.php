@@ -1,13 +1,13 @@
 <?php
 
-namespace Rasmus\Database;
+namespace Raccoon\Database;
 
-use Rasmus\App\Config;
-use Rasmus\Application;
-use Rasmus\File\Directory;
-use Rasmus\Util\Arr;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\Application;
+use Raccoon\File\Directory;
+use Raccoon\Util\Arr;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 class DB
 {
@@ -118,14 +118,7 @@ class DB
 
     public function update(array $data = [])
     {
-        if(!empty($data) && Arr::multidimensional($data))
-        {
-
-        }
-        else
-        {
-            return new UpdateBuilder($this->tablename, $data);
-        }
+        return new UpdateBuilder($this->tablename, $data);
     }
 
     /**

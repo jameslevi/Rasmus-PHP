@@ -2,12 +2,12 @@
 
 namespace App\Middleware;
 
-use Rasmus\Application;
-use Rasmus\App\Config;
-use Rasmus\App\Middleware;
-use Rasmus\File\Reader;
-use Rasmus\Http\Request;
-use Rasmus\Util\Str;
+use Raccoon\Application;
+use Raccoon\App\Config;
+use Raccoon\App\Middleware;
+use Raccoon\File\Reader;
+use Raccoon\Http\Request;
+use Raccoon\Util\Str;
 
 class BasicMiddleware extends Middleware
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\Route;
+namespace Raccoon\Route;
 
-use Rasmus\Cache\Cache;
-use Rasmus\Util\Str;
+use Raccoon\Cache\Cache;
+use Raccoon\Util\Str;
 
 class Router
 {

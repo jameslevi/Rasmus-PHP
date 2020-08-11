@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Http;
+namespace Raccoon\Http;
 
 class Response
 {

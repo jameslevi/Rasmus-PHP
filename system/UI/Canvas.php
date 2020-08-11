@@ -1,13 +1,13 @@
 <?php
 
-namespace Rasmus\UI;
+namespace Raccoon\UI;
 
-use Rasmus\App\Config;
-use Rasmus\App\Request;
-use Rasmus\File\Reader;
-use Rasmus\Resource\Lang\Lang;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\App\Request;
+use Raccoon\File\Reader;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 class Canvas
 {
@@ -234,7 +234,7 @@ class Canvas
     {
         if(is_object($component))
         {
-            if(get_parent_class($component) === 'Rasmus\UI\Component')
+            if(get_parent_class($component) === 'Raccoon\UI\Component')
             {
                 $this->output .= $component->draw();
             }

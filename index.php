@@ -22,7 +22,7 @@ if(function_exists('spl_autoload_register'))
             'App' => 'app/',
             'Components' => 'resource/view/components/',
             'Database' => 'app/database/',
-            'Rasmus' => 'system/',
+            'Raccoon' => 'system/',
 
         ];
 
@@ -50,7 +50,7 @@ if(function_exists('spl_autoload_register'))
  * by managing services.
  */
 
-$app = Rasmus\Application::init();
+$app = Raccoon\Application::init();
 
 /**
  * Start application services.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Rasmus\Resource\Lang;
+namespace Raccoon\Resource\Lang;
 
-use Rasmus\App\Config;
-use Rasmus\Cache\Cache;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\Cache\Cache;
+use Raccoon\Util\Str;
 
 class Lang extends Translations
 {

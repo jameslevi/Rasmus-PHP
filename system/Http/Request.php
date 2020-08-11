@@ -1,10 +1,10 @@
 <?php
 
-namespace Rasmus\Http;
+namespace Raccoon\Http;
 
-use Rasmus\App\Request as RequestData;
-use Rasmus\Http\Emitter;
-use Rasmus\Util\Collection;
+use Raccoon\App\Request as RequestData;
+use Raccoon\Http\Emitter;
+use Raccoon\Util\Collection;
 
 class Request
 {

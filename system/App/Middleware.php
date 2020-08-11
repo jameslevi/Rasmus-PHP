@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
-use Rasmus\Http\Request;
-use Rasmus\Http\Response;
+use Raccoon\Http\Request;
+use Raccoon\Http\Response;
 
 abstract class Middleware
 {

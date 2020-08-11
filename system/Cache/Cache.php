@@ -1,14 +1,14 @@
 <?php
 
-namespace Rasmus\Cache;
+namespace Raccoon\Cache;
 
-use Rasmus\File\Directory;
-use Rasmus\File\Reader;
-use Rasmus\Resource\Lang\Locale;
-use Rasmus\Route\Route;
-use Rasmus\UI\Canvas;
-use Rasmus\Util\Str;
-use Rasmus\Validation\Form;
+use Raccoon\File\Directory;
+use Raccoon\File\Reader;
+use Raccoon\Resource\Lang\Locale;
+use Raccoon\Route\Route;
+use Raccoon\UI\Canvas;
+use Raccoon\Util\Str;
+use Raccoon\Validation\Form;
 
 class Cache
 {

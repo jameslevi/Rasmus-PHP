@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\App;
+namespace Raccoon\App;
 
-use Rasmus\Util\Str;
+use Raccoon\Util\Str;
 
 class Request
 {

@@ -1,27 +1,27 @@
 <?php
 
-namespace Rasmus;
+namespace Raccoon;
 
-use Rasmus\App\Config;
-use Rasmus\App\Request;
-use Rasmus\App\Response;
-use Rasmus\Cache\Cache;
-use Rasmus\Database\DB;
-use Rasmus\File\Json;
-use Rasmus\File\Reader;
-use Rasmus\File\ReadLine;
-use Rasmus\Http\Emitter;
-use Rasmus\Http\Middleware;
-use Rasmus\Resource\Lang\Lang;
-use Rasmus\Route\Router;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\App\Request;
+use Raccoon\App\Response;
+use Raccoon\Cache\Cache;
+use Raccoon\Database\DB;
+use Raccoon\File\Json;
+use Raccoon\File\Reader;
+use Raccoon\File\ReadLine;
+use Raccoon\Http\Emitter;
+use Raccoon\Http\Middleware;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Route\Router;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 class Application
 {
 
     /**
-     * Current rasmus framework version.
+     * Current raccoon framework version.
      */
 
     private $version = '1.0.0';
@@ -70,7 +70,7 @@ class Application
     private $duration;
 
     /**
-     * Return current Rasmus Framework version.
+     * Return current Raccoon Framework version.
      */
 
     public function version()

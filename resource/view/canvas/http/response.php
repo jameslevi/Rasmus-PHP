@@ -1,9 +1,9 @@
 <?php
 
-namespace Rasmus\UI {
+namespace Raccoon\UI {
 
-use Rasmus\Application;
-use Rasmus\Util\Collection;
+use Raccoon\Application;
+use Raccoon\Util\Collection;
 
 return Canvas::draw(function(Canvas $canvas, Collection $emit) {
         

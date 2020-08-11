@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\Route;
+namespace Raccoon\Route;
 
-use Rasmus\Util\Str;
+use Raccoon\Util\Str;
 
 class Group
 {

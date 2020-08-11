@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\File;
+namespace Raccoon\File;
 
 class ReadLine
 {

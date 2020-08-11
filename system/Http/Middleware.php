@@ -1,11 +1,11 @@
 <?php
 
-namespace Rasmus\Http;
+namespace Raccoon\Http;
 
-use Rasmus\Application;
-use Rasmus\App\Config;
-use Rasmus\Util\Collection;
-use Rasmus\Util\Str;
+use Raccoon\Application;
+use Raccoon\App\Config;
+use Raccoon\Util\Collection;
+use Raccoon\Util\Str;
 
 class Middleware
 {

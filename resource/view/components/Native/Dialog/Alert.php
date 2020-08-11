@@ -2,9 +2,9 @@
 
 namespace Components\Native\Dialog;
 
-use Rasmus\App\Config;
-use Rasmus\UI\Component;
-use Rasmus\Util\Str;
+use Raccoon\App\Config;
+use Raccoon\UI\Component;
+use Raccoon\Util\Str;
 
 class Alert extends Component
 {

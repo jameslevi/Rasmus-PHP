@@ -2,8 +2,8 @@
 
 namespace Components\Native\Layout;
 
-use Rasmus\UI\Component;
-use Rasmus\Util\Str;
+use Raccoon\UI\Component;
+use Raccoon\Util\Str;
 
 class Column extends Component
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\Session;
+namespace Raccoon\Session;
 
-use Rasmus\Util\Collection;
+use Raccoon\Util\Collection;
 
 class Session
 {

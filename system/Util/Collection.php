@@ -1,6 +1,6 @@
 <?php
 
-namespace Rasmus\Util;
+namespace Raccoon\Util;
 
 class Collection
 {

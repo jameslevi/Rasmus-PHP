@@ -2,7 +2,7 @@
 
 namespace Components\Native\Widget;
 
-use Rasmus\UI\Component;
+use Raccoon\UI\Component;
 
 class Header extends Component
 {
