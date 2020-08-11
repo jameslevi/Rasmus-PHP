@@ -3,7 +3,7 @@
 namespace Rasmus\UI;
 
 use Rasmus\App\Config;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 abstract class ClassUtil
 {

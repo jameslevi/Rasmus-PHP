@@ -6,7 +6,7 @@ use Rasmus\App\Config;
 use Rasmus\Application;
 use Rasmus\File\Directory;
 use Rasmus\Util\Collection;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class DB
 {
@@ -117,7 +117,14 @@ class DB
 
     public function update(array $data = [])
     {
-        return new UpdateBuilder($this->tablename, $data);
+        if(!empty($data) && count($data) !== count($data, COUNT_RECURSIVE))
+        {
+
+        }
+        else
+        {
+            return new UpdateBuilder($this->tablename, $data);
+        }
     }
 
     /**

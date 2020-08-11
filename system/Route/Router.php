@@ -3,7 +3,7 @@
 namespace Rasmus\Route;
 
 use Rasmus\Cache\Cache;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Router
 {

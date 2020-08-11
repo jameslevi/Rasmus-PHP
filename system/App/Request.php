@@ -2,7 +2,7 @@
 
 namespace Rasmus\App;
 
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Request
 {

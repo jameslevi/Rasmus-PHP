@@ -4,7 +4,7 @@ namespace Rasmus\Resource\Lang;
 
 use Rasmus\App\Config;
 use Rasmus\Cache\Cache;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Lang extends Translations
 {

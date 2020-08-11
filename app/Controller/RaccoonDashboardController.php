@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Rasmus\App\Controller;
 use Rasmus\Http\Request;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class RaccoonDashboardController extends Controller
 {

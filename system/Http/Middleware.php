@@ -5,7 +5,7 @@ namespace Rasmus\Http;
 use Rasmus\Application;
 use Rasmus\App\Config;
 use Rasmus\Util\Collection;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Middleware
 {

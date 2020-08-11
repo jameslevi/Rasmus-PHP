@@ -4,7 +4,7 @@ namespace Rasmus\Validation\Util;
 
 use Rasmus\App\Config;
 use Rasmus\Resource\Lang\Lang;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class PasswordStrength
 {

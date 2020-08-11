@@ -7,7 +7,7 @@ use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Locale;
 use Rasmus\Route\Route;
 use Rasmus\UI\Canvas;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 use Rasmus\Validation\Form;
 
 class Cache

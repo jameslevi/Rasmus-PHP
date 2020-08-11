@@ -2,7 +2,7 @@
 
 namespace Rasmus\UI;
 
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class CSSUtility extends ClassUtil
 {

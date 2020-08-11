@@ -7,7 +7,7 @@ use Rasmus\App\Config;
 use Rasmus\App\Middleware;
 use Rasmus\File\Reader;
 use Rasmus\Http\Request;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class BasicMiddleware extends Middleware
 {

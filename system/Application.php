@@ -15,7 +15,7 @@ use Rasmus\Http\Middleware;
 use Rasmus\Resource\Lang\Lang;
 use Rasmus\Route\Router;
 use Rasmus\Util\Collection;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Application
 {
@@ -586,7 +586,7 @@ class Application
     }
 
     /**
-     * This statis method will instantiate the
+     * This static method will instantiate the
      * application and prevent unwanted multiple
      * instantiation.
      */

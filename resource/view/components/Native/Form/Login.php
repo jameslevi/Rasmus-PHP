@@ -4,7 +4,7 @@ namespace Components\Native\Form;
 
 use Rasmus\App\Config;
 use Rasmus\UI\Component;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Login extends Component
 {

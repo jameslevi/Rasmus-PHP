@@ -5,7 +5,7 @@ namespace Rasmus\Validation;
 use Rasmus\App\Config;
 use Rasmus\Resource\Lang\Lang;
 use Rasmus\Util\Collection;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Validate
 {

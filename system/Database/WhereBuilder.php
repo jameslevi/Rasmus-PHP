@@ -2,7 +2,7 @@
 
 namespace Rasmus\Database;
 
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 abstract class WhereBuilder
 {

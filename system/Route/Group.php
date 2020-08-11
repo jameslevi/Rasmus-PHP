@@ -2,7 +2,7 @@
 
 namespace Rasmus\Route;
 
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 class Group
 {

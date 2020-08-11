@@ -6,7 +6,7 @@ use Rasmus\App\Config;
 use Rasmus\File\Reader;
 use Rasmus\Resource\Lang\Lang;
 use Rasmus\Util\Collection;
-use Rasmus\Util\String\Str;
+use Rasmus\Util\Str;
 
 abstract class Component
 {

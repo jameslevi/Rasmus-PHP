@@ -3,7 +3,7 @@
 namespace Env {
 
     use Rasmus\Application;
-    use Rasmus\Util\String\Str;
+    use Rasmus\Util\Str;
 
     /**
      * Provide data from .env file to config settings.
