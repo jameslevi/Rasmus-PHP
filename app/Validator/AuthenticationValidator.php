@@ -2,8 +2,8 @@
 
 namespace App\Validator;
 
-use Rasmus\App\Validator;
-use Rasmus\Validation\Param;
+use Raccoon\App\Validator;
+use Raccoon\Validation\Param;
 
 class AuthenticationValidator extends Validator
 {
