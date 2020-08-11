@@ -137,7 +137,7 @@ abstract class Model
 
     public function drop()
     {
-
+        return DB::table($this->getName())->drop();
     }
 
     /**

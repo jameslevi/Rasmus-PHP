@@ -75,7 +75,7 @@ class DB
         if(!is_null($model))
         {
             $instance = new $model();
-            $create = $instance->create();
+            $instance->create();
         }
     }
 
@@ -162,6 +162,15 @@ class DB
     public function delete()
     {
         return new DeleteBuilder($this->tablename);
+    }
+
+    /**
+     * Drop table.
+     */
+
+    public function drop()
+    {
+        return DB::query('DROP TABLE ' . $this->tablename);
     }
 
     /**
