@@ -90,6 +90,41 @@ class DB
     }
 
     /**
+     * Create table when not exist.
+     */
+
+    public function create()
+    {
+        if(!$this->exist())
+        {
+            $this->addNewTable($this->tablename);
+        }
+    }
+
+    /**
+     * Return table columns.
+     */
+
+    public function columns()
+    {
+        if($this->exist())
+        {
+            $fields = [];
+            $query = DB::query('SHOW COLUMNS FROM ' . $this->tablename)->getQueryObject();
+            $driver = strtolower(static::driver());
+
+            if($driver === 'mysql')
+            {
+                while($fetch = mysqli_fetch_array($query)) {
+                    $fields[] = $fetch['Field'];
+                }
+            }
+
+            return $fields;
+        }
+    }
+
+    /**
      * Execute an SQL query.
      */
 

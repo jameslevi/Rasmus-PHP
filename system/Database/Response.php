@@ -32,12 +32,23 @@ class Response
 
     private $result = [];
 
+    /**
+     * If query is success.
+     */
+
     private $success = false;
+
+    /**
+     * Store query object.
+     */
+
+    private $object;
 
     public function __construct(float $start_time, float $end_time, string $driver, bool $select, $query, $conn)
     {
         $this->start_time = $start_time;
         $this->end_time = $end_time;
+        $this->object = $query;
 
         if($query)
         {
@@ -69,6 +80,15 @@ class Response
                 mysqli_free_result($query);
             }
         }
+    }
+
+    /**
+     * Return query object.
+     */
+
+    public function getQueryObject()
+    {
+        return $this->object;
     }
 
     /**
