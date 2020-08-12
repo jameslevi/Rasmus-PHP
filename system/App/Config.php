@@ -15,7 +15,7 @@ class Config
 
     private static function cache()
     {
-        return Cache::config();
+        return Cache::config(Application::context()->env());
     }
 
     /**
@@ -30,6 +30,15 @@ class Config
         $app->redirect = static::app()->redirect;
         $app->locale = static::app()->locale;
         $app->timezone = static::app()->timezone;       
+    }
+
+    /**
+     * Return .env data.
+     */
+
+    public static function env()
+    {
+        return new Collection(static::cache()->env());
     }
 
     /**

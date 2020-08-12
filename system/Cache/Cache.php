@@ -69,9 +69,23 @@ class Cache
      * Set cache type from the constructor.
      */
 
-    private function __construct(string $type)
+    private function __construct(string $type, array $env = [])
     {
         $this->type = $type;
+        
+        if(!empty($env) && !static::$env)
+        {
+            static::$config_cache['env'] = $env;
+        }
+    }
+
+    /**
+     * Return .env data.
+     */
+
+    public function env()
+    {
+        return static::$config_cache['env'] ?? [];
     }
 
     /**
@@ -383,7 +397,13 @@ class Cache
 
                 if($this->cached() && static::$enabled)
                 {
-                    static::$config_cache = $this->load()['config'];
+                    $load = $this->load();
+                    static::$config_cache = $load['config'];
+
+                    if(!array_key_exists('env', static::$config_cache))
+                    {
+                        static::$config_cache['env'] = $load['env'];
+                    }
 
                     if(!array_key_exists($module, static::$config_cache))
                     {
@@ -530,9 +550,9 @@ class Cache
      * Return data from config files.
      */
 
-    public static function config()
+    public static function config(array $env = [])
     {
-        return new self('config');
+        return new self('config', $env);
     }
 
     /**

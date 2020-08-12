@@ -91,6 +91,15 @@ class Application
     }
 
     /**
+     * Return .env data.
+     */
+
+    public function env()
+    {
+        return $this->env;
+    }
+
+    /**
      * Dynamically returns reactive data.
      */
 
@@ -192,7 +201,7 @@ class Application
                         $this->env[$name] = $val;
                     }
                 }
-            }            
+            }       
         }
     }
 
@@ -220,6 +229,8 @@ class Application
                 $this->inDebugMode();
             }
 
+            $this->env = Config::env()->toArray();
+            
             $code = 500;
             $file = Cache::$path . 'routes/' . Cache::serialize(Request::uri()) . Cache::$ext;
             $cache = new Reader($file);
