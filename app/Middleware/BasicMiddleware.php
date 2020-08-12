@@ -51,6 +51,15 @@ class BasicMiddleware extends Middleware
         }
 
         /**
+         * Test if request is through ajax when required.
+         */
+
+        if($request->route('ajax') && $request->isAjax())
+        {
+            return http(400);
+        }
+
+        /**
          * If request URI is static resource, bypass 
          * middleware testing.
          */
