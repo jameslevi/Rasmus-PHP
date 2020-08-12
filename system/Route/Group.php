@@ -150,7 +150,7 @@ class Group
      * GET method factory.
      */
 
-    public function get(string $uri, string $method)
+    public function get(string $uri, string $method = 'index')
     {
         return $this->makeRoute('get', $uri, $method);
     }
@@ -159,7 +159,7 @@ class Group
      * POST method factory.
      */
 
-    public function post(string $uri, string $method)
+    public function post(string $uri, string $method = 'index')
     {
         return $this->makeRoute('post', $uri, $method);
     }
@@ -168,7 +168,7 @@ class Group
      * PUT method factory.
      */
 
-    public function put(string $uri, string $method)
+    public function put(string $uri, string $method = 'index')
     {
         return $this->makeRoute('put', $uri, $method);
     }
@@ -177,7 +177,7 @@ class Group
      * PATCH method factory.
      */
 
-    public function patch(string $uri, string $method)
+    public function patch(string $uri, string $method = 'index')
     {
         return $this->makeRoute('patch', $uri, $method);
     }
@@ -186,7 +186,7 @@ class Group
      * DELETE method factory.
      */
 
-    public function delete(string $uri, string $method)
+    public function delete(string $uri, string $method = 'index')
     {
         return $this->makeRoute('delete', $uri, $method);
     }
