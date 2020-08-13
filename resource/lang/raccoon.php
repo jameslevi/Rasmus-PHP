@@ -26,7 +26,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('raccoon.framework')->en('Raccoon Framework');
     Locale::id('routes')->en('Routes')->tl('Mga Ruta');
     Locale::id('tutorial')->en('Tutorial')->tl('Pagtuturo');
-    Locale::id('version')->en('Version')->tl('Beryson');
+    Locale::id('version')->en('version')->tl('beryson');
     Locale::id('written.by')->en('Written by')->tl('Isinulat ni');
 
 }
