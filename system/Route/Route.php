@@ -55,7 +55,7 @@ class Route
     private function __construct(string $verb, string $uri, string $controller)
     {
         $this->set('verb', $verb);
-        $this->set('uri', $uri);
+        $this->set('uri', Str::break($uri, '?')[0]);
 
         if(Str::has($controller, '@'))
         {
