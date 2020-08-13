@@ -40,7 +40,6 @@ class RaccoonDashboardMiddleware extends Middleware
         {
             if(($key === $curr) || ($request->isLocalhost() && $key === $this->local_key))
             {
-                emit('key', $key);
                 return next();
             }
             else

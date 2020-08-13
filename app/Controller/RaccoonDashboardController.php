@@ -2,16 +2,12 @@
 
 namespace App\Controller;
 
+use Raccoon\App\Config;
 use Raccoon\Http\Request;
+use Raccoon\Resource\Lang\Lang;
 
 class RaccoonDashboardController extends RaccoonDashboardAPIController
 {
-    /**
-     * Dot address of raccoon dashboard canvas.
-     */
-
-    private $canvas = 'raccoon.dashboard';
-
     /**
      * All request to raccoon dashboard will be handled
      * by this method and will be routed to other methods.
@@ -19,9 +15,11 @@ class RaccoonDashboardController extends RaccoonDashboardAPIController
 
     protected function index(Request $request)
     {
-        return view($this->canvas, [
+        return view('raccoon.dashboard', [
 
-            'title' => 'Dashboard',
+            'title' => Lang::get('raccoon::dashboard'),
+
+            'key' => Config::env()->APP_KEY,
 
         ]);
     }

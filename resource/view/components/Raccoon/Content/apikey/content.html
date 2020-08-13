@@ -1,0 +1,19 @@
+<template>
+    <v-center>
+        <div class="v-w-300px v-mg-100px">
+            <div>
+                <v-alert id="alert" rounded="true" scheme="error" display="true">Please enter email to generate APP key.</v-alert>
+            </div>
+            <div class="v-pd-b-10px">
+                <v-textbox type="text" id="email" size="medium" rounded="true" autofocus="true" autocomplete="false" :placeholder="$label['raccoon::email']"></v-textbox>
+            </div>
+            <div>
+                <v-button id="generate" width="100" size="medium" rounded="true">{{ $label['raccoon::generate'] }}</v-button>
+            </div>
+        </div>
+    </v-center>
+</template>
+
+<script>
+
+</script>
