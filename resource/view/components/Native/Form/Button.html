@@ -12,6 +12,48 @@
     </button>
 </template>
 
+<script>
+function Button(id)
+{
+    return extendUtil(id, {
+
+        /**
+         * Button is clicked. 
+         */ 
+
+        click: function(func)
+        {
+            let that = this;
+            this.el(id).click(function() {
+
+                that.disable();
+                func(that);
+
+            });
+        },
+
+        /**
+         * Enable button. 
+         */ 
+
+        enable: function()
+        {
+            this.el(id).prop('disabled', false);
+        },
+
+        /**
+         * Disable button. 
+         */ 
+
+        disable: function()
+        {
+            this.el(id).prop('disabled', true);
+        },
+
+    });
+}
+</script>
+
 <style>
 .nv-button {
     padding: 0px 10px;
