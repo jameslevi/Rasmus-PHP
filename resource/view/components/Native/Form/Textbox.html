@@ -1,7 +1,5 @@
 <template>
-    <label :for="$name">
-        <input :type="$type" :id="$id" :name="$name" :maxlength="$maxlength" :class="$border_radius $border_color $height $line_height $text_size v-mg-none v-pd-6px v-w-100 v-outline-none nv-textbox" :autocomplete="$text_autocomplete" spellcheck="false" :placeholder="$placeholder" :value="$slot" :disabled="$disabled" :autofocus="$autofocus">
-    </label>
+    <input :type="$type" :id="$id" :name="$name" :maxlength="$maxlength" :class="$border_radius $border_color $height $line_height $text_size v-mg-none v-pd-6px v-w-100 v-outline-none nv-textbox" :autocomplete="$text_autocomplete" spellcheck="false" :placeholder="$placeholder" :value="$slot" :disabled="$disabled" :autofocus="$autofocus">
 </template>
 
 <script>
@@ -20,22 +18,85 @@ $('.nv-textbox').each(function() {
 });
 
 /**
- * Focus on textbox by id.
- */
+ * Textbox Utility Object. 
+ */ 
 
-function focusTextbox(id)
+const Textbox = function(id)
 {
-    $('#' + id).focus();
-}
+    return extendUtil(id, {
 
-/**
- * Disable textbox by id.
- */
+        /**
+         * Set or return textbox value. 
+         */ 
 
-function disableTextbox(id)
-{
-    $('#' + id).prop('disabled', true);
-}
+        val: function(text)
+        {
+            if(text)
+            {
+                this.el(id).val(text);
+            }
+            else
+            {
+                return this.el(id).val();
+            }
+        },
+
+        /**
+         * Set textbox value to empty. 
+         */ 
+
+        empty: function()
+        {
+            this.val('');
+        },
+
+        /**
+         * Return length of textbox value. 
+         */ 
+
+        length: function()
+        {
+            return this.val().length;
+        },
+
+        /**
+         * Focus on textbox. 
+         */ 
+
+        focus: function()
+        {
+            this.el(id).focus();
+        },
+
+        /**
+         * Blur textbox focus. 
+         */ 
+
+        blur: function()
+        {
+            this.el(id).blur();
+        },
+
+        /**
+         * Disable textbox. 
+         */ 
+
+        disable: function()
+        {
+            this.el(id).prop('disabled', true);
+        },
+
+        /**
+         * Enable textbox. 
+         */ 
+
+        enable: function()
+        {
+            this.el(id).prop('disabled', false);
+        }
+
+    });
+};
 </script>
 
 <style>

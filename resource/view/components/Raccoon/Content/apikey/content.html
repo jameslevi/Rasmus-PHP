@@ -1,19 +1,39 @@
 <template>
     <v-center>
-        <div class="v-w-300px v-mg-100px">
-            <div>
-                <v-alert id="alert" rounded="true" scheme="error" display="true">Please enter email to generate APP key.</v-alert>
-            </div>
-            <div class="v-pd-b-10px">
-                <v-textbox type="text" id="email" size="medium" rounded="true" autofocus="true" autocomplete="false" :placeholder="$label['raccoon::email']"></v-textbox>
-            </div>
-            <div>
-                <v-button id="generate" width="100" size="medium" rounded="true">{{ $label['raccoon::generate'] }}</v-button>
+        <div class="v-w-360px v-media-360px:w-100 v-mg-t-150px v-media-420px:mg-t-20px">
+            <div class="v-pd-20px">
+                <v-form method="post">
+                    <div>
+                        <v-alert id="alert" rounded="true" scheme="error"></v-alert>
+                    </div>
+                    <div class="v-pd-b-10px">
+                        <v-textbox type="text" id="email" size="medium" rounded="true" autofocus="true" autocomplete="false" :placeholder="$label['raccoon::email']"></v-textbox>
+                    </div>
+                    <div>
+                        <v-button id="generate" width="100" size="medium" rounded="true" guard="false">{{ $label['raccoon::generate'] }}</v-button>
+                    </div>
+                </v-form>
             </div>
         </div>
     </v-center>
 </template>
 
 <script>
+$('#generate').click(function() {
+    let email = Textbox('email');
+        email.disable();
 
+    let ajax = http('/raccoon/api/key-generate', {
+
+        email : email.val(),
+
+    }, function(data)
+    {
+        
+        
+
+    });
+
+
+});
 </script>
