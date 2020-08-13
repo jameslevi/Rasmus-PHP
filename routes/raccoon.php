@@ -24,48 +24,53 @@ namespace Raccoon\Route {
         $group->get('/{key}/dashboard');
 
         /**
+         * Set default ajax enable to true.
+         */
+
+        $group->ajax(true);
+
+        /**
          * Generate API key.
          */
 
-        $group->post('/{key}/api/key-generate', 'generateAPIKey')->ajax(true);
+        $group->post('/{key}/api/key-generate', 'generateAPIKey');
 
         /**
          * Clear caches API.
          */
 
-        $group->post('/{key}/api/cache/generate')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-all')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-config')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-assets')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-routes')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-html')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-xcss')->ajax(true);
-        $group->delete('/{key}/api/cache/clear-xjs')->ajax(true);
+        $group->post('/{key}/api/cache/generate');
+        $group->delete('/{key}/api/cache/clear-all');
+        $group->delete('/{key}/api/cache/clear-config');
+        $group->delete('/{key}/api/cache/clear-assets');
+        $group->delete('/{key}/api/cache/clear-routes');
+        $group->delete('/{key}/api/cache/clear-html');
+        $group->delete('/{key}/api/cache/clear-xcss');
+        $group->delete('/{key}/api/cache/clear-xjs');
 
         /**
          * Routes API.
          */
 
-        $group->get('/{key}/api/routes/all', 'routesShowAll')->ajax(true);
-        $group->get('/{key}/api/routes/{id}', 'routesProfile')->ajax(true);
-        $group->post('/{key}/api/routes/create', 'routesCreate')->ajax(true);
-        $group->put('/{key}/api/routes/{id}/edit', 'routesEdit')->ajax(true);
-        $group->delete('/{key}/api/routes/{id}/delete', 'routesDelete')->ajax(true);
-
+        $group->get('/{key}/api/routes/all', 'routesShowAll');
+        $group->get('/{key}/api/routes/{id}', 'routesProfile');
+        $group->post('/{key}/api/routes/create', 'routesCreate');
+        $group->put('/{key}/api/routes/{id}/edit', 'routesEdit');
+        $group->delete('/{key}/api/routes/{id}/delete', 'routesDelete');
 
         /**
          * Controller API.
          */
 
-        $group->get('/{key}/api/controller/all', 'controllerShowAll')->ajax(true);
-        $group->post('/{key}/api/controller/create', 'controllerCreate')->ajax(true);
+        $group->get('/{key}/api/controller/all', 'controllerShowAll');
+        $group->post('/{key}/api/controller/create', 'controllerCreate');
 
         /**
          * Middleware API.
          */
 
-        $group->get('/{key}/api/middleware/all', 'middlewareShowAll')->ajax(true);
-        $group->post('/{key}/api/middleware/create', 'middlewareCreate')->ajax(true);
+        $group->get('/{key}/api/middleware/all', 'middlewareShowAll');
+        $group->post('/{key}/api/middleware/create', 'middlewareCreate');
 
     });
 
