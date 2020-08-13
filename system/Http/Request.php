@@ -75,7 +75,7 @@ class Request
 
     public function post(string $name, $default = null)
     {
-        return RequestData::get($name, $default);
+        return RequestData::post($name, $default);
     }
 
     /**
