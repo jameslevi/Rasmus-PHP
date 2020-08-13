@@ -345,6 +345,13 @@ class Cache
 
         if(sizeof($routes) !== 0)
         {
+            $resource = [];
+
+            $resource[] = Route::get('/resource/static/css/{css}', 'ResourceController@stylesheet')->content('text/css')->getData();
+            $resource[] = Route::get('/resource/static/js/{js}', 'ResourceController@javascript')->content('application/javascript')->getData();
+
+            $routes['resource'] = $resource;
+
             static::$routes_cache = $routes;
 
             if(!empty(static::$config_cache))
