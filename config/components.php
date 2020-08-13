@@ -15,6 +15,7 @@ return [
     'center' => Components\Native\Layout\Center::class,
     'column' => Components\Native\Layout\Column::class,
     'data' => Components\Native\Form\Data::class,
+    'form' => Components\Native\Form\Form::class,
     'header' => Components\Native\Widget\Header::class,
     'icon' => Components\Native\Media\Icon::class,
     'line' => Components\Native\Layout\Line::class,
