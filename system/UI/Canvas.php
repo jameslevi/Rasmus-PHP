@@ -4,6 +4,7 @@ namespace Raccoon\UI;
 
 use Raccoon\App\Config;
 use Raccoon\App\Request;
+use Raccoon\Cache\Cache;
 use Raccoon\File\Reader;
 use Raccoon\Resource\Lang\Lang;
 use Raccoon\Util\Collection;
@@ -543,7 +544,7 @@ class Canvas
 
         if(!empty(static::$javascript) && Str::has($html, '</body>'))
         {
-            $js = implode(' ', static::$javascript);
+            $js = '$(document).ready(function() {' . implode(' ', static::$javascript) . '});';
             $uri = Request::uri();
             $file = 'storage/cache/js/' . md5($uri) . '.xjs';
             $reader = new Reader($file);
@@ -565,6 +566,69 @@ class Canvas
                     if(!empty($contents))
                     {
                         $js = $contents . $js;
+                    }
+
+                    $core = 'resource/assets/js/core.js';
+                    $read_core = new Reader($core);
+
+                    if($read_core->exist())
+                    {
+                        $get_core = Str::trim($read_core->contents());
+                        $s = '';
+
+                        if(Str::endWith($js, '});'))
+                        {
+                            $js = Str::move($js, 0, 3);
+                        }
+
+                        foreach(explode('/**', $get_core) as $script)
+                        {
+                            if(Str::has($script, '*/'))
+                            {
+                                $s .= Str::break($script, '*/')[1];
+                            }
+                            else
+                            {
+                                $s .= $script;
+                            }
+                        }
+
+                        $js .= $s;
+                        $js .= 'function url(uri){return "' . Config::app()->url . '" + uri;}';
+                    }
+
+                    /**
+                     * Include API routes data array.
+                     */
+
+                    $routes = Cache::routes();
+                    
+                    if(!empty($routes))
+                    {
+                        $xhr = [];
+
+                        foreach($routes as $group)
+                        {
+                            foreach($group as $route)
+                            {
+                                if($route['ajax'])
+                                {
+                                    $s = "{ type: '" . $route['verb'] . "', uri: '" . $route['uri'] . "', dataType: 'json', cache: false";
+
+                                    $s .= '}';
+                                    $xhr[] = $s;
+                                }
+                            }
+                        }
+
+                        $array = "const routes = [" . implode(',', $xhr) . "];";
+
+                        if(Str::endWith($js, '});'))
+                        {
+                            $js = Str::move($js, 0, 3);
+                        }
+
+                        $js .= $array . '});';
                     }
                 }
             }
