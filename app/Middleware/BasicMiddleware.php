@@ -35,6 +35,18 @@ class BasicMiddleware extends Middleware
         $is_resource = false;
 
         /**
+         * Set route timezone.
+         */
+
+        $app->timezone = $request->route('timezone');
+
+        /**
+         * Set route locale.
+         */
+
+        $app->locale = $request->route('locale');
+
+        /**
          * Test if request method is supported.
          */
         
@@ -102,18 +114,6 @@ class BasicMiddleware extends Middleware
                 return http(503);
             }
         }
-
-        /**
-         * Set route timezone.
-         */
-
-        $app->timezone = $request->route('timezone');
-
-        /**
-         * Set route locale.
-         */
-
-        $app->locale = $request->route('locale');
 
         return next();
     }

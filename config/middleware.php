@@ -38,6 +38,7 @@ namespace Env {
                 'before' => [
 
                     App\Middleware\BasicMiddleware::class,
+                    App\Middleware\RaccoonDashboardMiddleware::class,
                     App\Middleware\ValidationMiddleware::class,
                     App\Middleware\CORSMiddleware::class,
                     App\Middleware\IPBlockerMiddleware::class,
