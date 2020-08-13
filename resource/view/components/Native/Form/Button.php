@@ -47,13 +47,9 @@ class Button extends Component
 
         'size' => 'small',
 
-        'onclick' => null,
-
         'icon' => null,
 
         'disabled' => false,
-
-        'guard' => false,
 
         'rounded' => true,
 
