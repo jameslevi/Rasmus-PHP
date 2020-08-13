@@ -9,6 +9,6 @@
 
 return [
 
-    'jQuery' => 'public/js/vendor/jquery-3.5.1.min.js',
+    'jQuery' => 'resource/assets/js/vendor/jquery-3.5.1.min.js',
 
 ];
