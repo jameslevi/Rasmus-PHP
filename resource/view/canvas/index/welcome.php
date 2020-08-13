@@ -1,8 +1,8 @@
 <?php
 
-namespace Rasmus\UI {
+namespace Raccoon\UI {
 
-use Rasmus\Application;
+use Raccoon\Application;
 
 return Canvas::draw(function(Canvas $canvas) {
         
@@ -16,8 +16,10 @@ return Canvas::draw(function(Canvas $canvas) {
          * Pass all necessary informations required by your components.
          */
 
-        $canvas->emit('title', 'Welcome to Rasmus Framework');
+        $canvas->emit('title', 'Welcome to Raccoon Framework');
         $canvas->emit('version', Application::context()->version());
+        $canvas->emit('message', 'You can now start creating great applications using raccoon framework.');
+        $canvas->emit('author', 'James Levi Crisostomo');
         $canvas->emit('year', date('Y'));
 
         /**

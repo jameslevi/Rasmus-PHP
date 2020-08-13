@@ -1,37 +1,35 @@
 <template>
     <div class="v-pd-10px">
         <v-alert scheme="success" rounded="true" display="true">
-            Welcome to your first raccoon project!
+            {{ $emit['message'] }}
         </v-alert>
     </div>
-    <div>
-    <h1 class="v-weight-normal v-size-80px v-color-gray v-show v-align-center">
-        Raccoon
-    </h1>
-        <v-center>
-            <div class="v-w-400px v-media-400px:w-100 v-media-400px:pd-x-5px">
-                <v-column break="400">
-                    <item padding="5">
-                        <v-button href="/raccoon/dashboard" hover="true" size="large" scheme="error" width="100" rounded="true">Dashboard</v-button>
-                    </item>
-                    <item padding="5">
-                        <v-button href="/login" hover="true" size="large" width="100" rounded="true">Login</v-button>
-                    </item>
-                </v-column>
-            </div>
-        </v-center>
+    <div class="v-max-w-400px v-min-w-100px v-mg-y-20px v-center">
+        <img src="resource/assets/images/raccoon/logo.jpg" class="v-w-100 v-h-auto v-unselectable" />
+    </div>
+    <div class="v-justify-center">
+        <div class="v-w-400px v-media-400px:w-100 v-media-400px:pd-x-5px">
+            <v-column break="400">
+                <item padding="5">
+                    <v-button href="/raccoon/dashboard" hover="true" size="large" scheme="error" width="100" rounded="true">Dashboard</v-button>
+                </item>
+                <item padding="5">
+                    <v-button href="/login" hover="true" size="large" width="100" rounded="true">Login</v-button>
+                </item>
+            </v-column>
+        </div>
     </div>
     <div class="v-h-36px v-lh-36px v-w-100 v-bgcolor-#f0f0f0 v-size-13px v-pos-fixed v-bottom-0px v-media-440px:h-72px">
         <div class="v-pd-x-10px">
             <v-column break="440">
                 <item>
                     <div class="v-media-440px:align-center">
-                        Copyright &copy; {{ $emit['year'] }}
+                        Raccoon &copy; {{ $emit['year'] }}
                     </div>
                 </item>
                 <item>
                     <div class="v-align-right v-media-440px:align-center">
-                        Written by <b><v-link href="http://raccoon.io/about-us" newtab="true">James Levi Crisostomo</v-link></b>
+                        Written by <b><v-link href="http://raccoon.io/about-us" newtab="true">{{ $emit['author'] }}</v-link></b>
                     </div>
                 </item>
             </v-column>
