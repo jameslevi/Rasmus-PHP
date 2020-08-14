@@ -53,10 +53,4 @@ namespace Raccoon\UI {
 
     });
 
-    Scheme::id('theme1')->set(function() {
-
-        Color::id('test1')->default(255, 255, 255);
-
-    });
-
 }
