@@ -4,6 +4,8 @@
 
 function http(uri, data, complete)
 {
+    uri = uri.split('?')[0];
+
     var uriToArray = function(uri)
         {
             if(uri.substring(0, 1) === '/')

@@ -4,7 +4,7 @@
             <div class="v-pd-20px">
                 <v-form method="post">
                     <div>
-                        <v-alert id="alert" rounded="true" scheme="error"></v-alert>
+                        <v-alert id="error_message" rounded="true" scheme="error"></v-alert>
                     </div>
                     <div class="v-pd-b-10px">
                         <v-textbox type="text" id="email" size="medium" rounded="true" autofocus="true" autocomplete="false" :placeholder="$label['raccoon::email']"></v-textbox>
@@ -20,7 +20,8 @@
 
 <script>
 Button('generate').click(function(button) {
-    let email = Textbox('email');
+    let alert = Alert('error_message'),
+        email = Textbox('email');
         email.disable();
 
     let ajax = http('/raccoon/api/key-generate', {
@@ -31,6 +32,9 @@ Button('generate').click(function(button) {
     {
         email.enable();
         button.enable();
+        email.focus();
+
+        alert.set(data.email);
     });
 });
 </script>

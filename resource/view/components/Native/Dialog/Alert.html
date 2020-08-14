@@ -5,11 +5,11 @@
             <v-icon :src="$url" size="16"></v-icon>
         </div>
         <div :class="$color $text_size $offset v-f-left v-wrap-break-word nv-alert-message">
-            {{ $slot }} &nbsp;
+            {{ $slot }}
         </div>
         <div class="v-f-left v-square-16px" :show="$dismiss">
             <div :class="$dismiss_bg v-square-16px v-hide v-brd-radius-2px nv-alert-dismiss">
-                <a href="#" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px nv-alert-dismiss-icon">
+                <a href="#" :dismiss="$id" :class="$dismiss_color v-decor-line-none v-bold v-show v-square-16px v-align-center v-lh-12px v-size-19px nv-alert-dismiss-icon">
                     &times;
                 </a>
             </div>
@@ -25,58 +25,56 @@
  */
 
 $('.nv-alert-body').each(function() {
-    let display = $(this).is('[display]');
-    
-    if(display)
+    if($(this).is('[display]'))
     {
         $(this).delay(500).fadeIn(500);
     }
 });
 
 /**
- * Show alert and replace message.
- */
+ * Alert utility object. 
+ */ 
 
-function showAlert(id, message, autoclose_delay = null)
+function Alert(id)
 {
-    let el = $('#' + id);
+    return extendUtil(id, {
 
-    el.find('.nv-alert-message').text(message);
-    el.fadeIn(500);
+        /**
+         * Set alert message then show, if autoclose
+         * is not null, automatically close the alert. 
+         */ 
 
-    if(autoclose_delay !== null)
-    {
-        el.delay(autoclose_delay).fadeOut(500);
-    }
+        set: function(message, autoclose = null)
+        {
+            let el = this.el(id);
+
+            el.find('.nv-alert-message').text(message);
+            el.find('.nv-alert-body').fadeIn(500);
+
+            if(autoclose)
+            {
+                el.find('.nv-alert-body').delay(autoclose).fadeOut(500);
+            }
+        },
+
+        /**
+         * Close alert box. 
+         */ 
+
+        close()
+        {
+            this.el(id).find('.nv-alert-body').fadeOut(500);
+        }
+
+    });
 }
 
 /**
- * Close all rendered alert.
- */
-
-function hideAllAlert()
-{
-    $('.nv-alert').fadeOut(500);
-}
-
-/**
- * Hide alert by dismiss button or method call.
- */
-
-function hideAlert(el)
-{
-    if(typeof el === 'object')
-    {
-        $(el).parent().parent().parent().fadeOut(500);
-    }
-    else
-    {
-        $('#' + id).fadeOut(500);
-    }
-}
+ * Dismiss alert box. 
+ */ 
 
 $('.nv-alert-dismiss-icon').click(function(e) {
-    hideAlert(this);
+    Alert($(this).attr('dismiss')).close();
     e.preventDefault();
 });
 
