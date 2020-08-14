@@ -26,6 +26,24 @@ class Reader
     }
 
     /**
+     * Overwrite file content.
+     */
+
+    public function overwrite(string $data)
+    {
+        file_put_contents($this->file, $data);
+    }
+
+    /**
+     * Append data at the end of file content.
+     */
+
+    public function append(string $data)
+    {
+        file_put_contents($this->file, $data, FILE_APPEND);
+    }
+
+    /**
      * Return file name.
      */
 

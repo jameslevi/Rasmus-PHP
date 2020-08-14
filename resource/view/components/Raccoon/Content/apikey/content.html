@@ -1,10 +1,15 @@
 <template>
     <v-center>
-        <div class="v-w-360px v-media-360px:w-100 v-mg-t-150px v-media-420px:mg-t-20px">
+        <div class="v-w-420px v-media-420px:w-100 v-mg-t-150px v-media-420px:mg-t-20px">
             <div class="v-pd-20px">
                 <v-form method="post">
                     <div>
                         <v-alert id="error_message" rounded="true" scheme="error"></v-alert>
+                    </div>
+                    <div class="v-pd-y-20px v-size-14px">
+                        The raccoon community wants to stay in touch with you through
+                        your email account so you can be updated with our fresh release
+                        and latest documentations and tutorials.
                     </div>
                     <div class="v-pd-b-10px">
                         <v-textbox type="text" id="email" size="medium" rounded="true" autofocus="true" autocomplete="false" :placeholder="$label['raccoon::email']"></v-textbox>
@@ -36,7 +41,11 @@ Button('generate').click(function(button) {
 
         if(!data.success)
         {
-            alert.set(data.errors[0], 3000);
+            alert.set(data.errors[0]);
+        }
+        else
+        {
+            window.location.reload();
         }
     });
 });

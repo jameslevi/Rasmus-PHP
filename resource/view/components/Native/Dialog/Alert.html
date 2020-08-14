@@ -44,17 +44,12 @@ function Alert(id)
          * is not null, automatically close the alert. 
          */ 
 
-        set: function(message, autoclose = null)
+        set: function(message)
         {
             let el = this.el(id);
 
             el.find('.nv-alert-message').text(message);
             el.find('.nv-alert-body').fadeIn(500);
-
-            if(autoclose)
-            {
-                el.find('.nv-alert-body').delay(autoclose).fadeOut(500);
-            }
         },
 
         /**

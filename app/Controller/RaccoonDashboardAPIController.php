@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use Raccoon\App\Controller;
+use Raccoon\File\Reader;
 use Raccoon\Http\Request;
+use Raccoon\Util\Str;
 
 class RaccoonDashboardAPIController extends Controller
 {
@@ -14,32 +16,26 @@ class RaccoonDashboardAPIController extends Controller
     protected function generateAPIKey(Request $request)
     {
         $email = $request->post('email');
+        $key = Str::random(10);
+        $env = new Reader('.env');
 
-        
+        if($env->exist())
+        {
+            $content = str_replace('APP_KEY=null', 'APP_KEY=' . $key, $env->contents());
+            $env->overwrite($content);
 
-        return json([
+            return json([
 
-            'success' => true,
+                'success' => true,
 
-        ]);
-    }
+                'email' => $email,
+    
+                'key' => $key,
+    
+            ]);
+        }
 
-    /**
-     * Notify community for new 
-     */
-
-    private function notifyRaccoonServer(string $email, string $key)
-    {
-
-    }
-
-    /**
-     * Clear caches.
-     */
-
-    protected function clearCache(Request $request)
-    {
-
+        return http(500);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace Raccoon\Route {
 
+use Raccoon\Resource\Lang\Lang;
+
     /**
      * ROUTING
      * -----------------------------------------------
@@ -35,7 +37,7 @@ namespace Raccoon\Route {
 
         $group->post('/{key}/api/key-generate', 'generateAPIKey')->validate([
 
-            'email' => Param::email('Email')->post(),
+            'email' => Param::email(Lang::get('raccoon::email'))->post(),
 
         ]);
 

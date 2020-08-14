@@ -38,7 +38,7 @@ class RaccoonDashboardMiddleware extends Middleware
 
         if(!is_null($key))
         {
-            if(($key === $curr) || ($request->isLocalhost() && $key === $this->local_key))
+            if(($key === $curr) || ($request->isLocalhost() && $curr === $this->local_key))
             {
                 return next();
             }

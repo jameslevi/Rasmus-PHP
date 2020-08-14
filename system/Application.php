@@ -215,6 +215,15 @@ class Application
     }
 
     /**
+     * Return APP key.
+     */
+
+    public function key()
+    {
+        return Config::env()->APP_KEY;
+    }
+
+    /**
      * Magic happens here.
      */
 

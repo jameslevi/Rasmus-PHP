@@ -210,4 +210,22 @@ class Str
         return strlen($string) - (static::numberCount($string) + static::letterCount($string));
     }
 
+    /**
+     * Generate random string.
+     */
+
+    public static function random(int $length)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $str = '';
+
+        for($i = 1; $i <= $length; $i++)
+        {
+            $n = rand(0, strlen($characters) - 1);
+            $str .= $characters[$n];
+        }
+
+        return $str;
+    }
+
 }
