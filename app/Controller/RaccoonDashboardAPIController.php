@@ -65,13 +65,120 @@ class RaccoonDashboardAPIController extends Controller
 
     protected function configCacheClear(Request $request)
     {
-        
+        $static = $this->getStaticCache();
+
+        if($static)
+        {
+            $static = json_decode($static, true);
+
+            if(array_key_exists('config', $static))
+            {
+                $env = $static['config']['env'];
+
+                unset($static['config']);
+                $static['config'] = [
+
+                    'env' => $env,
+
+                ];
+
+                $reader = new Reader(Cache::getFile());
+
+                if($reader->exist())
+                {
+                    $reader->overwrite(json_encode($static));
+                }
+            }
+        }
 
         return json([
 
             'success' => true,
 
         ]);
+    }
+
+    /**
+     * Delete assets cache.
+     */
+
+    protected function assetsCacheClear(Request $request)
+    {
+        $static = $this->getStaticCache();
+
+        if($static)
+        {
+            $static = json_decode($static, true);
+
+            if(array_key_exists('assets', $static))
+            {
+                unset($static['assets']);
+                $static['assets'] = [];
+
+                $reader = new Reader(Cache::getFile());
+
+                if($reader->exist())
+                {
+                    $reader->overwrite(json_encode($static));
+                }
+            }
+        }
+
+        return json([
+
+            'success' => true,
+
+        ]);
+    }
+
+    /**
+     * Delete routes cache.
+     */
+
+    protected function routesCacheClear(Request $request)
+    {
+        $static = $this->getStaticCache();
+
+        if($static)
+        {
+            $static = json_decode($static, true);
+
+            if(array_key_exists('routes', $static))
+            {
+                unset($static['routes']);
+                $static['routes'] = [];
+
+                $reader = new Reader(Cache::getFile());
+
+                if($reader->exist())
+                {
+                    $reader->overwrite(json_encode($static));
+                }
+            }
+        }
+
+        return json([
+
+            'success' => true,
+
+        ]);
+    }
+
+    /**
+     * Return static cache containing config, assets
+     * and routes map.
+     */
+
+    private function getStaticCache()
+    {
+        $reader = new Reader(Cache::getFile());
+
+        if($reader->exist())
+        {
+            return $reader->contents();
+        }
+
+        return false;
     }
 
     /**
