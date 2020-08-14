@@ -11,7 +11,7 @@ class Button extends Component
 
     protected $data = [
 
-        'button_width' => 'v-w-auto',
+        'button_width' => 'v-w-100',
 
         'button_height' => 'v-h-32px',
 
@@ -29,9 +29,7 @@ class Button extends Component
 
         'icon_margin' => 'v-mg-t-8px',
 
-        'border_radius' => 'v-brd-radius-none',
-
-        'url' => null,
+        'border_radius' => 'v-brd-radius-3px',
 
         'redirect' => null,
 
@@ -112,19 +110,6 @@ class Button extends Component
             $this->button_height = 'v-h-42px';
             $this->line_height = 'v-lh-42px';
             $this->icon_margin = 'v-mg-t-13px';
-        }
-
-        /**
-         * Set font weight to bold.
-         */
-
-        if($this->bold)
-        {
-            $this->text_weight = 'v-weight-bold';
-        }
-        else
-        {
-            $this->text_weight = 'v-weight-normal';
         }
 
         if($this->hover)

@@ -1,5 +1,5 @@
 <template>
-    <button :id="$id" :name="$name" :disabled="$disabled" :redirect="$redirect" :method="$onclick" :class="$button_width $button_height $line_height $bgcolor $bgcolor_hover $bgcolor_active $text_color $text_size $border_radius v-display-block v-pd-none v-mg-none v-align-center nv-button">
+    <button :id="$id" :name="$name" :disabled="$disabled" :redirect="$redirect" :class="$button_width $button_height $line_height $bgcolor $bgcolor_hover $bgcolor_active $text_color $text_size $border_radius v-display-block v-pd-none v-mg-none v-align-center nv-button">
         <div class="v-display-inline-block">
             <b :show="hasIcon()" :class="$icon_margin v-square-16px v-show v-f-left v-mg-r-8px">
                 <v-icon :src="$icon" size="16"></v-icon>
@@ -13,6 +13,26 @@
 </template>
 
 <script>
+/**
+ * Redirect page when button with href
+ * is clicked. 
+ */ 
+
+$('.nv-button').each(function() {
+    $(this).click(function()
+    {
+        let redirect = $(this).attr('redirect');
+        if(redirect)
+        {
+            window.location.href = redirect;
+        }
+    });
+});
+
+/**
+ * Button utility. 
+ */ 
+
 function Button(id)
 {
     return extendUtil(id, {
