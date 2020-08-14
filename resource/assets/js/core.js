@@ -96,9 +96,9 @@ function http(uri, data, complete)
  * Redirect page to other page.
  */
 
-function redirect(url)
+function redirect(uri)
 {
-
+    window.location.href = url(uri);
 }
 
 /**
