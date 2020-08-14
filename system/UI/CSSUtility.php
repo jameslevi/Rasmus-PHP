@@ -399,7 +399,14 @@ class CSSUtility extends ClassUtil
                     $rgb = $rgb['default'];
                 }
 
-                return ['color-' . $color, 'color:rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')'];
+                if(!is_null($rgb['A']))
+                {
+                    return ['color-' . $color, 'color:rgba(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ',' . $rgb['A'] . ')'];
+                }
+                else
+                {
+                    return ['color-' . $color, 'color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
+                }
             }
         }
     }
@@ -679,7 +686,14 @@ class CSSUtility extends ClassUtil
                     $rgb = $rgb['default'];
                 }
 
-                return ['bgcolor-' . $color, 'background-color:rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')'];
+                if(!is_null($rgb['A']))
+                {
+                    return ['bgcolor-' . $color, 'background-color:rgba(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ',' . $rgb['A'] . ')'];
+                }
+                else
+                {
+                    return ['bgcolor-' . $color, 'background-color:rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')'];
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ use Raccoon\File\Reader;
 use Raccoon\Resource\Lang\Locale;
 use Raccoon\Route\Route;
 use Raccoon\UI\Canvas;
+use Raccoon\UI\Scheme;
 use Raccoon\Util\Str;
 use Raccoon\Validation\Form;
 
@@ -463,6 +464,21 @@ class Cache
                     foreach(Form::all() as $form)
                     {
                         $data[$form->getName()] = $form->getData();
+                    }
+                }
+
+                static::$config_cache[$module] = $data;
+            }
+            else if($module === 'scheme')
+            {
+                $data = [];
+                require $file;
+
+                if(!Scheme::empty())
+                {
+                    foreach(Scheme::get() as $scheme)
+                    {
+                        $data[$scheme->getId()] = $scheme->colors();
                     }
                 }
 

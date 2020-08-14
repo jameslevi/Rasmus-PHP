@@ -3,6 +3,7 @@
 namespace Components\Native\Form;
 
 use Raccoon\App\Config;
+use Raccoon\Application;
 use Raccoon\UI\Component;
 use Raccoon\Util\Str;
 
@@ -152,7 +153,7 @@ class Button extends Component
     protected function scheme(string $scheme)
     {
         $scheme = strtolower($scheme);
-        $colors = Config::scheme()->{$scheme} ?? null;
+        $colors = Config::scheme()[Application::context()->scheme] ?? null;
 
         if(!is_null($colors))
         {

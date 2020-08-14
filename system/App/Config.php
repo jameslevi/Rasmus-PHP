@@ -121,7 +121,7 @@ class Config
 
     public static function scheme()
     {
-        return new Collection(static::cache()->scheme());
+        return static::cache()->scheme();
     }
 
 }

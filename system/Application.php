@@ -239,6 +239,7 @@ class Application
             }
 
             $this->env = Config::env()->toArray();
+            $this->scheme = 'default';
             
             $code = 500;
             $file = Cache::$path . 'routes/' . Cache::serialize(Request::uri()) . Cache::$ext;

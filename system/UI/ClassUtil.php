@@ -3,6 +3,7 @@
 namespace Raccoon\UI;
 
 use Raccoon\App\Config;
+use Raccoon\Application;
 use Raccoon\Util\Str;
 
 abstract class ClassUtil
@@ -527,12 +528,23 @@ abstract class ClassUtil
 
     protected function isSchemeColor(string $color)
     {
-        if(Str::has($color, '_'))
+        $name = Str::break($color, '_')[0];
+        $scheme = Config::scheme()[Application::context()->scheme];
+        
+        if(array_key_exists($color, $scheme) || Str::has($color, '_'))
         {
-            $color = Str::break($color, '_')[0];
+            if(Str::has($color, '_'))
+            {
+                if(!in_array(Str::break($color, '_')[1], ['default', 'hover', 'active']))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         
-        return !is_null($this->toRGB($color));
+        return false;
     }
 
     /**
@@ -541,7 +553,7 @@ abstract class ClassUtil
 
     protected function toRGB(string $color)
     {
-        return Config::scheme()->{$color} ?? null;
+        return Config::scheme()[Application::context()->scheme][$color] ?? null;
     }
 
     /**
@@ -561,7 +573,14 @@ abstract class ClassUtil
             $rgb = $rgb['default'];
         }
         
-        return 'rgb(' . $rgb[0] . ',' . $rgb[1] . ',' . $rgb[2] . ')';
+        if(!is_null($rgb['A']))
+        {
+            return 'rgba(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ',' . $rgb['A'] . ')';
+        }
+        else
+        {
+            return 'rgb(' . $rgb['R'] . ',' . $rgb['G'] . ',' . $rgb['B'] . ')';
+        }
     }
 
     /**
