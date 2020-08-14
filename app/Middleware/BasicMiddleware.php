@@ -16,7 +16,7 @@ class BasicMiddleware extends Middleware
      * List of Restful verbs accepted in each request.
      */
 
-    private $accepted_methods = ['GET', 'POST', 'PUT', 'PATCH', '\DELETE'];
+    private $accepted_methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
     /**
      * Accepted static resources.

@@ -259,7 +259,7 @@ class Route
 
     public static function delete(string $uri, string $controller)
     {
-        return static::register(new self('\DELETE', $uri, $controller));
+        return static::register(new self('DELETE', $uri, $controller));
     }
 
     /**

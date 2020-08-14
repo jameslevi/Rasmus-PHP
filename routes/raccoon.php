@@ -45,14 +45,10 @@ use Raccoon\Resource\Lang\Lang;
          * Clear caches API.
          */
 
-        $group->post('/{key}/api/cache/generate');
-        $group->delete('/{key}/api/cache/clear-all');
-        $group->delete('/{key}/api/cache/clear-config');
-        $group->delete('/{key}/api/cache/clear-assets');
-        $group->delete('/{key}/api/cache/clear-routes');
-        $group->delete('/{key}/api/cache/clear-html');
-        $group->delete('/{key}/api/cache/clear-xcss');
-        $group->delete('/{key}/api/cache/clear-xjs');
+        $group->delete('/{key}/api/cache/clear-all', 'cacheClear');
+        $group->delete('/{key}/api/cache/clear-config', 'configCacheClear');
+        $group->delete('/{key}/api/cache/clear-assets', 'assetsCacheClear');
+        $group->delete('/{key}/api/cache/clear-routes', 'routesCacheClear');
 
         /**
          * Routes API.
