@@ -33,7 +33,11 @@ namespace Raccoon\Route {
          * Generate API key.
          */
 
-        $group->post('/{key}/api/key-generate', 'generateAPIKey');
+        $group->post('/{key}/api/key-generate', 'generateAPIKey')->validate([
+
+            'email' => Param::email('Email')->post(),
+
+        ]);
 
         /**
          * Clear caches API.

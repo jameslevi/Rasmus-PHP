@@ -23,12 +23,6 @@ class Validate
     private $name;
 
     /**
-     * Form type declared from form config.
-     */
-
-    private $type;
-
-    /**
      * Set to true if validation is optional.
      */
 
@@ -43,7 +37,6 @@ class Validate
     public function __construct(string $name, string $type, bool $optional)
     {
         $this->name = $name;
-        $this->type = $type;
         $this->optional = $optional;
 
         if(is_null(static::$cache))
@@ -94,7 +87,6 @@ class Validate
 
     public function test($value)
     {
-        $data = [];
         $message = null;
         $code = 0;
         
@@ -171,7 +163,7 @@ class Validate
                 $value = '';
             }
 
-            if($value !== '' && !$this->optional)
+            if($value !== '' || ($this->optional && $value !== ''))
             {
                 /**
                  * Value must be greater than or equal

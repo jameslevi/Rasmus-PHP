@@ -72,10 +72,33 @@ function http(uri, data, complete)
                 {
                     complete(data);
                 }
+            },
+
+            complete: function(xhr, status)
+            {
+                if(status === 'error')
+                {
+                    if(complete)
+                    {
+                        if(route.dataType === 'json')
+                        {
+                            complete(xhr.responseJSON);
+                        }
+                    }
+                }
             }
 
         });
     }
+}
+
+/**
+ * Redirect page to other page.
+ */
+
+function redirect(url)
+{
+
 }
 
 /**

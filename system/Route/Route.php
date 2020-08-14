@@ -161,7 +161,7 @@ class Route
      * Set validator class.
      */
 
-    public function validate(string $validator)
+    public function validate($validator)
     {
         $this->set('validate', $validator);
         return $this;

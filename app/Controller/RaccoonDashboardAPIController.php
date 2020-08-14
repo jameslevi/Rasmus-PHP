@@ -13,6 +13,23 @@ class RaccoonDashboardAPIController extends Controller
 
     protected function generateAPIKey(Request $request)
     {
+        $email = $request->post('email');
+
+        
+
+        return json([
+
+            'success' => true,
+
+        ]);
+    }
+
+    /**
+     * Notify community for new 
+     */
+
+    private function notifyRaccoonServer(string $email, string $key)
+    {
 
     }
 

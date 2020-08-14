@@ -34,7 +34,10 @@ Button('generate').click(function(button) {
         button.enable();
         email.focus();
 
-        alert.set(data.email);
+        if(!data.success)
+        {
+            alert.set(data.errors[0], 3000);
+        }
     });
 });
 </script>
