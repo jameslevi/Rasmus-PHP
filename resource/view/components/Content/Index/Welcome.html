@@ -1,6 +1,6 @@
 <template>
     <div class="v-pd-10px">
-        <v-alert scheme="success" rounded="true" display="true">
+        <v-alert id="message_alert" scheme="success" rounded="true" display="true">
             {{ $emit['message'] }}
         </v-alert>
     </div>
@@ -24,12 +24,12 @@
             <v-column break="440">
                 <item>
                     <div class="v-media-440px:align-center">
-                        Raccoon &copy; {{ $emit['year'] }}
+                        {{ $label["raccoon::raccoon"] }} &copy; {{ $emit['year'] }}
                     </div>
                 </item>
                 <item>
                     <div class="v-align-right v-media-440px:align-center">
-                        Written by <b><v-link href="http://raccoon.io/about-us" newtab="true">{{ $emit['author'] }}</v-link></b>
+                        {{ $label['raccoon::written.by'] }} <b><v-link href="http://raccoon.io/about-us" newtab="true">{{ $emit['author'] }}</v-link></b>
                     </div>
                 </item>
             </v-column>

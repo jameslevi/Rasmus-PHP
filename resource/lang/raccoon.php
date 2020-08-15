@@ -23,6 +23,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('locale')->en('Locale');
     Locale::id('log.in')->en('Log In');
     Locale::id('middleware')->en('Middleware')->tl('Tagapamagitan');
+    Locale::id('raccoon')->en('Raccoon');
     Locale::id('raccoon.framework')->en('Raccoon Framework');
     Locale::id('routes')->en('Routes')->tl('Mga Ruta');
     Locale::id('tutorial')->en('Tutorial')->tl('Pagtuturo');

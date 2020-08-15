@@ -60,6 +60,23 @@ class RaccoonDashboardAPIController extends Controller
     }
 
     /**
+     * Clear UI caches including css, js and html cache files.
+     */
+
+    protected function uiCacheClear(Request $request)
+    {
+        $this->deleteCSSCache();
+        $this->deleteJSCache();
+        $this->deleteHTMLCache();
+
+        return json([
+
+            'success' => true,
+
+        ]);
+    }
+
+    /**
      * Delete config cache.
      */
 
@@ -293,6 +310,45 @@ class RaccoonDashboardAPIController extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * Return all routes.
+     */
+
+    protected function routesGroup(Request $request)
+    {
+        $routes = Cache::routes();
+        $group = $request->resource()->group;
+        $success = false;
+
+        if(array_key_exists($group, $routes))
+        {
+            $success = true;
+        }
+
+        return json([
+
+            'data' => $success ? $routes[$group] : [],
+
+            'success' => $success,
+
+        ]);
+    }
+
+    /**
+     * Return routes data.
+     */
+
+    protected function routesProfile(Request $request)
+    {
+        $id = $request->resource()->id;
+
+        return json([
+
+            'success' => true,
+
+        ]);
     }
 
 }

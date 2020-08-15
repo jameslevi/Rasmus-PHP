@@ -49,12 +49,13 @@ use Raccoon\Resource\Lang\Lang;
         $group->delete('/{key}/api/cache/clear-config', 'configCacheClear');
         $group->delete('/{key}/api/cache/clear-assets', 'assetsCacheClear');
         $group->delete('/{key}/api/cache/clear-routes', 'routesCacheClear');
+        $group->delete('/{key}/api/cache/clear-ui', 'uiCacheClear');
 
         /**
          * Routes API.
          */
 
-        $group->get('/{key}/api/routes/all', 'routesShowAll');
+        $group->get('/{key}/api/routes/{group}', 'routesGroup');
         $group->get('/{key}/api/routes/{id}', 'routesProfile');
         $group->post('/{key}/api/routes/create', 'routesCreate');
         $group->put('/{key}/api/routes/{id}/edit', 'routesEdit');

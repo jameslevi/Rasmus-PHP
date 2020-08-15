@@ -393,6 +393,7 @@ class Cache
             'auth',
             'cors',
             'middleware',
+            'database',
         ];
 
         if(in_array($module, $modules))
