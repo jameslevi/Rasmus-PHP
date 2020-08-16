@@ -15,8 +15,6 @@ class Counter extends Model
     {
         $field->text();
         $field->notNull();
-
-        return $field;
     }
 
     /**
@@ -27,8 +25,6 @@ class Counter extends Model
     {
         $field->varChar(30);
         $field->notNull();
-
-        return $field;
     }
 
 }

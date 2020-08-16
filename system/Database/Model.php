@@ -7,6 +7,12 @@ use Raccoon\Util\Str;
 abstract class Model
 {
     /**
+     * Store current model to evaluate.
+     */
+
+    private $current_model;
+
+    /**
      * Methods not table columns.
      */
 
@@ -87,42 +93,48 @@ abstract class Model
 
             foreach($this->fields as $field)
             {
-                $parse = $this->{$field}(new Field($field))->getData();
-                $sql .= $field . ' ';
-
-                if(!is_null($parse['type']))
+                $this->current_model = new Field($field);
+                $this->{$field}($this->current_model);
+                
+                if(method_exists($this, $field))
                 {
-                    $sql .= strtoupper($parse['type']);
+                    $parse = $this->current_model->getData();
+                    $sql .= $field . ' ';
 
-                    if(!is_null($parse['value']))
+                    if(!is_null($parse['type']))
                     {
-                        $sql .= '(' . $parse['value'] . ')';
-                    }
-                }
+                        $sql .= strtoupper($parse['type']);
 
-                if(!empty($parse['optional']))
-                {
-                    $sql .= ' ';
-
-                    foreach($parse['optional'] as $optional)
-                    {
-                        if($optional !== 'PRIMARY KEY')
+                        if(!is_null($parse['value']))
                         {
-                            $sql .= strtoupper($optional) . ' ';
-                        }
-                        else
-                        {
-                            $primary_key = $field;
+                            $sql .= '(' . $parse['value'] . ')';
                         }
                     }
 
-                    if(Str::endWith($sql, ' '))
+                    if(!empty($parse['optional']))
                     {
-                        $sql = Str::move($sql, 0, 1);
-                    }
-                }
+                        $sql .= ' ';
 
-                $sql .= ', ';
+                        foreach($parse['optional'] as $optional)
+                        {
+                            if($optional !== 'PRIMARY KEY')
+                            {
+                                $sql .= strtoupper($optional) . ' ';
+                            }
+                            else
+                            {
+                                $primary_key = $field;
+                            }
+                        }
+
+                        if(Str::endWith($sql, ' '))
+                        {
+                            $sql = Str::move($sql, 0, 1);
+                        }
+                    }
+
+                    $sql .= ', ';
+                }
             }
 
             $sql .= 'PRIMARY KEY(' . $primary_key . '))';
