@@ -48,6 +48,10 @@ class Route
 
         'cors' => false,
 
+        'csrf' => true,
+
+        'scheme' => 'default',
+
         'content' => null,
 
     ];
@@ -158,12 +162,32 @@ class Route
     }
 
     /**
+     * Disable csrf token authentication.
+     */
+
+    public function csrf(bool $csrf)
+    {
+        $this->set('csrf', $csrf);
+        return $this;
+    }
+
+    /**
      * Set validator class.
      */
 
     public function validate($validator)
     {
         $this->set('validate', $validator);
+        return $this;
+    }
+
+    /**
+     * Set color scheme for UI in this route.
+     */
+
+    public function scheme(string $scheme)
+    {
+        $this->set('scheme', $scheme);
         return $this;
     }
 
@@ -191,7 +215,10 @@ class Route
 
     private function set(string $name, $value)
     {
-        $this->data[$name] = $value;
+        if(array_key_exists($name, $this->data))
+        {
+            $this->data[$name] = $value;
+        }
     }
 
     /**

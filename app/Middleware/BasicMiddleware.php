@@ -47,6 +47,15 @@ class BasicMiddleware extends Middleware
         $app->locale = $request->route('locale');
 
         /**
+         * Set route color scheme.
+         */
+
+        if($app->scheme !== $request->route('scheme'))
+        {
+            $app->scheme = $request->route('scheme');
+        }
+
+        /**
          * Test if request method is supported.
          */
         

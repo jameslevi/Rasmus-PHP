@@ -35,6 +35,10 @@ class Group
 
         'cors' => false,
 
+        'csrf' => true,
+
+        'scheme' => 'default',
+
     ];
 
     /**
@@ -129,6 +133,15 @@ class Group
     }
 
     /**
+     * Disable csrf token authentication.
+     */
+
+    public function csrf(bool $csrf)
+    {
+        $this->set('csrf', $csrf);
+    }
+
+    /**
      * Set validator class.
      */
 
@@ -138,12 +151,24 @@ class Group
     }
 
     /**
+     * Set scheme color value.
+     */
+
+    public function scheme(string $scheme)
+    {
+        $this->set('scheme', $scheme);
+    }
+
+    /**
      * Set route setting data.
      */
 
     private function set(string $name, $value)
     {
-        $this->data[$name] = $value;
+        if(array_key_exists($name, $this->data))
+        {
+            $this->data[$name] = $value;
+        }
     }
 
     /**

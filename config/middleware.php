@@ -28,6 +28,7 @@ namespace Env {
 
             'dashboard'       => App\Middleware\RaccoonDashboardMiddleware::class,
             'basic'           => App\Middleware\BasicMiddleware::class,
+            'csrf'            => App\Middleware\CSRFProtectionMiddleware::class,
             'validation'      => App\Middleware\ValidationMiddleware::class,
             'cors'            => App\Middleware\CORSMiddleware::class,
             'ip-block'        => App\Middleware\IPBlockerMiddleware::class,
@@ -60,6 +61,7 @@ namespace Env {
                 'before' => [
                     'dashboard',
                     'basic',
+                    'csrf',
                     'validation',
                     'cors',
                     'ip-block',

@@ -233,6 +233,10 @@ class Application
         {
             Config::setReactiveData();
 
+            /**
+             * If in debug mode.
+             */
+
             if(Config::app()->deployment)
             {
                 $this->inDebugMode();
