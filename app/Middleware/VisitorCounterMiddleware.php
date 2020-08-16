@@ -10,27 +10,16 @@ use Raccoon\Session\Session;
 class VisitorCounterMiddleware extends Middleware
 {
     /**
-     * Name of visitor counter session model.
-     */
-
-    private static $counter_model = 'visitor_counter';
-
-    /**
      * Log how many times your application will
-     * be visited by users.
+     * be visited by users. Applies to html pages
+     * only.
      */
 
     protected function handle(Request $request)
     {
-        $content = $request->route('content');
-        
-        /**
-         * Check if route is an html page only.
-         */
-
-        if(is_null($content) && is_null(emit('code')) && $request->method() === 'GET')
+        if(is_null($request->route('content')) && is_null(emit('code')) && $request->method() === 'GET')
         {
-            $model = Session::make(static::$counter_model, [
+            $model = Session::make('visitor_counter', [
 
                 'status' => false,
 
@@ -46,9 +35,9 @@ class VisitorCounterMiddleware extends Middleware
             {
                 Counter::log($request->userAgent(), $request->client());
 
-                $model->set('status', true);
-                $model->set('user_agent', $request->userAgent());
-                $model->set('ip_address', $request->client());
+                $model->status = true;
+                $model->user_agent = $request->userAgent();
+                $model->ip_address = $request->client();
             }
         }
 

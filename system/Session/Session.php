@@ -67,7 +67,7 @@ class Session
 
     public function __set(string $name, $value)
     {
-
+        $this->set($name, $value);
     }
 
     /**
