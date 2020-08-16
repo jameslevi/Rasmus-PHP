@@ -867,7 +867,7 @@ class Canvas
 
                         if(array_key_exists($value, $this->emitted) && !is_null($this->emitted[$value]))
                         {
-                            $str .= $this->emitted[$value] . Str::break($segment, '}}')[1];
+                            $str .= htmlspecialchars($this->emitted[$value]) . Str::break($segment, '}}')[1];
                         }
                         else
                         {

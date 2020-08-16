@@ -11,10 +11,14 @@
         <div class="v-w-400px v-media-400px:w-100 v-media-400px:pd-x-5px">
             <v-column break="400">
                 <item padding="5">
-                    <v-button href="/raccoon/dashboard" hover="true" size="large" scheme="error" width="100" rounded="true">Dashboard</v-button>
+                    <v-button href="/raccoon/dashboard" size="large" scheme="error" width="100" rounded="true">
+                        {{ $label['raccoon::dashboard'] }}
+                    </v-button>
                 </item>
                 <item padding="5">
-                    <v-button href="/login" hover="true" size="large" width="100" rounded="true">Login</v-button>
+                    <v-button href="/login" size="large" width="100" rounded="true">
+                        {{ $label['raccoon::log.in'] }}
+                    </v-button>
                 </item>
             </v-column>
         </div>
@@ -24,7 +28,7 @@
             <v-column break="440">
                 <item>
                     <div class="v-media-440px:align-center">
-                        {{ $label["raccoon::raccoon"] }} &copy; {{ $emit['year'] }}
+                        {{ $label['raccoon::raccoon'] }} &copy; {{ $emit['year'] }}
                     </div>
                 </item>
                 <item>

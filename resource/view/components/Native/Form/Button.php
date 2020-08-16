@@ -52,7 +52,7 @@ class Button extends Component
 
         'rounded' => true,
 
-        'hover' => false,
+        'hover' => true,
 
         'href' => null,
 
