@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
+use Database\Model\Counter;
 use Raccoon\App\Middleware;
-use Raccoon\Database\DB;
 use Raccoon\Http\Request;
 use Raccoon\Session\Session;
 
@@ -41,16 +41,10 @@ class VisitorCounterMiddleware extends Middleware
                 'datetime' => null,
 
             ]);
-
+            
             if(!$model->status)
             {
-                DB::table('counter')->insert([
-
-                    'user_agent' => $request->userAgent(),
-
-                    'ip_address' => $request->client(),
-
-                ])->exec();
+                Counter::log($request->userAgent(), $request->client());
 
                 $model->set('status', true);
                 $model->set('user_agent', $request->userAgent());

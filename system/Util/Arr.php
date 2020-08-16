@@ -13,4 +13,13 @@ class Arr
         return count($array) !== count($array, COUNT_RECURSIVE);
     }
 
+    /**
+     * Return last item in the array.
+     */
+
+    public static function last(array $array)
+    {
+        return $array[sizeof($array) - 1];
+    }
+
 }

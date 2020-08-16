@@ -2,6 +2,7 @@
 
 namespace Raccoon\Database;
 
+use Raccoon\Util\Arr;
 use Raccoon\Util\Str;
 
 abstract class Model
@@ -18,6 +19,7 @@ abstract class Model
 
     private $except = [
         '__construct',
+        '__callStatic',
         'id',
         'created',
         'updated',
@@ -61,9 +63,7 @@ abstract class Model
 
     public function getName()
     {
-        $split = explode('\\', get_class($this));
-
-        return $split[sizeof($split) - 1];
+        return strtolower(Arr::last(explode('\\', get_class($this))));
     }
 
     /**
@@ -84,11 +84,9 @@ abstract class Model
         if(!empty($this->fields))
         {
             array_unshift($this->fields, 'id');
-            $this->fields[] = 'created';
-            $this->fields[] = 'updated';
-            $this->fields[] = 'deleted';
+            array_push($this->fields, 'created', 'updated', 'deleted');
 
-            $sql = 'CREATE TABLE ' . strtolower($this->getName()) . ' (';
+            $sql = 'CREATE TABLE ' . $this->getName() . ' (';
             $primary_key = null;
 
             foreach($this->fields as $field)
@@ -195,6 +193,18 @@ abstract class Model
     {
         $field->dateTime();
         $field->notNull();
+    }
+
+    /**
+     * Call dynamic static services methods.
+     */
+
+    public static function __callStatic(string $name, $arguments)
+    {
+        $class = 'Database\Service\\' . Arr::last(explode('\\', static::class));
+        $instance = new $class();
+        
+        return $instance->call($name, $arguments);
     }
 
 }

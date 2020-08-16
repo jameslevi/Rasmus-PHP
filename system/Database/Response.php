@@ -2,6 +2,7 @@
 
 namespace Raccoon\Database;
 
+use Raccoon\Util\Arr;
 use Raccoon\Util\Collection;
 
 class Response
@@ -134,7 +135,14 @@ class Response
             }
         }
 
-        return $collections;
+        if(sizeof($collections) === 1)
+        {
+            return $collections[0];
+        }
+        else
+        {
+            return $collections;
+        }
     }
 
     /**
@@ -152,7 +160,7 @@ class Response
 
     public function last()
     {
-        return new Collection($this->toArray()[$this->numRows() - 1]);
+        return new Collection(Arr::last($this->toArray()));
     }
 
     /**
