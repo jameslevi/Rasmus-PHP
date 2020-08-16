@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "devDependencies": {
+        "jQuery": "^3.5.1"
+    }
+}
