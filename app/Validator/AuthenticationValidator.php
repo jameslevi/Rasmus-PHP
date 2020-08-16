@@ -3,6 +3,7 @@
 namespace App\Validator;
 
 use Raccoon\App\Validator;
+use Raccoon\Resource\Lang\Lang;
 use Raccoon\Validation\Param;
 
 class AuthenticationValidator extends Validator
@@ -22,7 +23,7 @@ class AuthenticationValidator extends Validator
 
     protected function user(Param $param)
     {
-        $param->name('Username');
+        $param->name(Lang::get('raccoon::username'));
         $param->type('text');
         $param->method($this->method);
 
@@ -37,7 +38,7 @@ class AuthenticationValidator extends Validator
 
     protected function password(Param $param)
     {
-        $param->name('Password');
+        $param->name(Lang::get('raccoon::password'));
         $param->type('text');
         $param->method($this->method);
 

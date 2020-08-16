@@ -3,6 +3,7 @@
 namespace Components\Native\Form;
 
 use Raccoon\App\Config;
+use Raccoon\Resource\Lang\Lang;
 use Raccoon\UI\Component;
 use Raccoon\Util\Str;
 
@@ -27,17 +28,34 @@ class Login extends Component
 
         'action' => null,
 
-        'user' => 'Username',
+        'user' => null,
 
-        'password' => 'Password',
+        'password' => null,
 
-        'button' => 'LOGIN',
+        'button' => null,
 
     ];
 
+    /**
+     * Set labels before render.
+     */
+
     protected function render()
     {
+        if(is_null($this->user))
+        {
+            $this->user = Lang::get('raccoon::username');
+        }
 
+        if(is_null($this->password))
+        {
+            $this->password = Lang::get('raccoon::password');
+        }
+
+        if(is_null($this->button))
+        {
+            $this->button = Lang::get('raccoon::continue');
+        }
     }
 
     /**

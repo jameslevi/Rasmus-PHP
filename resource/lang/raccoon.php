@@ -9,27 +9,30 @@ namespace Raccoon\Resource\Lang {
      */
 
     Locale::id('api.key')->en('API Key');
-    Locale::id('blog')->en('Blog')->tl('Tala');
-    Locale::id('controller')->en('Controller')->tl('Taga-kontrol');
-    Locale::id('copyright')->en('Copyright')->tl('Karapatang Sipi');
+    Locale::id('blog')->en('Blog');
+    Locale::id('continue')->en('Continue');
+    Locale::id('controller')->en('Controller');
+    Locale::id('copyright')->en('Copyright');
     Locale::id('dashboard')->en('Dashboard');
-    Locale::id('database')->en('Database')->tl('Imbakan');
-    Locale::id('documentation')->en('Documentation')->tl('Dokumentasyon');
+    Locale::id('database')->en('Database');
+    Locale::id('documentation')->en('Documentation');
     Locale::id('ecosystem')->en('Ecosystem');
     Locale::id('email')->en('Email');
-    Locale::id('generate')->en('Generate')->tl('Gumawa');
+    Locale::id('generate')->en('Generate');
     Locale::id('github')->en('Github');
     Locale::id('james.crisostomo')->en('James Crisostomo');
     Locale::id('locale')->en('Locale');
     Locale::id('log.in')->en('Log In');
-    Locale::id('middleware')->en('Middleware')->tl('Tagapamagitan');
+    Locale::id('middleware')->en('Middleware');
+    Locale::id('password')->en('Password');
     Locale::id('raccoon')->en('Raccoon');
     Locale::id('raccoon.framework')->en('Raccoon Framework');
     Locale::id('route.id')->en('Route ID');
-    Locale::id('route.group')->en('Route Group')->tl('Grupo ng Ruta');
-    Locale::id('routes')->en('Routes')->tl('Mga Ruta');
-    Locale::id('tutorial')->en('Tutorial')->tl('Pagtuturo');
-    Locale::id('version')->en('version')->tl('beryson');
-    Locale::id('written.by')->en('Written by')->tl('Isinulat ni');
+    Locale::id('route.group')->en('Route Group');
+    Locale::id('routes')->en('Routes');
+    Locale::id('tutorial')->en('Tutorial');
+    Locale::id('username')->en('Username');
+    Locale::id('version')->en('version');
+    Locale::id('written.by')->en('Written by');
 
 }

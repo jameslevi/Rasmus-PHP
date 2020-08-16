@@ -1,9 +1,8 @@
 <template>
-
-    <form :id="$id" method="post" :action="$action_url">
-        
-        {{ $slot }}
-
+    <v-form method="post" :id="$id">
+        <div>
+            {{ $slot }}
+        </div>
         <div>
             <v-alert :id="$alert_id" scheme="error" variant="default" rounded="true">
                 {{ $label['validation::message.default'] }}
@@ -16,10 +15,9 @@
             <v-textbox type="password" :id="$password_id" name="password" class="nv-password-text" rounded="true" size="medium" :placeholder="$password"></v-textbox>
         </div>
         <div>
-            <v-button :id="$button_id" rounded="true" width="100" size="medium" onclick="login">
+            <v-button :id="$button_id" rounded="true" width="100" size="medium">
                 {{ $button }}
             </v-button>
         </div>
-    </form>
-
+    </v-form>
 </template>

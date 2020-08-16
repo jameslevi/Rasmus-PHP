@@ -69,7 +69,16 @@ function Alert(id)
  */ 
 
 $('.nv-alert-dismiss-icon').click(function(e) {
-    Alert($(this).attr('dismiss')).close();
+let dismiss = $(this).prop('dismiss');
+
+    if(dismiss)
+    {
+        Alert(dismiss).close();
+    }
+    else
+    {
+        $(this).parent().parent().parent().fadeOut(500);
+    }
     e.preventDefault();
 });
 

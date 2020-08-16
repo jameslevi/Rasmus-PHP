@@ -134,13 +134,12 @@ class Cache
             if($read->exist())
             {
                 Canvas::init($emit);
+                $load = require $location;
 
-                function loadCanvas(string $location)
+                if($load)
                 {
-                    $object = require $location;
-                    return $object->html();
+                    $html = Canvas::getCanvas()->html();
                 }
-                $html = loadCanvas($location);
 
                 if(static::$minify)
                 {

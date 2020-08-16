@@ -1,20 +1,16 @@
 <template>
-
-    <div class="v-w-100 v-h-100vh v-bgcolor-#dddddd v-ov-auto">
+    <div class="v-w-100">
         <v-center>
-            <div class="v-w-320px">
-            <v-box marginbottom="10" margintop="100">
+            <div class="v-w-330px v-mg-t-40px v-media-330px:w-offset-40px">
                 <div class="v-pd-20px v-pd-t-0px">
                     <div class="v-pd-b-10px">
-                        <v-header title="Login" bold="true"></v-header>
+                        <v-header :title="$label['raccoon::log.in']"></v-header>
                     </div>
                     <div>
-                        <v-login action="login/authenticate"></v-login>
+                        <v-login id="main_login"></v-login>
                     </div>
                 </div>
-            </v-box>
             </div>
         </v-center>
     </div>
-
 </template>

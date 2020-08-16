@@ -2,9 +2,9 @@
 
 namespace Raccoon\UI {
 
-use Raccoon\Application;
+    use Raccoon\Application;
 
-return Canvas::draw(function(Canvas $canvas) {
+    return Canvas::draw(function(Canvas $canvas) {
         
         /**
          * Template to use for your view.
@@ -26,7 +26,7 @@ return Canvas::draw(function(Canvas $canvas) {
          * Include the generic header.
          */
 
-        $canvas->include('content.index.header');
+        $canvas->include('raccoon.sections.header');
 
         /**
          * Main content of your welcome page.
@@ -34,11 +34,6 @@ return Canvas::draw(function(Canvas $canvas) {
 
         $canvas->include('content.index.welcome');
         
-        /**
-         * Return canvas to your view.
-         */
-
-        return $canvas;
     });
 
 }

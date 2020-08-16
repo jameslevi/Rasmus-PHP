@@ -18,9 +18,9 @@ namespace Raccoon\Route {
         $group->controller('AuthenticationController');
         $group->auth(false);
         
-        $group->get('/login', 'index');
-        $group->post('/login/authenticate', 'authenticate')->validate('Authentication');
-        $group->get('/logout', 'logout');
+        $group->get('/login');
+        $group->post('/login/authenticate', 'authenticate')->validate('Authentication')->ajax(true);
+        $group->post('/logout', 'logout')->ajax(true)->csrf(false);
 
     });
 

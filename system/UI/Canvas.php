@@ -13,6 +13,12 @@ use Raccoon\Util\Str;
 class Canvas
 {
     /**
+     * Canvas object to evaluate.
+     */
+
+    private static $canvas;
+
+    /**
      * Store data emitted from the controller.
      */
 
@@ -932,7 +938,25 @@ class Canvas
 
     public static function draw($closure)
     {
-        return $closure(new self(), new Collection(static::$inital_emit));
+        $canvas = new self();
+        
+        if(is_null(static::$canvas))
+        {
+            static::$canvas = $canvas;
+        }
+
+        $closure($canvas, new Collection(static::$inital_emit));
+    
+        return true;
+    }
+
+    /**
+     * Return canvas to render.
+     */
+
+    public static function getCanvas()
+    {
+        return static::$canvas;
     }
 
 }

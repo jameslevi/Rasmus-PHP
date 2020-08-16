@@ -3,11 +3,11 @@
 namespace App\Controller
 {
 
-    use Raccoon\App\Request;
-    use Raccoon\App\Response;
-    use Raccoon\Cache\Cache;
-    use Raccoon\Resource\Lang\Lang;
-    use Raccoon\Util\Collection;
+use Raccoon\App\Request;
+use Raccoon\App\Response;
+use Raccoon\Cache\Cache;
+use Raccoon\Resource\Lang\Lang;
+use Raccoon\Util\Collection;
 
     /**
      * Return canvas factory object to generate view.
@@ -23,6 +23,19 @@ namespace App\Controller
         }
 
         return $canvas;
+    }
+
+    /**
+     * Transform resource value.
+     */
+
+    function transform($resource)
+    {
+        $data = [];
+
+        
+
+        return json($data);
     }
 
     /**
