@@ -52,11 +52,18 @@ class UpdateBuilder extends WhereBuilder
             {
                 if(is_string($val))
                 {
-                    $sql .= $key . " = '" . DB::sanitize($val) . "', ";
+                    if(strtolower($val) === 'now()')
+                    {
+                        $sql .= "`" .$key . "` = NOW(), ";
+                    }
+                    else
+                    {
+                        $sql .= "`" . $key . "` = '" . DB::sanitize($val) . "', ";
+                    }
                 }
                 else if(is_int($val) || is_bool($val))
                 {
-                    $sql .= $key . " = " . DB::sanitize($val) . ", ";
+                    $sql .= "`" . $key . "` = " . DB::sanitize($val) . ", ";
                 }
             }
 
