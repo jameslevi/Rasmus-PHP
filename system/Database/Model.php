@@ -156,53 +156,45 @@ abstract class Model
      * Default row id.
      */
 
-    protected function id(Field $field)
+    private function id(Field $field)
     {
         $field->int();
         $field->autoIncrement();
         $field->primaryKey();
-
-        return $field;
     }
 
     /**
      * Date and time when row is created.
      */
 
-    protected function created(Field $field)
+    private function created(Field $field)
     {
         $field->dateTime();
         $field->notNull();
         $field->default();
         $field->currentTimestamp();
-
-        return $field;
     }
 
     /**
      * Update datetime each time data is updated.
      */
 
-    protected function updated(Field $field)
+    private function updated(Field $field)
     {
         $field->dateTime();
         $field->notNull();
         $field->onUpdate();
         $field->currentTimestamp();
-        
-        return $field;
     }
 
     /**
      * Date and time indicating that row is already deleted.
      */
 
-    protected function deleted(Field $field)
+    private function deleted(Field $field)
     {
         $field->dateTime();
         $field->notNull();
-
-        return $field;
     }
 
 }

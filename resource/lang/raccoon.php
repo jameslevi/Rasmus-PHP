@@ -25,6 +25,8 @@ namespace Raccoon\Resource\Lang {
     Locale::id('middleware')->en('Middleware')->tl('Tagapamagitan');
     Locale::id('raccoon')->en('Raccoon');
     Locale::id('raccoon.framework')->en('Raccoon Framework');
+    Locale::id('route.id')->en('Route ID');
+    Locale::id('route.group')->en('Route Group')->tl('Grupo ng Ruta');
     Locale::id('routes')->en('Routes')->tl('Mga Ruta');
     Locale::id('tutorial')->en('Tutorial')->tl('Pagtuturo');
     Locale::id('version')->en('version')->tl('beryson');
