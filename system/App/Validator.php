@@ -8,6 +8,8 @@ use Raccoon\Validation\Param;
 
 abstract class Validator
 {
+    private static $param;
+
     /**
      * Store error messages encountered
      * during validation.
@@ -39,12 +41,12 @@ abstract class Validator
         
         foreach($methods as $method)
         {
-            $form = new Param($method, $request);
-            $val = $this->{$method}($form);
+            static::$param = new Param($method, $request);
+            $val = $this->{$method}(static::$param);
 
-            if(!$val->validate())
+            if(!static::$param->validate())
             {
-                $errors[] = $val->getMessage();
+                $errors[] = static::$param->getMessage();
                 $failure++;
             }
         }

@@ -18,6 +18,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('documentation')->en('Documentation');
     Locale::id('ecosystem')->en('Ecosystem');
     Locale::id('email')->en('Email');
+    Locale::id('event')->en('Event');
     Locale::id('generate')->en('Generate');
     Locale::id('github')->en('Github');
     Locale::id('james.crisostomo')->en('James Crisostomo');
@@ -27,6 +28,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('password')->en('Password');
     Locale::id('raccoon')->en('Raccoon');
     Locale::id('raccoon.framework')->en('Raccoon Framework');
+    Locale::id('register')->en('Register');
     Locale::id('route.id')->en('Route ID');
     Locale::id('route.group')->en('Route Group');
     Locale::id('routes')->en('Routes');

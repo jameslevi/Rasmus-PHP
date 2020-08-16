@@ -8,13 +8,6 @@ use Raccoon\Validation\Param;
 
 class AuthenticationValidator extends Validator
 {
-
-    /**
-     * Expected request method.
-     */
-
-    private $method = 'post';
-
     /**
      * USER VALIDATION
      * -----------------------------------------------
@@ -25,9 +18,7 @@ class AuthenticationValidator extends Validator
     {
         $param->name(Lang::get('raccoon::username'));
         $param->type('text');
-        $param->method($this->method);
-
-        return $param;
+        $param->method('post');
     }
 
     /**
@@ -40,9 +31,7 @@ class AuthenticationValidator extends Validator
     {
         $param->name(Lang::get('raccoon::password'));
         $param->type('text');
-        $param->method($this->method);
-
-        return $param;
+        $param->method('post');
     }
 
 }

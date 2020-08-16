@@ -58,14 +58,31 @@ class Route
 
     private function __construct(string $verb, string $uri, string $controller)
     {
+        $uri = Str::break($uri, '?')[0];
+
+        if(!Str::startWith($uri, '/'))
+        {
+            $uri = '/' . $uri;
+        }
+
+        if(Str::endWith($uri, '/'))
+        {
+            $uri = Str::move($uri, 0, 1);
+        }
+
         $this->set('verb', $verb);
-        $this->set('uri', Str::break($uri, '?')[0]);
+        $this->set('uri', $uri);
 
         if(Str::has($controller, '@'))
         {
             $break = Str::break($controller, '@');
             $this->set('controller', $break[0]);
             $this->set('method', $break[1]);    
+        }
+        else
+        {
+            $this->set('controller', $controller);
+            $this->set('method', 'index');
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Raccoon\App\Controller;
 use Raccoon\Http\Request;
+use Raccoon\Resource\Lang\Lang;
 
 class AuthenticationController extends Controller
 {
@@ -16,7 +17,7 @@ class AuthenticationController extends Controller
     {
         return view('login.login', [
 
-            'title' => 'Log In',
+            'title' => Lang::get('raccoon::log.in'),
 
         ]);
     }
@@ -27,7 +28,11 @@ class AuthenticationController extends Controller
 
     protected function authenticate(Request $request)
     {
-        return 'z';
+        return json([
+
+            'success' => true,
+
+        ]);
     }
 
     /**

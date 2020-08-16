@@ -13,6 +13,6 @@ namespace Raccoon\Route {
      * over again.
      */
 
-    Route::get('/', 'MainController@index');
+    Route::get('/', 'MainController');
 
 }
