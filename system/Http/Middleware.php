@@ -2,7 +2,6 @@
 
 namespace Raccoon\Http;
 
-use Raccoon\Application;
 use Raccoon\App\Config;
 use Raccoon\Util\Collection;
 use Raccoon\Util\Str;
@@ -28,23 +27,11 @@ class Middleware
     private $route;
 
     /**
-     * Application instance.
-     */
-
-    private $context;
-
-    /**
      * Store middlewares to iterate.
      */
 
     private $middlewares_before = [];
     private $middlewares_after = [];
-
-    /**
-     * Path of middlewares.
-     */
-
-    private $path = 'app/Middleware/';
 
     /**
      * Filtering is successfull.
@@ -70,10 +57,9 @@ class Middleware
 
     private $response;
 
-    private function __construct(Collection $route, Application $context)
+    private function __construct(Collection $route)
     {
         $this->route = $route;
-        $this->context = $context;
         $this->getMiddlewares();
         $this->package = $this->makePackage();
     }
@@ -99,16 +85,23 @@ class Middleware
     {
         $config = Config::middleware();
         $default = $this->route->middleware ?? $config->default;
-        $middlewares = $config->middlewares[$default];
+        $middlewares = $config->middlewares;
+        $group = $config->groups[$default];
 
-        foreach($middlewares['before'] as $middleware)
+        foreach($group['before'] as $middleware)
         {
-            $this->middlewares_before[] = $middleware;
+            if(array_key_exists($middleware, $middlewares))
+            {
+                $this->middlewares_before[] = $middlewares[$middleware];
+            }
         }
 
-        foreach($middlewares['after'] as $middleware)
+        foreach($group['after'] as $middleware)
         {
-            $this->middlewares_after[] = $middleware;
+            if(array_key_exists($middleware, $middlewares))
+            {
+                $this->middlewares_after[] = $middlewares[$middleware];
+            }
         }
     }
 
@@ -223,12 +216,12 @@ class Middleware
      * Instantiate middleware.
      */
 
-    public static function init(Collection $route, Application $context)
+    public static function init(Collection $route)
     {
         if(is_null(static::$instance) && !static::$booted)
         {
             static::$booted = true;
-            static::$instance = new self($route, $context);    
+            static::$instance = new self($route);    
         
             return static::$instance;
         }

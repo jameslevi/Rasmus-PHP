@@ -304,7 +304,7 @@ class Application
             {
                 require 'App\global.php';
                 
-                $test = Middleware::init(new Collection($route), $this);
+                $test = Middleware::init(new Collection($route));
 
                 if(!$test->empty())
                 {

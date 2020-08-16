@@ -58,13 +58,22 @@ class ValidationMiddleware extends Middleware
                     }
                     else
                     {
-                        if($request->method() === 'post')
+                        $resource = $request->resource()->{$key} ?? null;
+
+                        if(!is_null($resource))
                         {
-                            $value = $request->post($key, $data['default']);
+                            $value = $resource;
                         }
                         else
                         {
-                            $value = $request->get($key, $data['default']);
+                            if($request->method() === 'post')
+                            {
+                                $value = $request->post($key, $data['default']);
+                            }
+                            else
+                            {
+                                $value = $request->get($key, $data['default']);
+                            }
                         }
                     }
 

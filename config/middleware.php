@@ -2,16 +2,6 @@
 
 namespace Env {
 
-    /**
-     * MIDDLEWARES
-     * -----------------------------------------------
-     * Middlewares are group of PHP classes that are
-     * used to filter and validate incoming requests.
-     * Middlewares can be executed before or after 
-     * controller return requested resource. Each 
-     * routes can execute different middlewares.
-     */
-
     return [
 
         /**
@@ -25,32 +15,60 @@ namespace Env {
         'default' => env('MIDDLEWARE', 'generic'),
 
         /**
-         * MIDDLEWARE GROUPS
+         * MIDDLEWARES
          * -----------------------------------------------
-         * Define middlewares in each middleware group. The
-         * default middleware is named 'generic'.
+         * Middlewares are of PHP classes that are used to
+         * filter and validate incoming requests. Middlewares
+         * can be executed before or after controller return
+         * requested resource. Each routes can execute 
+         * different middlewares.
          */ 
 
         'middlewares' => [
 
+            'dashboard'       => App\Middleware\RaccoonDashboardMiddleware::class,
+            'basic'           => App\Middleware\BasicMiddleware::class,
+            'validation'      => App\Middleware\ValidationMiddleware::class,
+            'cors'            => App\Middleware\CORSMiddleware::class,
+            'ip-block'        => App\Middleware\IPBlockerMiddleware::class,
+            'auth'            => App\Middleware\AuthenticationMiddleware::class,
+            'response'        => App\Middleware\ResponseMiddleware::class,
+            'counter'         => App\Middleware\VisitorCounterMiddleware::class,
+
+        ],
+
+        /**
+         * MIDDLEWARE GROUPS
+         * -----------------------------------------------
+         * Middlewares are group of PHP classes that are
+         * used to filter and validate incoming requests.
+         * Middlewares can be executed before or after 
+         * controller return requested resource. Each 
+         * routes can execute different middlewares.
+         */ 
+
+        'groups' => [
+
+            /**
+             * GENERIC MIDDLEWARE
+             * -----------------------------------------------
+             * This will serve as your default middleware.
+             */ 
+
             'generic' => [
-
+                
                 'before' => [
-
-                    App\Middleware\BasicMiddleware::class,
-                    App\Middleware\RaccoonDashboardMiddleware::class,
-                    App\Middleware\ValidationMiddleware::class,
-                    App\Middleware\CORSMiddleware::class,
-                    App\Middleware\IPBlockerMiddleware::class,
-                    App\Middleware\AuthenticationMiddleware::class,
-
+                    'dashboard',
+                    'basic',
+                    'validation',
+                    'cors',
+                    'ip-block',
+                    'auth',
                 ],
 
                 'after' => [
-
-                    App\Middleware\ResponseMiddleware::class,
-                    App\Middleware\VisitorCounterMiddleware::class,
-
+                    'response',
+                    'counter',
                 ],
 
             ],
