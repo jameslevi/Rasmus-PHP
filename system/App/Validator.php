@@ -51,7 +51,7 @@ abstract class Validator
             }
         }
 
-        $this->errors = $errors;
+        $this->errors = array_unique($errors);
 
         return $failure === 0;
     }

@@ -2,12 +2,19 @@
 
 namespace App\Validator;
 
+use Database\Model\User;
 use Raccoon\App\Validator;
 use Raccoon\Resource\Lang\Lang;
 use Raccoon\Validation\Param;
 
 class AuthenticationValidator extends Validator
 {
+    /**
+     * Error message id.
+     */
+
+    protected $error_message = 'raccoon::please.enter.invalid.username.or.password';
+
     /**
      * USER VALIDATION
      * -----------------------------------------------
@@ -19,6 +26,11 @@ class AuthenticationValidator extends Validator
         $param->name(Lang::get('raccoon::username'));
         $param->type('text');
         $param->method('post');
+
+        if(!User::has('user', $param->value()))
+        {
+            $param->invalid(Lang::get($this->error_message));
+        }
     }
 
     /**
@@ -32,6 +44,11 @@ class AuthenticationValidator extends Validator
         $param->name(Lang::get('raccoon::password'));
         $param->type('text');
         $param->method('post');
+
+        if(!User::isValidCredential($param->post('user'), $param->value()))
+        {
+            $param->invalid(Lang::get($this->error_message));
+        }
     }
 
 }

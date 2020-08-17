@@ -117,6 +117,15 @@ abstract class Service
     }
 
     /**
+     * Test if value exist from specific field.
+     */
+
+    protected function has(string $field, $value)
+    {
+        return !$this->select('id')->equal($field, $value)->get()->empty();
+    }
+
+    /**
      * Return paginated results.
      */
 
@@ -149,7 +158,7 @@ abstract class Service
 
     protected function getById(int $id = 1, array $fields = null)
     {
-        return $this->select($fields)->equal('id', $id)->limit(0, 1)->get();
+        return $this->select($fields)->equal('id', $id)->limit(0, 1)->get()->first();
     }
 
     /**

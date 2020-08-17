@@ -14,5 +14,6 @@ namespace Raccoon\Route {
      */
 
     Route::get('/', 'MainController');
+    Route::get('/dashboard', 'MainController@dashboard')->auth(true);
 
 }

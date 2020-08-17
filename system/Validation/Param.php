@@ -145,7 +145,25 @@ class Param
         }
 
         return $value;
-    }   
+    }
+
+    /**
+     * GET parameter values.
+     */
+    
+    public function get(string $name)
+    {
+        return Request::get($name);
+    }
+
+    /**
+     * POST parameter values.
+     */
+
+    public function post(string $name)
+    {
+        return Request::post($name);
+    }
 
     /**
      * Return true if value is empty.

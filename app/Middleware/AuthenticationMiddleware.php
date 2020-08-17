@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use Database\Model\User;
 use Raccoon\App\Config;
 use Raccoon\App\Middleware;
 use Raccoon\Http\Request;
@@ -17,7 +18,7 @@ class AuthenticationMiddleware extends Middleware
         /**
          * If authentication is enabled.
          */
-
+        
         if(Config::auth()->enable)
         {
             /**
@@ -29,34 +30,14 @@ class AuthenticationMiddleware extends Middleware
                 /**
                  * If request is authenticated.
                  */
-
-                if($auth->authenticated())
-                {
-                    /**
-                     * If user authentication is active.
-                     */
-
-                    if($auth->isActive())
-                    {
-                        /**
-                         * Always update the timestamp whenever application
-                         * is loading to recognize the user as active.
-                         */
-
-                        $auth->update();
-                    }
-                    else
-                    {
-                        /**
-                         * If user is not active, redirect request.
-                         */
-
-                        return http(403);
-                    }
-                }
-                else 
+                
+                if(!$auth->authenticated())
                 {
                     return http(403);
+                }
+                else
+                {
+                    User::setActive(Auth::context()->get('id'));
                 }
             }
         }

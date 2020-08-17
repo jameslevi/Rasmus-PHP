@@ -81,7 +81,7 @@ class Auth
             $expiration = $idle->expire;
             $timestamp = $this->get('timestamp');
 
-            
+            return true;
         }
 
         return false;
@@ -151,6 +151,15 @@ class Auth
             static::$instance = new self();           
         }
 
+        return static::$instance;
+    }
+
+    /**
+     * Return auth instance.
+     */
+
+    public static function context()
+    {
         return static::$instance;
     }
 

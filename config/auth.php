@@ -11,7 +11,16 @@ namespace Env {
          * will be automatically rejected.
          */
 
-        'enable' => env('AUTHENTICATION', true),
+        'enable' => env('AUTH_ENABLE', true),
+
+        /**
+         * SUCCESS AUTHENTICATION REDIRECT
+         * -----------------------------------------------
+         * Uri where user will be automatically redirected
+         * after 
+         */
+
+        'redirect' => env('AUTH_REDIRECT', '/'),
 
         /**
          * IDLENESS
@@ -22,7 +31,7 @@ namespace Env {
 
         'idle' => [
 
-            'enable' => env('IDLE', true),
+            'enable' => env('AUTH_IDLE', true),
 
             'expire' => minutes(30),
 
@@ -39,23 +48,11 @@ namespace Env {
 
         'attempts' => [
 
-            'enable' => env('ATTEMPTS', true),
+            'enable' => env('AUTH_ATTEMPTS', true),
 
             'max' => 10,
 
             'hold' => minutes(10),
-
-        ],
-
-        /**
-         * AUTHENTICATION TESTING
-         * -----------------------------------------------
-         * Default testing credentials.
-         */
-
-        'test' => [
-
-
 
         ],
 

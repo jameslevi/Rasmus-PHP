@@ -58,10 +58,11 @@ Button('authenticate').click(function(button) {
             user.enable();
             pass.enable();
             button.enable();
+            pass.empty();
 
             if(data.success)
             {
-                window.location.reload();
+                redirect(data.redirect);
             }
             else
             {

@@ -36,4 +36,6 @@ namespace Raccoon\Resource\Lang {
     Locale::id('version')->en('version');
     Locale::id('written.by')->en('Written by');
 
+    Locale::id('please.enter.invalid.username.or.password')->en('Please enter invalid username or password.');
+    
 }

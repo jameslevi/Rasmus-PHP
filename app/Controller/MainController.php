@@ -13,4 +13,9 @@ class MainController extends Controller
         return view('index.welcome');
     }
 
+    protected function dashboard(Request $request)
+    {
+        return 'Welcome to Dashboard';
+    }
+
 }

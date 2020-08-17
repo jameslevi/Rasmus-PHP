@@ -151,7 +151,10 @@ class Response
 
     public function first()
     {
-        return new Collection($this->toArray()[0]);
+        if(!$this->empty())
+        {
+            return new Collection($this->toArray()[0]);
+        }
     }
 
     /**
@@ -160,7 +163,10 @@ class Response
 
     public function last()
     {
-        return new Collection(Arr::last($this->toArray()));
+        if(!$this->empty())
+        {
+            return new Collection(Arr::last($this->toArray()));
+        }
     }
 
     /**

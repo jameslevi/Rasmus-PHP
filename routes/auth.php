@@ -20,7 +20,7 @@ namespace Raccoon\Route {
         
         $group->get('/login');
         $group->post('/login/authenticate', 'authenticate')->validate('Authentication')->ajax(true);
-        $group->post('/logout', 'logout')->ajax(true)->csrf(false);
+        $group->get('/logout', 'logout')->csrf(false)->auth(true);
 
     });
 
