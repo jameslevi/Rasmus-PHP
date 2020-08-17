@@ -286,12 +286,12 @@ abstract class Component
                     {
                     $str .= '<';
                     $pos = strpos($tag, ' ');
-                    $props = Str::move(Str::break($tag, '>')[0], $pos);
+                    $props = $pos ? Str::move(Str::break($tag, '>')[0], $pos) : '';
                     $content = Str::break($tag, '>')[1] ?? null;
                     $str .= Str::break(Str::break($tag, '>')[0], ' ')[0] . ' ';
                     $tagname = Str::break($tag, ' ')[0];
                     
-                    if(Str::startWith($props, ' '))
+                    while(Str::startWith($props, ' '))
                     {
                         $props = Str::move($props, 1);
                     }

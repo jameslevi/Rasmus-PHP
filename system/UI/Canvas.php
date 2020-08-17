@@ -286,6 +286,7 @@ class Canvas
             {
 
                 $html = $this->replaceTemplates($reader->contents());
+                $html = $this->replaceAttributes($html);
                 $html = $this->replaceTags($html);
                 $html = $this->replaceUtilty($html);
                 $html = $this->replaceTemplates($html);
@@ -295,6 +296,123 @@ class Canvas
         }
 
         return $this->output;
+    }
+
+    /**
+     * Replace dynamic attributes from native html tags.
+     */
+
+    private function replaceAttributes(string $html)
+    {   
+        $str = '';
+
+        foreach(explode('<', $html) as $tag)
+        {
+            if(!Str::startWith($tag, '/') && !Str::startWith($tag, 'v-') && $tag !== '')
+            {
+                if(Str::has($tag, '>'))
+                {
+                    $str .= '<';
+                    $pos = strpos($tag, ' ');
+                    $props = $pos ? Str::move(Str::break($tag, '>')[0], $pos) : '';
+                    $str .= Str::break(Str::break($tag, '>')[0], ' ')[0] . ' ';
+                    $content = Str::break($tag, '>')[1] ?? null;
+
+                    while(Str::startWith($props, ' '))
+                    {
+                        $props = Str::move($props, 1);
+                    }
+
+                    if(!Str::endWith($props, ' '))
+                    {
+                        $props .= ' ';
+                    }
+
+                    $attrs = explode('" ', $props);
+                    
+                    if(sizeof($attrs) > 1)
+                    {
+                        foreach($attrs as $attr)
+                        {
+                            if($attr !== '' && $attr !== ' ')
+                            {
+                                if(Str::startWith($attr, ':'))
+                                {
+                                    $tag_name = Str::move(Str::break($attr, '=')[0], 1);
+                                    $value = Str::break($attr, '="')[1];
+                                    $val = null;
+                                    
+                                    if(Str::startWith($value, '$'))
+                                    {
+                                        $directive = strtolower(Str::move(Str::break($value, '[')[0], 1));
+                                        
+                                        if(Str::has($value, "['") && Str::has($value, "']"))
+                                        {
+                                            $index = Str::move(Str::break($value, "['")[1], 0, 2);
+                                            
+                                            if($directive === 'emit')
+                                            {
+                                                if(array_key_exists($index, $this->emitted) && !is_null($this->emitted[$index]))
+                                                {
+                                                    $val = $this->emitted[$index];
+                                                }
+                                            }
+                                            else if($directive === 'label')
+                                            {
+                                                $lang = Lang::get($index);
+                                            
+                                                if($lang !== $index)
+                                                {
+                                                    $val = $lang;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if(!is_null($val))
+                                    {
+                                        $str .= $tag_name . '="' . $val . '" ';
+                                    }
+                                }
+                                else
+                                {
+                                    $str .= $attr . '" ';
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(sizeof($attrs) === 1 && $attrs[0] !== '' && $attrs[0] !== ' ')
+                        {
+                            $str .= $attrs[0];
+                        }
+                    }
+
+                    if(Str::endWith($str, ' '))
+                    {
+                        $str = Str::move($str, 0, 1);
+                    }
+
+                    $str .= '>';
+
+                    if(!is_null($content))
+                    {
+                        $str .= $content;
+                    }
+                }
+                else
+                {
+                    $str .= $tag;
+                }
+            }
+            else if($tag !== '')
+            {
+                $str .= '<' . $tag;
+            }
+        }
+
+        return $str;
     }
 
     /**
@@ -550,7 +668,11 @@ class Canvas
 
         if(!empty(static::$javascript) && Str::has($html, '</body>'))
         {
-            $js = '$(document).ready(function() {' . implode(' ', static::$javascript) . '});';
+            /**
+             * Wrap all javascripts in jquery ready method.
+             */
+
+            $js = '$(document).ready(function(){' . implode(' ', static::$javascript) . '});';
             $uri = Request::uri();
             $file = 'storage/cache/js/' . md5($uri) . '.xjs';
             $reader = new Reader($file);
@@ -619,7 +741,7 @@ class Canvas
                             {
                                 if($route['ajax'])
                                 {
-                                    $s = "{ type: '" . $route['verb'] . "', uri: '" . $route['uri'] . "', dataType: 'json', cache: false";
+                                    $s = "{type:'" . $route['verb'] . "',uri:'" . $route['uri'] . "',dataType:'json',cache:false";
 
                                     $s .= '}';
                                     $xhr[] = $s;
@@ -687,7 +809,6 @@ class Canvas
             $end = strpos($str, '</v-' . $name . '>');
             $props = Str::move($tag, strlen($name));
             $span = substr($html, $pos, $length);
-            $tagname = Str::break($tag, ' ')[0];
             $content = null;
             $data = [];
 
@@ -775,6 +896,16 @@ class Canvas
 
             if(!is_null($content))
             {
+                while(Str::startWith($content, ' ') || Str::startWith($content, "\n"))
+                {
+                    $content = Str::move($content, 1);
+                }
+
+                while(Str::endWith($content, ' ') || Str::endWith($content, "\n"))
+                {
+                    $content = Str::move($content, 0, 1);
+                }
+
                 $instance->slot(Str::trim($content));
             }
                 
