@@ -8,35 +8,40 @@
         <img src="resource/assets/images/raccoon/logo.jpg" class="v-w-100 v-h-auto v-unselectable" />
     </div>
     <div class="v-justify-center">
-        <div class="v-w-400px v-media-400px:w-100 v-media-400px:pd-x-5px">
-            <v-column break="400">
-                <item padding="5">
-                    <v-button href="/raccoon/dashboard" size="large" scheme="error" width="100" rounded="true">
+        <div class="v-w-400px v-media-400px:w-100 v-pd-x-10px">
+            <div class="v-f-left v-w-50 v-media-400px:w-100 v-media-400px:mg-b-10px">
+                <div class="v-pd-r-5px v-media-400px:pd-r-none">
+                    <v-button href="/raccoon/dashboard" size="large" scheme="error">
                         {{ $label['raccoon::dashboard'] }}
                     </v-button>
-                </item>
-                <item padding="5">
-                    <v-button href="/login" size="large" width="100" rounded="true">
+                </div>
+            </div>    
+            <div class="v-f-left v-w-50 v-media-400px:w-100">
+                <div class="v-pd-l-5px v-media-400px:pd-l-none">
+                    <v-button href="/login" size="large">
                         {{ $label['raccoon::log.in'] }}
                     </v-button>
-                </item>
-            </v-column>
+                </div>
+            </div>
+            <div class="clear"></div>
         </div>
     </div>
     <div class="v-h-36px v-lh-36px v-w-100 v-bgcolor-#f0f0f0 v-size-13px v-pos-fixed v-bottom-0px v-media-440px:h-72px">
-        <div class="v-pd-x-10px">
-            <v-column break="440">
-                <item>
-                    <div class="v-media-440px:align-center">
-                        {{ $label['raccoon::raccoon'] }} &copy; {{ $emit['year'] }}
-                    </div>
-                </item>
-                <item>
-                    <div class="v-align-right v-media-440px:align-center">
-                        {{ $label['raccoon::written.by'] }} <b><v-link href="http://raccoon.io/about-us" newtab="true">{{ $emit['author'] }}</v-link></b>
-                    </div>
-                </item>
-            </v-column>
+        <div class="v-media-440px:align-center v-media-440px:w-100 v-f-left">
+            <div class="v-pd-l-10px">
+                {{ $label['raccoon::raccoon'] }} &copy; {{ $emit['year'] }}
+            </div>
         </div>
+        <div class="v-media-440px:align-center v-media-440px:w-100 v-f-right">
+            <div class="v-pd-r-10px">
+                {{ $label['raccoon::written.by'] }} 
+                <b>
+                    <v-link href="http://raccoon.io/about-us" newtab="true">
+                        {{ $emit['author'] }}
+                    </v-link>
+                </b>
+            </div>
+        </div>
+        <div class="v-clear-left"></div>
     </div>
 </template>

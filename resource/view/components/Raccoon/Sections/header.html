@@ -1,48 +1,40 @@
 <template>
-    <div class="v-min-h-36px v-lh-36px v-size-14px v-bgcolor-#eeeeee">
-        <v-column break="480">
-            <item width="30">
-                <div class="v-h-36px v-ov-hidden v-w-100 v-media-480px:align-center">
-                    <b class="v-mg-l-10px">
-                        <v-link href="https://raccoon.io" newtab="true">
-                            {{ $label['raccoon::raccoon.framework'] }}
+    <div class="v-min-h-36px v-lh-36px v-size-14px v-bgcolor-#eeeeee v-media-560px:h-72px">
+        <div class="v-f-left v-h-36px v-media-560px:w-100 v-media-560px:align-center">
+            <b class="v-mg-l-10px">
+                <v-link href="https://raccoon.io" newtab="true">
+                    {{ $label['raccoon::raccoon.framework'] }}
+                </v-link>
+            </b>
+            <span> - {{ $label['raccoon::version'] }} {{ $emit['version'] }}</span>
+        </div>
+        <div class="v-f-right v-h-36px v-media-560px:w-100 v-media-560px:bgcolor-#e0e0e0 v-pd-r-10px v-media-560px:pd-r-none">
+            <div class="v-media-560px:justify-center">
+                <ul class="v-li-type-none header-menu v-mg-0px v-pd-0px">
+                    <li class="v-mg-l-none!">
+                        <v-link href="https://raccoon.io/documentation" newtab="true">
+                            {{ $label['raccoon::documentation'] }}
                         </v-link>
-                    </b>
-                    <span> - {{ $label['raccoon::version'] }} {{ $emit['version'] }}</span>
-                </div>
-            </item>
-            <item width="70">
-                <div class="v-h-36px v-pd-x-10px v-f-right v-media-480px:f-none v-media-480px:bgcolor-#e0e0e0 v-media-480px:justify-center">
-                    <ul class="v-li-type-none header-menu v-mg-0px v-pd-0px">
-                        <li style="margin-left: 0px;">
-                            <v-link href="https://raccoon.io/documentation" newtab="true">
-                                {{ $label['raccoon::documentation'] }}
-                            </v-link>
-                        </li>
-                        <li>
-                            <v-link href="https://raccoon.io/ecosystem">
-                                {{ $label['raccoon::ecosystem'] }}
-                            </v-link>
-                        </li>
-                        <li>
-                            <v-link href="https://raccoon.io/blog" newtab="true">
-                                {{ $label['raccoon::blog'] }}
-                            </v-link>
-                        </li>
-                        <li>
-                            <v-link href="https://raccoon.io/tutorial" newtab="true">
-                                {{ $label['raccoon::tutorial'] }}
-                            </v-link>
-                        </li>
-                        <li>
-                            <v-link href="https://github.com/jameslevi/Rasmus-PHP" newtab="true">
-                                {{ $label['raccoon::github'] }}
-                            </v-link>
-                        </li>
-                    </ul>
-                </div>
-            </item>
-        </v-column>
+                    </li>
+                    <li>
+                        <v-link href="https://raccoon.io/blog" newtab="true">
+                            {{ $label['raccoon::blog'] }}
+                        </v-link>
+                    </li>
+                    <li>
+                        <v-link href="https://raccoon.io/tutorial" newtab="true">
+                            {{ $label['raccoon::tutorial'] }}
+                        </v-link>
+                    </li>
+                    <li>
+                        <v-link href="https://github.com/jameslevi/Rasmus-PHP" newtab="true">
+                            {{ $label['raccoon::github'] }}
+                        </v-link>
+                    </li>
+                </ul>
+            </div>
+        </div>    
+        <div class="v-f-clear"></div>
     </div>
     <v-line color="#e0e0e0"></v-line>
 </template>

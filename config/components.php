@@ -13,7 +13,6 @@ return [
     'box' => Components\Native\Layout\Box::class,
     'button' => Components\Native\Form\Button::class,
     'center' => Components\Native\Layout\Center::class,
-    'column' => Components\Native\Layout\Column::class,
     'data' => Components\Native\Form\Data::class,
     'form' => Components\Native\Form\Form::class,
     'header' => Components\Native\Widget\Header::class,
