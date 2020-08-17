@@ -1,21 +1,72 @@
 <template>
     <div class="v-w-100">
         <v-center>
-            <div class="v-w-330px v-mg-t-40px v-media-330px:w-offset-40px">
-                <div class="v-pd-20px v-pd-t-0px">
+            <div class="v-w-330px v-mg-t-80px">
+                <v-form>
+                    <v-alert id="login_message" scheme="error" variant="default" rounded="true">
+                        {{ $label['raccoon::version'] }}
+                    </v-alert>
+                    <div class="v-pd-t-20px">
+                        <h3 class="v-weight-normal v-size-17px">
+                            {{ $label['raccoon::log.in'] }}
+                        </h3>
+                    </div>
                     <div class="v-pd-b-10px">
-                        <v-header :title="$label['raccoon::log.in']"></v-header>
+                        <v-textbox type="text" id="user" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::username']"></v-textbox>
                     </div>
-                    <div>
-                        <v-login id="main_login"></v-login>
-                        <div class="v-pd-t-10px">
-                            <v-button href="/register" size="medium" scheme="error">
-                                {{ $label['raccoon::register'] }}
-                            </v-button>
-                        </div>
+                    <div class="v-pd-b-10px">
+                        <v-textbox type="password" id="password" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::password']"></v-textbox>
                     </div>
-                </div>
+                    <div class="v-pd-b-10px">
+                        <v-button id="authenticate" size="medium">
+                            {{ $label['raccoon::continue'] }}
+                        </v-button>
+                    </div>
+                    <div class="v-pd-b-10px">
+                        <v-button href="/register" size="medium" scheme="error">
+                            {{ $label['raccoon::register'] }}
+                        </v-button>
+                    </div>
+                </v-form>
             </div>
         </v-center>
     </div>
 </template>
+
+<script>
+
+/**
+ * Login authentication.
+ */
+
+Button('authenticate').click(function(button) {
+    let alert = Alert('login_message'),
+        user = Textbox('user'),
+        pass = Textbox('password');
+        
+        user.disable();
+        pass.disable();
+
+    let ajax = http('/login/authenticate', {
+
+            user: user.val(),
+
+            password: pass.val(),
+
+        }, function(data) {
+
+            user.enable();
+            pass.enable();
+            button.enable();
+
+            if(data.success)
+            {
+                window.location.reload();
+            }
+            else
+            {
+                alert.set(data.errors[0]);
+            }
+        });
+    });
+</script>
