@@ -11,7 +11,7 @@ namespace Env {
          * connection.
          */
 
-        'driver' => env('DRIVER', 'mysql'),
+        'driver' => env('DB_DRIVER', 'mysql'),
 
         /**
          * DATABASE
@@ -19,7 +19,7 @@ namespace Env {
          * Name of your database to use.
          */
 
-        'database' => env('DATABASE', 'test'),
+        'database' => env('DB_DATABASE', 'test'),
 
         /**
          * HOST
@@ -27,7 +27,7 @@ namespace Env {
          * Server host.
          */
 
-        'host' => env('HOST', 'localhost'),
+        'host' => env('DB_HOST', 'localhost'),
 
         /**
          * USERNAME
@@ -35,7 +35,7 @@ namespace Env {
          * Default username specified is root.
          */
 
-        'username' => env('USERNAME', 'root'),
+        'username' => env('DB_USERNAME', 'root'),
 
         /**
          * PASSWORD
@@ -43,7 +43,7 @@ namespace Env {
          * Default password is null.
          */
 
-        'password' => env('PASSWORD'),
+        'password' => env('DB_PASSWORD'),
 
     ];
 
