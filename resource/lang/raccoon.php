@@ -16,7 +16,6 @@ namespace Raccoon\Resource\Lang {
     Locale::id('dashboard')->en('Dashboard');
     Locale::id('database')->en('Database');
     Locale::id('documentation')->en('Documentation');
-    Locale::id('ecosystem')->en('Ecosystem');
     Locale::id('email')->en('Email');
     Locale::id('event')->en('Event');
     Locale::id('generate')->en('Generate');

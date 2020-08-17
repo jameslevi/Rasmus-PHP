@@ -27,7 +27,7 @@ namespace Env {
         'middlewares' => [
 
             'dashboard'       => App\Middleware\RaccoonDashboardMiddleware::class,
-            'basic'           => App\Middleware\BasicMiddleware::class,
+            'base'            => App\Middleware\BaseMiddleware::class,
             'csrf'            => App\Middleware\CSRFProtectionMiddleware::class,
             'validation'      => App\Middleware\ValidationMiddleware::class,
             'cors'            => App\Middleware\CORSMiddleware::class,
@@ -60,7 +60,7 @@ namespace Env {
                 
                 'before' => [
                     'dashboard',
-                    'basic',
+                    'base',
                     'csrf',
                     'validation',
                     'cors',
