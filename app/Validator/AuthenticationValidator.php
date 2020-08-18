@@ -21,13 +21,13 @@ class AuthenticationValidator extends Validator
      * Only require basic text validation.
      */
 
-    protected function user(Param $param)
+    protected function email(Param $param)
     {
-        $param->name(Lang::get('raccoon::username'));
+        $param->name(Lang::get('raccoon::email'));
         $param->type('text');
         $param->method('post');
 
-        if(!User::has('user', $param->value()))
+        if(!User::has('email', $param->value()))
         {
             $param->invalid(Lang::get($this->error_message));
         }
@@ -45,7 +45,7 @@ class AuthenticationValidator extends Validator
         $param->type('text');
         $param->method('post');
 
-        if(!User::isValidCredential($param->post('user'), $param->value()))
+        if(!User::isValidCredential($param->post('email'), $param->value()))
         {
             $param->invalid(Lang::get($this->error_message));
         }

@@ -31,11 +31,11 @@ class AuthenticationController extends Controller
 
     protected function authenticate(Request $request)
     {
-        $user = $request->post('user');
+        $email = $request->post('email');
         $password = $request->post('password');
         $redirect = $request->get('redirect', Config::auth()->redirect);
         
-        Auth::context()->register(User::select('id')->equal('user', $user)->equal('password', $password)->get()->first()->id, $user);
+        Auth::context()->register(User::select('id')->equal('email', $email)->equal('password', $password)->get()->first()->id, $email);
         
         return json([
 

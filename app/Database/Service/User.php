@@ -10,10 +10,10 @@ class User extends Service
      * Return true if user and password is valid.
      */
 
-    protected function isValidCredential(string $user, string $password)
+    protected function isValidCredential(string $email, string $password)
     {
         return !$this->select('id')
-                    ->equal('user', $user)
+                    ->equal('email', $email)
                     ->equal('password', $password)
                     ->get()
                     ->empty();

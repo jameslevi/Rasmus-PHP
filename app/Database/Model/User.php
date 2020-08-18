@@ -8,35 +8,51 @@ use Raccoon\Database\Model;
 class User extends Model
 {
     /**
-     * User field can be username or email. You can
-     * adjust the values length depending on your
-     * needs.
+     * USER NAME
+     * -----------------------------------------------
+     * User name will be saved in just one column
+     * but you can modify user model to have two
+     * separate columns for first name and last
+     * name.
      */
 
-    protected function user(Field $field)
+    protected function name(Field $field)
     {
-        $field->varChar(60);
-        $field->notNull();
+        $field->varChar(60)->notNull();
     }
 
     /**
+     * EMAIL
+     * -----------------------------------------------
+     * This field must be unique to avoid conflict in
+     * authentication.
+     */
+
+    protected function email(Field $field)
+    {
+        $field->varChar(60)->unique()->notNull();
+    }
+
+    /**
+     * PASSWORD
+     * -----------------------------------------------
      * This is very straight forward.
      */
 
     protected function password(Field $field)
     {
-        $field->varChar(30);
-        $field->notNull();
+        $field->varChar(30)->notNull();
     }
 
     /**
-     * Updated each time page is requested.
+     * ACTIVE LOG
+     * ----------------------------------------------- 
+     * Update datetime each time web page is requested.
      */
 
-    protected function log(Field $field)
+    protected function active_log(Field $field)
     {
-        $field->dateTime();
-        $field->notNull();
+        $field->dateTime()->notNull();
     }
 
 }

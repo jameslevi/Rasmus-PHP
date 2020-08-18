@@ -12,7 +12,7 @@
                         </h3>
                     </div>
                     <div class="v-pd-b-10px">
-                        <v-textbox type="text" id="user" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::username']"></v-textbox>
+                        <v-textbox type="text" id="user" size="medium" rounded="true" autocomplete="false" autofocus="true" :placeholder="$label['raccoon::username']"></v-textbox>
                     </div>
                     <div class="v-pd-b-10px">
                         <v-textbox type="password" id="password" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::password']"></v-textbox>
@@ -41,21 +41,21 @@
 
 Button('authenticate').click(function(button) {
     let alert = Alert('login_message'),
-        user = Textbox('user'),
+        email = Textbox('user'),
         pass = Textbox('password');
         
-        user.disable();
+        email.disable();
         pass.disable();
 
     let ajax = http('/login/authenticate', {
 
-            user: user.val(),
+            email: email.val(),
 
             password: pass.val(),
 
         }, function(data) {
 
-            user.enable();
+            email.enable();
             pass.enable();
             button.enable();
             pass.empty();
