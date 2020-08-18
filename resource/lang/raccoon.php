@@ -24,6 +24,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('james.crisostomo')->en('James Crisostomo');
     Locale::id('locale')->en('Locale');
     Locale::id('log.in')->en('Log In');
+    Locale::id('log.out')->en('Log Out');
     Locale::id('middleware')->en('Middleware');
     Locale::id('name')->en('Name');
     Locale::id('password')->en('Password');
@@ -37,6 +38,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('username')->en('Username');
     Locale::id('version')->en('version');
     Locale::id('written.by')->en('Written by');
+    Locale::id('welcome.to.your.dashboard')->en('Welcome to your dashboard');
 
     /**
      * AUTHENTICATION VALIDATION MESSAGE

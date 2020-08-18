@@ -93,7 +93,12 @@ class AuthenticationController extends Controller
     protected function logout(Request $request)
     {
         Auth::context()->reset();
-        return redirect('/');
+        
+        return json([
+
+            'success' => true,
+
+        ]);
     }
 
 }

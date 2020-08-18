@@ -1,0 +1,35 @@
+<template>
+    <div class="v-h-100vh v-bgcolor-#e0e0e0 v-w-100">
+        <div class="v-pd-20px">
+            <div class="v-w-100">
+                <v-box>
+                    <div class="v-pd-b-10px">
+                        {{ $label['raccoon::welcome.to.your.dashboard'] }}
+                    </div>
+                    <v-line color="#e0e0e0"></v-line>
+                    <div class="v-pd-t-10px">
+                        <v-button id="logout">
+                            {{ $label['raccoon::log.out'] }}
+                        </v-button>
+                    </div>
+                </v-box>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+Button('logout').click(function(button) {
+
+    button.disable();
+
+    http('/user/logout', {
+    }, function(data) {
+
+        button.enable();
+
+        redirect('/');
+    });
+
+});
+</script>

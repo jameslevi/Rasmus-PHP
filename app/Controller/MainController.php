@@ -15,7 +15,7 @@ class MainController extends Controller
 
     protected function dashboard(Request $request)
     {
-        return 'Welcome to Dashboard';
+        return view('index.dashboard');
     }
 
 }

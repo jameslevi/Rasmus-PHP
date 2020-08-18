@@ -12,7 +12,7 @@ class Button extends Component
 
     protected $data = [
 
-        'button_width' => 'v-w-100',
+        'button_width' => 'v-w-auto',
 
         'button_height' => 'v-h-32px',
 

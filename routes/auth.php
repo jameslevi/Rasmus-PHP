@@ -28,14 +28,14 @@ namespace Raccoon\Route {
          * Logout route should require authentication.
          */
 
+        $group->ajax(true);
         $group->auth(true);
-        $group->get('/user/logout', 'logout');
+        $group->delete('/user/logout', 'logout');
 
         /**
          * Ajax routes.
          */
 
-        $group->ajax(true);
         $group->auth(false);
         $group->post('/user/register', 'userRegister')->validate('Registration');
         $group->post('/user/authenticate', 'userAuthenticate')->validate('Authentication');
