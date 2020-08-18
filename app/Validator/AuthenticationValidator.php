@@ -24,8 +24,6 @@ class AuthenticationValidator extends Validator
     protected function email(Param $param)
     {
         $param->name(Lang::get('raccoon::email'));
-        $param->type('text');
-        $param->method('post');
 
         if(!User::has('email', $param->value()))
         {
@@ -42,10 +40,8 @@ class AuthenticationValidator extends Validator
     protected function password(Param $param)
     {
         $param->name(Lang::get('raccoon::password'));
-        $param->type('text');
-        $param->method('post');
-
-        if(!User::isValidCredential($param->post('email'), $param->value()))
+        
+        if(!User::isValidCredential($param->post('email'), md5($param->value())))
         {
             $param->invalid(Lang::get($this->error_message));
         }

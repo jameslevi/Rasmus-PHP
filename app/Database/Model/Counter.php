@@ -13,8 +13,7 @@ class Counter extends Model
 
     protected function user_agent(Field $field)
     {
-        $field->text();
-        $field->notNull();
+        $field->text()->notNull();
     }
 
     /**
@@ -23,8 +22,7 @@ class Counter extends Model
 
     protected function ip_address(Field $field)
     {
-        $field->varChar(30);
-        $field->notNull();
+        $field->varChar(30)->notNull();
     }
 
 }

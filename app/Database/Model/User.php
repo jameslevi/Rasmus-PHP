@@ -41,7 +41,7 @@ class User extends Model
 
     protected function password(Field $field)
     {
-        $field->varChar(30)->notNull();
+        $field->varChar(32)->notNull();
     }
 
     /**
@@ -50,7 +50,7 @@ class User extends Model
      * Update datetime each time web page is requested.
      */
 
-    protected function active_log(Field $field)
+    protected function active(Field $field)
     {
         $field->dateTime()->notNull();
     }

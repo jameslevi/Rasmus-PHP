@@ -3,9 +3,9 @@
 namespace Raccoon\Resource\Lang {
 
     /**
-     * TRANSLATIONS
+     * RACCOON LOCAL LABELS.
      * -----------------------------------------------
-     * Include tagalog (Filipino) translations.
+     * Labels commonly used in raccoon dashboard.
      */
 
     Locale::id('api.key')->en('API Key');
@@ -25,6 +25,7 @@ namespace Raccoon\Resource\Lang {
     Locale::id('locale')->en('Locale');
     Locale::id('log.in')->en('Log In');
     Locale::id('middleware')->en('Middleware');
+    Locale::id('name')->en('Name');
     Locale::id('password')->en('Password');
     Locale::id('raccoon')->en('Raccoon');
     Locale::id('raccoon.framework')->en('Raccoon Framework');
@@ -37,6 +38,14 @@ namespace Raccoon\Resource\Lang {
     Locale::id('version')->en('version');
     Locale::id('written.by')->en('Written by');
 
+    /**
+     * AUTHENTICATION VALIDATION MESSAGE
+     * -----------------------------------------------
+     * Messages used for validation errors.
+     */
+
     Locale::id('please.enter.valid.email.or.password')->en('Please enter valid email or password.');
+    Locale::id('email.already.exist')->en('Email already exist.');
+    Locale::id('passwords.dont.matched')->en('Password\'s don\'t matched.');
     
 }

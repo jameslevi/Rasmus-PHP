@@ -16,18 +16,29 @@ namespace Raccoon\Route {
     Route::group(function(Group $group) {
 
         $group->controller('AuthenticationController');
-        $group->auth(false);
+        
+        /**
+         * Page routes.
+         */
 
         $group->get('/login');
         $group->get('/register', 'register');
+
+        /**
+         * Logout route should require authentication.
+         */
+
+        $group->auth(true);
         $group->get('/user/logout', 'logout');
 
+        /**
+         * Ajax routes.
+         */
+
         $group->ajax(true);
-
-        $group->post('/user/register', 'userRegister');
+        $group->auth(false);
+        $group->post('/user/register', 'userRegister')->validate('Registration');
         $group->post('/user/authenticate', 'userAuthenticate')->validate('Authentication');
-        
-
     });
 
 }

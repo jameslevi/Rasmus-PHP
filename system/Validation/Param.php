@@ -48,6 +48,11 @@ class Param
         $this->set('form', $form);
         $this->set('name', $form);
         $this->request = $request;
+
+        if(Request::method() !== 'GET')
+        {
+            $this->set('method', 'post');
+        }
     }
 
     /**

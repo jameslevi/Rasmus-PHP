@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
         $password = $request->post('password');
         $redirect = $request->get('redirect', Config::auth()->redirect);
         
-        Auth::context()->register(User::select('id')->equal('email', $email)->equal('password', $password)->get()->first()->id, $email);
+        Auth::context()->register(User::select('id')->equal('email', $email)->equal('password', md5($password))->get()->first()->id, $email);
         
         return json([
 
@@ -63,6 +63,22 @@ class AuthenticationController extends Controller
 
     protected function userRegister(Request $request)
     {
+        $name = $request->post('name');
+        $email = $request->post('email');
+        $password = md5($request->post('password_confirm'));
+
+        User::insert([
+
+            'name' => $name,
+
+            'email' => $email,
+
+            'password' => $password,
+
+        ]);
+
+        Auth::context()->register(User::select('id')->equal('email', $email)->get()->first()->id, $email);
+
         return json([
 
             'success' => true,

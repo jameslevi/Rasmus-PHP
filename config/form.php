@@ -76,10 +76,6 @@ namespace Raccoon\Validation {
         ->maxWord(1)
         ->maxLine(1)
         ->maxSpecialCharacters(0)
-        ->minLetter(4)
-        ->minNumber(2)
-        ->minUppercase(2)
-        ->minLowercase(2)
         ->mustNot(['password'])
     ;
 

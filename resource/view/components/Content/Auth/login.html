@@ -3,16 +3,15 @@
         <v-center>
             <div class="v-w-330px v-mg-t-80px">
                 <v-form>
-                    <v-alert id="login_message" scheme="error" variant="default" rounded="true">
-                        {{ $label['raccoon::version'] }}
-                    </v-alert>
+                    <div class="v-pd-x-20px">
+                    <v-alert id="login_message" scheme="error" variant="default" rounded="true"></v-alert>
                     <div class="v-pd-t-20px">
                         <h3 class="v-weight-normal v-size-17px">
                             {{ $label['raccoon::log.in'] }}
                         </h3>
                     </div>
                     <div class="v-pd-b-10px">
-                        <v-textbox type="text" id="user" size="medium" rounded="true" autocomplete="false" autofocus="true" :placeholder="$label['raccoon::email']"></v-textbox>
+                        <v-textbox type="text" id="email" size="medium" rounded="true" autocomplete="false" autofocus="true" :placeholder="$label['raccoon::email']"></v-textbox>
                     </div>
                     <div class="v-pd-b-10px">
                         <v-textbox type="password" id="password" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::password']"></v-textbox>
@@ -26,6 +25,7 @@
                         <v-button href="/register" size="medium" scheme="error">
                             {{ $label['raccoon::register'] }}
                         </v-button>
+                    </div>
                     </div>
                 </v-form>
             </div>
@@ -41,7 +41,7 @@
 
 Button('authenticate').click(function(button) {
     let alert = Alert('login_message'),
-        email = Textbox('user'),
+        email = Textbox('email'),
         pass = Textbox('password');
         
         email.disable();

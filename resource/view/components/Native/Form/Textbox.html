@@ -37,7 +37,7 @@ function Textbox(id)
             }
             else
             {
-                return this.el(id).val();
+                return encodeURIComponent(this.el(id).val());
             }
         },
 
