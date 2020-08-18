@@ -39,7 +39,7 @@ class Auth
 
             'id' => null,
 
-            'user' => null,
+            'email' => null,
 
             'timein' => null,
 
@@ -56,7 +56,7 @@ class Auth
 
     public function authenticated()
     {
-        return !is_null($this->model) && $this->model->status && !is_null($this->model->id) && !is_null($this->model->user);
+        return !is_null($this->model) && $this->model->status && !is_null($this->model->id) && !is_null($this->model->email);
     }
 
     /**
@@ -91,11 +91,11 @@ class Auth
      * Authenticate user.
      */
 
-    public function register(string $id, string $user)
+    public function register(string $id, string $email)
     {
         $this->model->set('status', true);
         $this->model->set('id', $id);
-        $this->model->set('user', $user);
+        $this->model->set('email', $email);
         $this->model->set('timein', time());
         $this->model->set('timestamp', time());
     }
@@ -108,7 +108,7 @@ class Auth
     {
         $this->model->set('status', false);
         $this->model->set('id', null);
-        $this->model->set('user', null);
+        $this->model->set('email', null);
         $this->model->set('timein', null);
         $this->model->set('timestamp', null);
     }

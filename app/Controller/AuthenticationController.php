@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
         $password = $request->post('password');
         $redirect = $request->get('redirect', Config::auth()->redirect);
         
-        Auth::context()->register(User::select('id')->equal('email', $email)->equal('password', md5($password))->get()->first()->id, $email);
+        $this->makeSession($email, $password);
         
         return json([
 
@@ -58,6 +58,15 @@ class AuthenticationController extends Controller
     }
 
     /**
+     * Create user session.
+     */
+
+    private function makeSession(string $email, string $password)
+    {
+        Auth::context()->register(User::select('id')->equal('email', $email)->equal('password', md5($password))->get()->first()->id, $email);
+    }
+
+    /**
      * Create new user.
      */
 
@@ -65,7 +74,7 @@ class AuthenticationController extends Controller
     {
         $name = $request->post('name');
         $email = $request->post('email');
-        $password = md5($request->post('password_confirm'));
+        $password = $request->post('password_confirm');
 
         User::insert([
 
@@ -73,11 +82,11 @@ class AuthenticationController extends Controller
 
             'email' => $email,
 
-            'password' => $password,
+            'password' => md5($password),
 
         ]);
 
-        Auth::context()->register(User::select('id')->equal('email', $email)->get()->first()->id, $email);
+        $this->makeSession($email, $password);
 
         return json([
 
@@ -93,7 +102,7 @@ class AuthenticationController extends Controller
     protected function logout(Request $request)
     {
         Auth::context()->reset();
-        
+
         return json([
 
             'success' => true,

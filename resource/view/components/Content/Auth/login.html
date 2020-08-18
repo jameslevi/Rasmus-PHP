@@ -16,6 +16,11 @@
                     <div class="v-pd-b-10px">
                         <v-textbox type="password" id="password" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::password']"></v-textbox>
                     </div>
+                    <div class="v-size-14px v-pd-b-10px">
+                        <v-link href="/forgot-password">
+                            {{ $label['raccoon::forgot.password'] }}
+                        </v-link>
+                    </div>
                     <div class="v-pd-b-10px">
                         <v-button id="authenticate" size="medium" width="100">
                             {{ $label['raccoon::continue'] }}
