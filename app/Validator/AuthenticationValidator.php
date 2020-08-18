@@ -13,7 +13,7 @@ class AuthenticationValidator extends Validator
      * Error message id.
      */
 
-    protected $error_message = 'raccoon::please.enter.invalid.username.or.password';
+    protected $error_message = 'raccoon::please.enter.valid.email.or.password';
 
     /**
      * USER VALIDATION
