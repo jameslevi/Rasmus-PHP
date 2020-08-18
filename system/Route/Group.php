@@ -2,6 +2,7 @@
 
 namespace Raccoon\Route;
 
+use Closure;
 use Raccoon\Util\Str;
 
 class Group
@@ -224,15 +225,16 @@ class Group
 
     private function makeRoute(string $type, string $uri, $method)
     {
-        if(is_string($method))
+        if(is_string($method) && !Str::has($method, '@'))
         {
-            if(!Str::has($method, '@'))
-            {
-                $method = $this->data['controller'] . '@' . $method;
-            }
-
-            return Route::{$type}($uri, $method)->inject($this->data);
+            $method = $this->data['controller'] . '@' . $method;
         }
+        else if($method instanceof Closure)
+        {
+            $this->set('closure', $method);
+        }
+
+        return Route::{$type}($uri, $method)->inject($this->data);
     }
 
 }

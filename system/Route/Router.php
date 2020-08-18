@@ -15,12 +15,6 @@ class Router
     private static $routed = false;
 
     /**
-     * Store all route files from the routes folder.
-     */
-
-    private $files = [];
-
-    /**
      * Store all extracted routes.
      */
 

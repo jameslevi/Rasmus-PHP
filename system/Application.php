@@ -364,16 +364,16 @@ class Application
             }
 
             /**
-             * Execute controller request.
+             * Execute controller request or request closure.
              */
 
             Emitter::emit('code', $code);
             $fetch = null;
 
-            if($code === 200 && is_null($route['controller']) && !is_null($route['closure']))
+            if($code === 200 && !is_null($route['closure']))
             {
                 $closure = $route['closure'];
-                          
+                
                 if(is_array($closure) && empty($closure))
                 {
                     $file = 'routes/' . $route['group'] . '.php';
