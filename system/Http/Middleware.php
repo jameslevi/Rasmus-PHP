@@ -129,7 +129,7 @@ class Middleware
     {
         if(!$this->empty($after))
         {
-            require_once 'global.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/system/Helpers/middleware-helper.php';
 
             $this->index = 0;
             $this->success = false;

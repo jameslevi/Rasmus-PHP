@@ -17,7 +17,7 @@ namespace Raccoon\Route {
 
         $group->controller('AuthenticationController');
         $group->auth(false);
-        
+
         $group->get('/login');
         $group->get('/register', 'register');
         $group->get('/user/logout', 'logout');

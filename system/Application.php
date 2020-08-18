@@ -309,7 +309,7 @@ class Application
 
             if(!is_null($route) && $code === 200)
             {
-                require 'App\global.php';
+                require_once 'Helpers\global-helper.php';
                 
                 $test = Middleware::init(new Collection($route));
 
@@ -373,6 +373,10 @@ class Application
             if($code === 200 && !is_null($route['closure']))
             {
                 $closure = $route['closure'];
+
+                /**
+                 * If cached and closure has no way to be cached.
+                 */
                 
                 if(is_array($closure) && empty($closure))
                 {
@@ -380,8 +384,19 @@ class Application
 
                     if(file_exists($file))
                     {
-                        require $file;
-                        $all = Route::all();
+                        /**
+                         * Encapsulate the helpers inside the closure.
+                         */
+
+                        function loadRoutes(string $file)
+                        {
+                            require_once 'Helpers/route-helper.php';
+                            require $file;
+
+                            return Route::all();
+                        }
+
+                        $all = loadRoutes($file);
 
                         for($i = 0; $i <= (sizeof($all) - 1); $i++)
                         {
@@ -552,7 +567,7 @@ class Application
 
     private function controllerExec(string $controller, string $method, Collection $route)
     {
-        require_once 'App\control-helper.php';
+        require_once 'Helpers\controller-helper.php';
 
         $instance = new $controller();
         $fetch = $instance->init($method, $route);

@@ -322,6 +322,8 @@ class Cache
         
         if($dir->valid())
         {
+            require_once 'system/Helpers/route-helper.php';
+
             foreach($dir->files() as $file)
             {
                 $file = $path . $file;
@@ -330,7 +332,7 @@ class Cache
                 if($reader->exist() && $reader->type() === 'php')
                 {
                     $data = [];
-                    $load = require $file;
+                    require $file;
 
                     foreach(Route::all() as $route)
                     {
@@ -449,7 +451,7 @@ class Cache
         if(in_array($module, $withEnv) && !static::$env)
         {
             static::$env = true;
-            require '././system/App/env.php';
+            require '././system/Helpers/env-helper.php';
         }
 
         if(file_exists($file))
