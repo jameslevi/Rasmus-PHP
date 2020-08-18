@@ -13,6 +13,8 @@ class Group
 
     protected $data = [
 
+        'closure' => null,
+
         'controller' => null,
 
         'middleware' => 'generic',
@@ -175,7 +177,7 @@ class Group
      * GET method factory.
      */
 
-    public function get(string $uri, string $method = 'index')
+    public function get(string $uri, $method = 'index')
     {
         return $this->makeRoute('get', $uri, $method);
     }
@@ -184,7 +186,7 @@ class Group
      * POST method factory.
      */
 
-    public function post(string $uri, string $method = 'index')
+    public function post(string $uri, $method = 'index')
     {
         return $this->makeRoute('post', $uri, $method);
     }
@@ -193,7 +195,7 @@ class Group
      * PUT method factory.
      */
 
-    public function put(string $uri, string $method = 'index')
+    public function put(string $uri, $method = 'index')
     {
         return $this->makeRoute('put', $uri, $method);
     }
@@ -202,7 +204,7 @@ class Group
      * PATCH method factory.
      */
 
-    public function patch(string $uri, string $method = 'index')
+    public function patch(string $uri, $method = 'index')
     {
         return $this->makeRoute('patch', $uri, $method);
     }
@@ -211,7 +213,7 @@ class Group
      * DELETE method factory.
      */
 
-    public function delete(string $uri, string $method = 'index')
+    public function delete(string $uri, $method = 'index')
     {
         return $this->makeRoute('delete', $uri, $method);
     }
@@ -220,14 +222,17 @@ class Group
      * Dynamically create route object.
      */
 
-    private function makeRoute(string $type, string $uri, string $method)
+    private function makeRoute(string $type, string $uri, $method)
     {
-        if(!Str::has($method, '@'))
+        if(is_string($method))
         {
-            $method = $this->data['controller'] . '@' . $method;
-        }
+            if(!Str::has($method, '@'))
+            {
+                $method = $this->data['controller'] . '@' . $method;
+            }
 
-        return Route::{$type}($uri, $method)->inject($this->data);
+            return Route::{$type}($uri, $method)->inject($this->data);
+        }
     }
 
 }

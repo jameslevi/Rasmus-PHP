@@ -102,6 +102,7 @@ class Router
 
                 if($n === sizeof($uri2) && sizeof($uri1) === sizeof($uri2))
                 {
+                    $route['group'] = $groups[$i];
                     $this->route = $route;
                     
                     if(Cache::enabled())

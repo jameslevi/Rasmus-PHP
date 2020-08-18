@@ -2,6 +2,7 @@
 
 namespace Raccoon;
 
+use Closure;
 use Raccoon\App\Config;
 use Raccoon\App\Request;
 use Raccoon\App\Response;
@@ -12,7 +13,9 @@ use Raccoon\File\Reader;
 use Raccoon\File\ReadLine;
 use Raccoon\Http\Emitter;
 use Raccoon\Http\Middleware;
+use Raccoon\Http\Request as HttpRequest;
 use Raccoon\Resource\Lang\Lang;
+use Raccoon\Route\Route;
 use Raccoon\Route\Router;
 use Raccoon\Util\Collection;
 use Raccoon\Util\Str;
@@ -365,8 +368,47 @@ class Application
              */
 
             Emitter::emit('code', $code);
-            $fetch = $this->controllerExec($controller, $method, new Collection($route ?? []));
-            
+            $fetch = null;
+
+            if($code === 200 && is_null($route['controller']) && !is_null($route['closure']))
+            {
+                $closure = $route['closure'];
+                          
+                if(is_array($closure) && empty($closure))
+                {
+                    $file = 'routes/' . $route['group'] . '.php';
+
+                    if(file_exists($file))
+                    {
+                        require $file;
+                        $all = Route::all();
+
+                        for($i = 0; $i <= (sizeof($all) - 1); $i++)
+                        {
+                            $data = $all[$i]->getData();
+                            if(strtolower($data['uri']) === strtolower(Request::uri()))
+                            {
+                                $closure = $data['closure'];
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if($closure instanceof Closure)
+                {
+                    $fetch = $closure(new HttpRequest([
+
+                        'route' => $route,
+
+                    ]));
+                }
+            }
+            else
+            {
+                $fetch = $this->controllerExec($controller, $method, new Collection($route ?? []));
+            }   
+
             if($fetch instanceof Response)
             {
                 Emitter::clear();

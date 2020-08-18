@@ -94,14 +94,7 @@ class Request
 
     public static function uri()
     {
-        $uri = Str::break($_SERVER['REQUEST_URI'], '?')[0];
-
-        if(!Str::endWith($uri, '/') && !Str::endWith($uri, '.xcss'))
-        {
-            $uri .= '/';
-        }
-
-        return $uri;
+        return Str::break($_SERVER['REQUEST_URI'], '?')[0];
     }    
 
     /**

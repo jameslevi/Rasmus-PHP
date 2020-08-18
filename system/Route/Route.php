@@ -2,6 +2,7 @@
 
 namespace Raccoon\Route;
 
+use Closure;
 use Raccoon\Util\Str;
 
 class Route
@@ -23,6 +24,8 @@ class Route
         'verb' => 'GET',
 
         'uri' => null,
+
+        'closure' => null,
 
         'controller' => null,
 
@@ -56,16 +59,16 @@ class Route
 
     ];
 
-    private function __construct(string $verb, string $uri, string $controller)
+    private function __construct(string $verb, string $uri, $controller)
     {
         $uri = Str::break($uri, '?')[0];
 
-        if(!Str::startWith($uri, '/'))
+        if(!Str::startWith($uri, '/') && $uri !== '/')
         {
             $uri = '/' . $uri;
         }
 
-        if(Str::endWith($uri, '/'))
+        if(Str::endWith($uri, '/') && $uri !== '/')
         {
             $uri = Str::move($uri, 0, 1);
         }
@@ -73,16 +76,23 @@ class Route
         $this->set('verb', $verb);
         $this->set('uri', $uri);
 
-        if(Str::has($controller, '@'))
+        if(is_string($controller))
         {
-            $break = Str::break($controller, '@');
-            $this->set('controller', $break[0]);
-            $this->set('method', $break[1]);    
+            if(Str::has($controller, '@'))
+            {
+                $break = Str::break($controller, '@');
+                $this->set('controller', $break[0]);
+                $this->set('method', $break[1]);    
+            }
+            else
+            {
+                $this->set('controller', $controller);
+                $this->set('method', 'index');
+            }
         }
-        else
+        else if($controller instanceof Closure)
         {
-            $this->set('controller', $controller);
-            $this->set('method', 'index');
+            $this->set('closure', $controller);
         }
     }
 
@@ -265,7 +275,7 @@ class Route
      * GET routes factory.
      */
 
-    public static function get(string $uri, string $controller)
+    public static function get(string $uri, $controller)
     {
         return static::register(new self('GET', $uri, $controller));
     }
@@ -274,7 +284,7 @@ class Route
      * POST routes factory.
      */
 
-    public static function post(string $uri, string $controller)
+    public static function post(string $uri, $controller)
     {
         return static::register(new self('POST', $uri, $controller));
     }
@@ -283,7 +293,7 @@ class Route
      * PUT routes factory.
      */
 
-    public static function put(string $uri, string $controller)
+    public static function put(string $uri, $controller)
     {
         return static::register(new self('PUT', $uri, $controller));
     }
@@ -292,7 +302,7 @@ class Route
      * PATCH routes factory.
      */
 
-    public static function patch(string $uri, string $controller)
+    public static function patch(string $uri, $controller)
     {
         return static::register(new self('PATCH', $uri, $controller));
     }
@@ -301,7 +311,7 @@ class Route
      * DELETE routes factory.
      */
 
-    public static function delete(string $uri, string $controller)
+    public static function delete(string $uri, $controller)
     {
         return static::register(new self('DELETE', $uri, $controller));
     }
@@ -310,7 +320,7 @@ class Route
      * Route group factory.
      */
 
-    public static function group($closure)
+    public static function group(Closure $closure)
     {
         $closure(new Group());
     }
