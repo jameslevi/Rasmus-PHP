@@ -144,7 +144,7 @@ class Param
             $value = $this->request->resource()->{$this->data['form']};
         }
 
-        return $value;
+        return $value ?? '';
     }
 
     /**

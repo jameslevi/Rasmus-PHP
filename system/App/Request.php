@@ -102,7 +102,7 @@ class Request
      * parameter value.
      */
 
-    public static function get(string $name = null, $default = null)
+    public static function get(string $name = null, $default = '')
     {
         if(!is_null($name))
         {
@@ -119,7 +119,7 @@ class Request
      * parameter value.
      */
 
-    public static function post(string $name, $default = null)
+    public static function post(string $name, $default = '')
     {
         if(!is_null($name))
         {

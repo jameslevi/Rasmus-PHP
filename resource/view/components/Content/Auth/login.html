@@ -47,7 +47,7 @@ Button('authenticate').click(function(button) {
         email.disable();
         pass.disable();
 
-    let ajax = http('/login/authenticate', {
+        http('/user/authenticate', {
 
             email: email.val(),
 

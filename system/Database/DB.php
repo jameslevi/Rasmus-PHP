@@ -402,9 +402,9 @@ class DB
      * Sanitize string to prevent SQL injection.
      */
 
-    public static function sanitize(string $string)
+    public static function sanitize(?string $string)
     {
-        if(static::testConnection())
+        if(static::testConnection() && !is_null($string))
         {
             $driver = strtolower(static::driver());
 
@@ -413,6 +413,8 @@ class DB
                 return mysqli_real_escape_string(static::context(), $string);
             }
         }
+
+        return '';
     }
 
     /**

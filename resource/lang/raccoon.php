@@ -10,6 +10,7 @@ namespace Raccoon\Resource\Lang {
 
     Locale::id('api.key')->en('API Key');
     Locale::id('blog')->en('Blog');
+    Locale::id('confirm.password')->en('Confirm Password');
     Locale::id('continue')->en('Continue');
     Locale::id('controller')->en('Controller');
     Locale::id('copyright')->en('Copyright');

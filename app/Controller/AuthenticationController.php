@@ -6,21 +6,32 @@ use Database\Model\User;
 use Raccoon\App\Config;
 use Raccoon\App\Controller;
 use Raccoon\Http\Request;
-use Raccoon\Resource\Lang\Lang;
 use Raccoon\Session\Auth;
 
 class AuthenticationController extends Controller
 {
-
     /**
      * Display default login page.
      */
 
     protected function index(Request $request)
     {
-        return view('login.login', [
+        return view('auth.canvas', [
 
-            'title' => Lang::get('raccoon::log.in'),
+            'id' => 'login',
+
+        ]);
+    }
+
+    /**
+     * Display default registration page.
+     */
+
+    protected function register(Request $request)
+    {
+        return view('auth.canvas', [
+
+            'id' => 'register',
 
         ]);
     }
@@ -29,7 +40,7 @@ class AuthenticationController extends Controller
      * Process authentication request.
      */
 
-    protected function authenticate(Request $request)
+    protected function userAuthenticate(Request $request)
     {
         $email = $request->post('email');
         $password = $request->post('password');
@@ -42,6 +53,19 @@ class AuthenticationController extends Controller
             'success' => true,
 
             'redirect' => $redirect,
+
+        ]);
+    }
+
+    /**
+     * Create new user.
+     */
+
+    protected function userRegister(Request $request)
+    {
+        return json([
+
+            'success' => true,
 
         ]);
     }
