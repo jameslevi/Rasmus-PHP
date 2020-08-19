@@ -284,7 +284,6 @@ class Canvas
 
             if($reader->exist())
             {
-
                 $html = $this->replaceTemplates($reader->contents());
                 $html = $this->replaceAttributes($html);
                 $html = $this->replaceTags($html);
@@ -308,7 +307,7 @@ class Canvas
 
         foreach(explode('<', $html) as $tag)
         {
-            if(!Str::startWith($tag, '/') && !Str::startWith($tag, 'v-') && $tag !== '')
+            if(!Str::startWith($tag, '/') && $tag !== '')
             {
                 if(Str::has($tag, '>'))
                 {
@@ -341,7 +340,7 @@ class Canvas
                                     $tag_name = Str::move(Str::break($attr, '=')[0], 1);
                                     $value = Str::break($attr, '="')[1];
                                     $val = null;
-                                    
+
                                     if(Str::startWith($value, '$'))
                                     {
                                         $directive = strtolower(Str::move(Str::break($value, '[')[0], 1));
@@ -350,14 +349,14 @@ class Canvas
                                         {
                                             $index = Str::move(Str::break($value, "['")[1], 0, 2);
                                             
-                                            if($directive === 'emit')
+                                            if(Str::eq($directive, 'emit'))
                                             {
                                                 if(array_key_exists($index, $this->emitted) && !is_null($this->emitted[$index]))
                                                 {
                                                     $val = $this->emitted[$index];
                                                 }
                                             }
-                                            else if($directive === 'label')
+                                            else if(Str::eq($directive, 'label'))
                                             {
                                                 $lang = Lang::get($index);
                                             
@@ -365,6 +364,40 @@ class Canvas
                                                 {
                                                     $val = $lang;
                                                 }
+                                            }
+                                            else if(Str::eq($directive, 'assets'))
+                                            {
+                                                $url = Config::app()->url;
+
+                                                if(!Str::startWith($index, '/'))
+                                                {
+                                                    $index = '/' . $index;
+                                                }
+
+                                                $path = '/resource/assets' . $index;
+
+                                                if(Str::endWith($url, '/'))
+                                                {
+                                                    $url = Str::move($url, 0, 1);
+                                                }
+
+                                                $val = $url . $path;
+                                            }
+                                            else if(Str::eq($directive, 'url'))
+                                            {
+                                                $url = Config::app()->url;
+
+                                                if(Str::endWith($url, '/'))
+                                                {
+                                                    $url = Str::move($url, 0, 1);
+                                                }
+
+                                                if(!Str::startWith($index, '/'))
+                                                {
+                                                    $index = '/' . $index;
+                                                }
+
+                                                $val = $url . $index;
                                             }
                                         }
                                     }

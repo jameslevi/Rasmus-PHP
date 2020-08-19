@@ -4,6 +4,14 @@ namespace Raccoon\Util;
 
 class Str
 {
+    /**
+     * Test if input strings are equal.
+     */
+
+    public static function eq(string $string1, string $string2 = null)
+    {
+        return $string1 === $string2;
+    }
 
     /**
      * Return the first character of string.

@@ -64,12 +64,7 @@ class Button extends Component
 
     protected function href(string $href)
     {
-        if(!Str::startWith($href, '/'))
-        {
-            $href = '/' . $href;
-        }
-
-        $this->redirect = Config::app()->url . $href;
+        $this->redirect = $href;
     }
 
     /**

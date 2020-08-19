@@ -17,7 +17,7 @@
                         <v-textbox type="password" id="password" size="medium" rounded="true" autocomplete="false" :placeholder="$label['raccoon::password']"></v-textbox>
                     </div>
                     <div class="v-size-14px v-pd-b-10px">
-                        <v-link href="/forgot-password">
+                        <v-link :href="$url['/forgot-password']">
                             {{ $label['raccoon::forgot.password'] }}
                         </v-link>
                     </div>
@@ -27,7 +27,7 @@
                         </v-button>
                     </div>
                     <div class="v-pd-b-10px">
-                        <v-button href="/register" size="medium" scheme="error" width="100">
+                        <v-button :href="$url['/register']" size="medium" scheme="error" width="100">
                             {{ $label['raccoon::register'] }}
                         </v-button>
                     </div>

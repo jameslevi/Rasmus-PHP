@@ -5,20 +5,20 @@
         </v-alert>
     </div>
     <div class="v-max-w-400px v-min-w-100px v-mg-y-20px v-center">
-        <img src="resource/assets/images/raccoon/logo.jpg" class="v-w-100 v-h-auto v-unselectable" />
+        <img :src="$assets['/images/raccoon/logo.jpg']" class="v-w-100 v-h-auto v-unselectable">
     </div>
     <div class="v-justify-center">
         <div class="v-w-400px v-media-400px:w-100 v-pd-x-10px">
             <div class="v-f-left v-w-50 v-media-400px:w-100 v-media-400px:mg-b-10px">
                 <div class="v-pd-r-5px v-media-400px:pd-r-none">
-                    <v-button href="/raccoon/dashboard" size="large" scheme="error" width="100">
+                    <v-button :href="$url['/raccoon/dashboard']" size="large" scheme="error" width="100">
                         {{ $label['raccoon::dashboard'] }}
                     </v-button>
                 </div>
             </div>    
             <div class="v-f-left v-w-50 v-media-400px:w-100">
                 <div class="v-pd-l-5px v-media-400px:pd-l-none">
-                    <v-button href="/login" size="large" width="100">
+                    <v-button :href="$url['/login']" size="large" width="100">
                         {{ $label['raccoon::log.in'] }}
                     </v-button>
                 </div>

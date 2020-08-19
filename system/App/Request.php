@@ -95,7 +95,16 @@ class Request
     public static function uri()
     {
         return Str::break($_SERVER['REQUEST_URI'], '?')[0];
-    }    
+    }  
+    
+    /**
+     * Return true if request is over https.
+     */
+
+    public static function https()
+    {
+        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    }
 
     /**
      * Return list of GET parameter values or return

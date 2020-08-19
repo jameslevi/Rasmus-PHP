@@ -497,7 +497,6 @@ abstract class Component
                                             else if(method_exists($this, $css))
                                             {
                                                 $val = $this->{$css}();
-
                                             }
                                             else
                                             {
