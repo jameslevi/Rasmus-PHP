@@ -258,6 +258,62 @@ abstract class Component
             {
 
             $html = Str::break(Str::break($html, '<template>')[1], '</template>')[0];
+            $strx = '';
+
+            /**
+             * Replace all self closing tags.
+             */
+            
+            foreach(explode('<', $html) as $tag)
+            {
+                if(!Str::startWith($tag, '/') && $tag !== '')
+                {
+                    if(Str::has($tag, '>'))
+                    {
+                        $tagname = Str::break(Str::break($tag, ' ')[0], '>')[0];
+
+                        if(Str::startWith($tag, 'v-'))
+                        {
+                            $strx .= '<';
+                            $this_tag = Str::break($tag, '>')[0];
+
+                            if(Str::endWith($this_tag, ' /'))
+                            {
+                                $this_tag = Str::move($this_tag, 0, 2);
+                                $strx .= $this_tag . '></' . $tagname . '>';
+                            }
+                            else
+                            {
+                                $strx .= $tag;
+                            }
+                        }
+                        else
+                        {
+                            $strx .= '<';
+                            $this_tag = Str::break($tag, '>')[0];
+
+                            if(Str::endWith($this_tag, ' /'))
+                            {
+                                $this_tag = Str::move($this_tag, 0, 2);
+                                $strx .= $this_tag . '>';
+                            }
+                            else
+                            {
+                                $strx .= $tag;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $strx .= $tag;
+                    }
+                }
+                else if($tag !== '')
+                {
+                    $strx .= '<' . $tag;
+                }
+            }
+            $html = $strx;
 
             if(Str::has($html, '<!--') && Str::has($html, '-->') && Config::app()->minify)
             {

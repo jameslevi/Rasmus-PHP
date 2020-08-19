@@ -285,6 +285,7 @@ class Canvas
             if($reader->exist())
             {
                 $html = $this->replaceTemplates($reader->contents());
+                $html = $this->replaceSelfClosingTags($html);
                 $html = $this->replaceAttributes($html);
                 $html = $this->replaceTags($html);
                 $html = $this->replaceUtilty($html);
@@ -295,6 +296,67 @@ class Canvas
         }
 
         return $this->output;
+    }
+
+    /**
+     * Replace all self closing tags.
+     */
+
+    private function replaceSelfClosingTags(string $html)
+    {
+        $str = '';
+
+        foreach(explode('<', $html) as $tag)
+        {
+            if(!Str::startWith($tag, '/') && $tag !== '')
+            {
+                if(Str::has($tag, '>'))
+                {
+                    $tagname = Str::break(Str::break($tag, ' ')[0], '>')[0];
+                    
+                    if(Str::startWith($tag, 'v-'))
+                    {
+                        $str .= '<';
+                        $this_tag = Str::break($tag, '>')[0];
+
+                        if(Str::endWith($this_tag, ' /'))
+                        {
+                            $this_tag = Str::move($this_tag, 0, 2);
+                            $str .= $this_tag . '></' . $tagname . '>';
+                        }
+                        else
+                        {
+                            $str .= $tag;
+                        }
+                    }
+                    else
+                    {
+                        $str .= '<';
+                        $this_tag = Str::break($tag, '>')[0];
+
+                        if(Str::endWith($this_tag, ' /'))
+                        {
+                            $this_tag = Str::move($this_tag, 0, 2);
+                            $str .= $this_tag . '>';
+                        }
+                        else
+                        {
+                            $str .= $tag;
+                        }
+                    }
+                }
+                else
+                {
+                    $str .= $tag;
+                }
+            }
+            else if($tag !== '')
+            {
+                $str .= '<' . $tag;
+            }
+        }
+
+        return $str;
     }
 
     /**
