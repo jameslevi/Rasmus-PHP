@@ -121,7 +121,21 @@ class Lang extends Translations
     public static function get(string $key, array $templates = null)
     {
         $instance = new self($key, $templates);
-        return $instance->translate(Config::app()->locale, $templates);
+        $translation = $instance->translate(Config::app()->locale, $templates);
+
+        /**
+         * If no translation found, try the backup locale.
+         */
+    
+        if($translation === $key)
+        {
+            if(!is_null(Config::app()->backup_locale))
+            {
+                $translation = $instance->translate(Config::app()->backup_locale, $templates);
+            }
+        }
+
+        return $translation;
     }
 
     /**

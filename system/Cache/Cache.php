@@ -381,7 +381,6 @@ class Cache
             'app',
             'auth',
             'components',
-            'cors',
             'database',
             'dependency',
             'form',
@@ -392,7 +391,6 @@ class Cache
         $withEnv = [
             'app',
             'auth',
-            'cors',
             'middleware',
             'database',
         ];

@@ -28,10 +28,8 @@ namespace Env {
                 $uri = Str::move($uri, 1);
             }
 
-            return env('APP_URL', 'localhost') . '/' . $uri;
+            return env('APP_URL', 'http://localhost') . '/' . $uri;
         }
-
-        return $uri;
     }
 
     /**

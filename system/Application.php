@@ -2,6 +2,7 @@
 
 namespace Raccoon;
 
+use App\Middleware\CORSMiddleware;
 use Closure;
 use Raccoon\App\Config;
 use Raccoon\App\Request;
@@ -78,6 +79,11 @@ class Application
 
     public function version()
     {
+        if(Str::eq($this->version, Config::env()->API_VERSION))
+        {
+            return Config::env()->API_VERSION;
+        }
+
         return $this->version;
     }
 
@@ -223,7 +229,7 @@ class Application
 
     public function key()
     {
-        return Config::env()->APP_KEY;
+        return Config::env()->API_KEY;
     }
 
     /**
@@ -519,14 +525,14 @@ class Application
 
         if(!empty($route))
         {
-            if($route['cors'] || !Config::cors()->disable)
+            if($route['cors'] || !Config::env()->SECURITY_CORS)
             {
                 header('Access-Control-Allow-Origin: *');
                 header('Access-Control-Allow-Credentials: true');
             }
             else
             {
-                if(in_array(Request::origin(), Config::cors()->allow))
+                if(in_array(Request::origin(), CORSMiddleware::$list))
                 {
                     header('Access-Control-Allow-Origin: ' . Request::origin());
                     header('Access-Control-Allow-Credentials: true');
@@ -640,20 +646,8 @@ class Application
             }
 
             $this->exited = true;
-            $this->computeExecutionDuration();
+            $this->duration = (number_format(microtime(true) - START_TIME, 2));
         }
-    }
-
-    /**
-     * Compute execution duration.
-     */
-
-    private function computeExecutionDuration()
-    {
-        $start = START_TIME;
-        $end = microtime(true);
-
-        $this->duration = (number_format($end - $start, 2));
     }
 
     /**

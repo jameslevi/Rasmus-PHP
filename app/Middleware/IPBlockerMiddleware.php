@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use Raccoon\App\Config;
 use Raccoon\App\Middleware;
 use Raccoon\Http\Request;
 
@@ -19,7 +20,7 @@ class IPBlockerMiddleware extends Middleware
 
     protected function handle(Request $request)
     {
-        if(!$request->isLocalhost())
+        if(!$request->isLocalhost() && Config::env()->SECURITY_IP_BLOCKER)
         {
             $this->fetchIpFromDataBase();
 
@@ -30,7 +31,7 @@ class IPBlockerMiddleware extends Middleware
 
             foreach($this->ip as $ip)
             {
-                if(in_array($request->client(), $this->ip))
+                if(in_array($request->client(), $ip))
                 {
                     return http(403);
                 }

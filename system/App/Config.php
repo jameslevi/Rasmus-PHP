@@ -69,16 +69,6 @@ class Config
     }
 
     /**
-     * Return application with cross origin
-     * resource sharing permissions.
-     */
-
-    public static function cors()
-    {
-        return new Collection(static::cache()->cors());
-    }
-
-    /**
      * Return application database driver and
      * credentials.
      */

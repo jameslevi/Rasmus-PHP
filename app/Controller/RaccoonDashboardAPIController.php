@@ -23,7 +23,8 @@ class RaccoonDashboardAPIController extends Controller
 
         if($env->exist())
         {
-            $content = str_replace('APP_KEY=null', 'APP_KEY=' . $key, $env->contents());
+            $content = str_replace('API_KEY=null', 'API_KEY=' . $key, $env->contents());
+            $content = str_replace('API_TIMESTAMP=null', 'API_TIMESTAMP=' . date('Y-m-d H:i:s'), $content);
             $env->overwrite($content);
 
             return json([
@@ -38,6 +39,32 @@ class RaccoonDashboardAPIController extends Controller
         }
 
         return http(500);
+    }
+
+    /**
+     * Set application mode.
+     */
+
+    protected function setMode(Request $request)
+    {
+        $env = new Reader('.env');
+        $mode = $request->resource()->mode;
+        
+        if(!in_array($mode, ['up', 'down']))
+        {
+            $mode = 'down';
+        }
+
+        if($env->exist())
+        {
+            
+        }
+
+        return json([
+
+            'success' => true,
+
+        ]);
     }
 
     /**

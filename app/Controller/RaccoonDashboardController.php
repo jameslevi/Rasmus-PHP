@@ -19,7 +19,7 @@ class RaccoonDashboardController extends RaccoonDashboardAPIController
 
             'title' => Lang::get('raccoon::dashboard'),
 
-            'key' => Config::env()->APP_KEY,
+            'key' => Config::env()->API_KEY,
 
         ]);
     }

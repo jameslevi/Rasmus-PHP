@@ -123,6 +123,7 @@ class BaseMiddleware extends Middleware
             if(!$is_resource)
             {
                 $app->mode = 'down';
+                
                 return http(503);
             }
         }

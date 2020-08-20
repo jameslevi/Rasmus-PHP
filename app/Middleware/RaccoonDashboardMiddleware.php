@@ -21,7 +21,7 @@ class RaccoonDashboardMiddleware extends Middleware
         $uri = $request->uri();
         $id = strtolower(Str::break(Str::move($uri, 1), '/')[0]);
         $curr = $request->resource()->key ?? null;
-        $key = Config::env()->APP_KEY;
+        $key = Config::env()->API_KEY;
 
         /**
          * If requesting for non-dashboard routes.

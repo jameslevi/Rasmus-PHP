@@ -42,6 +42,12 @@ use Raccoon\Resource\Lang\Lang;
         ]);
 
         /**
+         * Set application mode.
+         */
+
+        $group->put('/{key}/api/mode/{mode}', 'setMode');
+
+        /**
          * Clear caches API.
          */
 

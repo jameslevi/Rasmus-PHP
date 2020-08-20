@@ -10,32 +10,7 @@ namespace Env {
          * URL to use when generating assets file location.
          */
 
-        'url' => env('APP_URL', 'localhost'),
-
-        /**
-         * APPLICATION NAME
-         * -----------------------------------------------
-         * Name of your application accessible whenever and
-         * wherever you need it.
-         */
-
-        'name' => env('APP_NAME', 'Untitled Application'),
-
-        /**
-         * APPLICATION VERSION
-         * -----------------------------------------------
-         * Indicate current application version.
-         */
-
-        'version' => env('APP_VERSION'),
-
-        /**
-         * APPLICATION AUTHOR
-         * -----------------------------------------------
-         * Indicate your self, company or organization.  
-         */
-
-        'author' => env('APP_AUTHOR'),
+        'url' => env('APP_URL', 'http://localhost'),
 
         /**
          * MODE
@@ -45,7 +20,7 @@ namespace Env {
          * is detected.
          */
 
-        'mode' => env('MODE', 'up'),  
+        'mode' => env('APP_MODE', 'up'),  
 
         /**
          * DEPLOYMENT STATUS
@@ -55,18 +30,43 @@ namespace Env {
          * will be disabled.
          */
 
-        'deployment' => env('DEPLOYMENT', 'debug'),
+        'deployment' => env('APP_DEPLOYMENT', 'debug'),
 
         /**
          * REDIRECTION
          * -----------------------------------------------
          * All incoming request will be redirected to
-         * other application whenever needed. Base URL
-         * will be automatically concatenated at the
-         * beginning of the URL.
+         * other application whenever needed.
          */
 
-        'redirect' => url(env('REDIRECT', null)),
+        'redirect' => env('APP_REDIRECT'),
+
+        /**
+         * TIMEZONE
+         * -----------------------------------------------
+         * Set timezone to be used by logging, date and 
+         * time formatting and mysql timestamps.
+         */
+
+        'timezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+
+        /**
+         * VISITOR COUNTER
+         * -----------------------------------------------
+         * Automatically create visitor counter model in
+         * your database and log each request.
+         */
+
+        'visitor_counter' => env('APP_VISIT_COUNTER', false),
+
+        /**
+         * MAX EXECUTION TIME
+         * -----------------------------------------------
+         * How much time given to the server to process 
+         * each request before returning error.
+         */
+
+        'max_limit' => env('APP_MAX_LIMIT', 30),
 
         /**
          * CACHING
@@ -78,7 +78,7 @@ namespace Env {
          * deployment status is in debug mode.
          */
 
-        'cache' => env('CACHE', true),
+        'cache' => env('RES_CACHE', true),
 
         /**
          * DEFAULT LANGUAGE TRANSLATION
@@ -87,7 +87,7 @@ namespace Env {
          * and other text stuff whenever available.
          */
 
-        'locale' => env('LOCALE', 'en'),
+        'locale' => env('RES_LOCALE', 'en'),
 
         /**
          * FALLBACK LANGUAGE TRANSLATION
@@ -96,16 +96,7 @@ namespace Env {
          * available, try to have a fallback translation.
          */    
 
-        'locale2' => env('LOCALE2', null),  
-
-        /**
-         * TIMEZONE
-         * -----------------------------------------------
-         * Set timezone to be used by logging, date and 
-         * time formatting and mysql timestamps.
-         */
-
-        'timezone' => env('TIMEZONE', 'UTC'),  
+        'backup_locale' => env('RES_BACKUP_LOCALE'),
 
         /**
          * MINIFY SOURCE CODE
@@ -116,7 +107,7 @@ namespace Env {
          * whitespaces and comments in the document.
          */  
 
-        'minify' => env('MINIFY', true),
+        'minify' => env('RES_MINIFY', true),
 
     ];
 
