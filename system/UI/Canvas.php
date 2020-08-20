@@ -731,7 +731,7 @@ class Canvas
         if($imploded !== '' && Str::has($html, '</head>'))
         {
             $uri = Request::uri();
-            $file = 'storage/cache/css/' . md5($uri) . '.xcss';
+            $file = 'storage/cache/css/' . md5($uri) . '.css';
             $reader = new Reader($file);
             $reader->delete();
 
@@ -752,7 +752,7 @@ class Canvas
 
             $uri = md5(Request::uri());
 
-            $link = '<link rel="stylesheet" href="' . $url . 'resource/static/css/' . $uri . '.xcss" type="text/css" />';
+            $link = '<link rel="stylesheet" href="' . $url . 'resource/static/css/' . $uri . '.css" type="text/css" />';
 
             $html = $segments[0] . $link . '</head>' . $segments[1];
         }
@@ -769,7 +769,7 @@ class Canvas
 
             $js = '$(document).ready(function(){' . implode(' ', static::$javascript) . '});';
             $uri = Request::uri();
-            $file = 'storage/cache/js/' . md5($uri) . '.xjs';
+            $file = 'storage/cache/js/' . md5($uri) . '.js';
             $reader = new Reader($file);
             $reader->delete();
 
@@ -873,7 +873,7 @@ class Canvas
 
             $uri = md5(Request::uri());
 
-            $script = '<script type="text/javascript" src="' . $url . 'resource/static/js/' . $uri . '.xjs"></script>';
+            $script = '<script type="text/javascript" src="' . $url . 'resource/static/js/' . $uri . '.js"></script>';
         
             $html = $segments[0] . $script . '</body>' . $segments[1];
         }

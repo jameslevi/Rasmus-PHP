@@ -9,6 +9,11 @@ use Raccoon\Http\Request;
 
 class ResourceController extends Controller
 {
+    /**
+     * Path where to locate cached resources.
+     */
+
+    private $path = 'storage/cache/';
 
     /**
      * Cached stylesheet method.
@@ -17,7 +22,7 @@ class ResourceController extends Controller
     protected function stylesheet(Request $request)
     {
         $css = '';
-        $path = 'storage/cache/css/' . $request->resource()->css;
+        $path = $this->path . 'css/' . $request->resource()->css;
         $reader = new Reader($path);
 
         if($reader->exist())
@@ -30,7 +35,12 @@ class ResourceController extends Controller
             $reader->delete();
         }
 
-        return $css;
+        if(!empty($css))
+        {
+            return $css;
+        }
+
+        return http(404);
     }
 
     /**
@@ -40,7 +50,7 @@ class ResourceController extends Controller
     protected function javascript(Request $request)
     {
         $js = '';
-        $path = 'storage/cache/js/' . $request->resource()->js;
+        $path = $this->path . 'js/' . $request->resource()->js;
         $reader = new Reader($path);
 
         if($reader->exist())
@@ -53,7 +63,12 @@ class ResourceController extends Controller
             $reader->delete();
         }
 
-        return $js;
+        if(!empty($js))
+        {
+            return $js;
+        }
+
+        return http(404);
     }
 
 }

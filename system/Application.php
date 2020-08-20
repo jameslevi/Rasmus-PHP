@@ -523,7 +523,6 @@ class Application
             {
                 header('Access-Control-Allow-Origin: *');
                 header('Access-Control-Allow-Credentials: true');
-                header('Access-Control-Max-Age: 86400');
             }
             else
             {
@@ -531,7 +530,6 @@ class Application
                 {
                     header('Access-Control-Allow-Origin: ' . Request::origin());
                     header('Access-Control-Allow-Credentials: true');
-                    header('Access-Control-Max-Age: 86400');
                 }
             }
 

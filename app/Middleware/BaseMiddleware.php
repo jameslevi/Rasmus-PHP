@@ -22,7 +22,7 @@ class BaseMiddleware extends Middleware
      * Accepted static resources.
      */
 
-    private $resource_ext = ['xcss', 'xjs'];
+    private $resource_ext = ['css', 'js'];
 
     /**
      * Basic http request logic handler.
@@ -88,20 +88,23 @@ class BaseMiddleware extends Middleware
          * middleware testing.
          */
 
-        foreach($this->resource_ext as $ext)
+        if(!is_null($request->route('content')))
         {
-            if(Str::endWith($uri, '.' . $ext) && Str::startWith($uri, '/resource/static/'))
+            foreach($this->resource_ext as $ext)
             {
-                $path = 'storage/cache/' . Str::move($ext, 1) . '/' . $request->resource()->{Str::move($ext, 1)};
-                $reader = new Reader($path);
+                if(Str::endWith($uri, '.' . $ext) && Str::startWith($uri, '/resource/static/'))
+                {
+                    $path = 'storage/cache/' . $ext . '/' . $request->resource()->{Str::move($ext, 1)};
+                    $reader = new Reader($path);
             
-                if($reader->exist())
-                {
-                    $is_resource = true;
-                }
-                else
-                {
-                    return http(404);       
+                    if($reader->exist())
+                    {
+                        $is_resource = true;
+                    }
+                    else
+                    {
+                        return http(404);       
+                    }
                 }
             }
         }
